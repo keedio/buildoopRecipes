@@ -35,7 +35,7 @@ specNewVersion=`echo $newVersion | sed s/-/_/g`
 
 # Update bom name file to new version 
 echo Renaming $bomOldVersion to $bomNewVersion
-mv $bomOldVersion $bomNewVersion
+#mv $bomOldVersion $bomNewVersion
 
 # Update al rpm .spec files from recipes
 
@@ -45,5 +45,6 @@ for file in $packageFiles
 do
 	specPackageName=`echo $file | cut -f 2 -d '/'`_release
 	echo Updating $specPackageName version $specOldVersion to version $specNewVersion
-	sed -i "s/$specPackageName $specOldVersion/$specPackageName $specNewVersion/" "$file"
+	#sed -i "s/$specPackageName $specOldVersion/$specPackageName $specNewVersion/" "$file"
+	sed -i "s/$specPackageName openbus0.0.1_1/$specPackageName $specNewVersion/" "$file"
 done
