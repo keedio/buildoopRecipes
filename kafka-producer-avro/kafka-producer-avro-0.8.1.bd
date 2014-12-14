@@ -3,7 +3,7 @@
 		"description": "kafka-producer-avro description", 
 		"homepage":    "http://www.kafka-producer-avro.org/",
 		"license":     "Apache-2.0",
-		"filename":    "kafka-producer-avro-0.8.1_openbus-0.0.1-r1.bd"
+		"filename":    "kafka-producer-avro-0.8.1.bd"
 	},
 	
 	"do_download": {

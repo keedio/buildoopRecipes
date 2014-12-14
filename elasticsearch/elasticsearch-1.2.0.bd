@@ -3,7 +3,7 @@
 		"description": "elasticsearch description", 
 		"homepage":    "http://www.elasticsearch.org/",
 		"license":     "Apache-2.0",
-		"filename":    "elasticsearch-1.2.0_openbus-0.0.1-r1.bd"
+		"filename":    "elasticsearch-1.2.0.bd"
 	},
 	
 	"do_download": {

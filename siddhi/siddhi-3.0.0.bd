@@ -3,7 +3,7 @@
 		"description": "WSO2 Siddhi Complex Event Processor", 
 		"homepage":    "http://wso2.com/products/complex-event-processor/",
 		"license":     "Apache-2.0",
-		"filename":    "siddhi-3.0.0_openbus-0.0.1-r1.bd"
+		"filename":    "siddhi-3.0.0.bd"
 	},
 	
 	"do_download": {

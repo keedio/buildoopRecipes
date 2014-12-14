@@ -3,7 +3,7 @@
 		"description": "Flume kafka producer Avro converter", 
 		"homepage":    "https://github.com/buildoop/flume-kafka-avro-sink",
 		"license":     "Apache-2.0",
-		"filename":    "flume-kafka-avro-sink-0.8.0_openbus-0.0.1-r1.bd"
+		"filename":    "flume-kafka-avro-sink-0.8.0.bd"
 	},
 	
 	"do_download": {

@@ -3,7 +3,7 @@
 		"description": "Apache Commons Daemon JSVC and jar files", 
 		"homepage":    "http://commons.apache.org/proper/commons-daemon/jsvc.html",
 		"license":     "Apache-2.0",
-		"filename":    "jsvcdaemon-1.0.13_openbus-0.0.1-r1.bd"
+		"filename":    "jsvcdaemon-1.0.13.bd"
 	},
 	
 	"do_download": {

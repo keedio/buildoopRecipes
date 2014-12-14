@@ -3,7 +3,7 @@
                 "description": "Storm to Elasticsearch connector from Health Market Science",
                 "homepage":    "https://github.com/hmsonline/storm-elastic-search",
                 "license":     "Eclipse Public License - v 1.0",
-                "filename":    "storm-elasticsearch-0.1.3_openbus-0.0.1-r1.bd"
+                "filename":    "storm-elasticsearch-0.1.3.bd"
         },
 
         "do_download": {

@@ -24,7 +24,6 @@ bomOldVersion=`find -name '*.bom' | cut -f 2 -d '/'`
 # Get current version from Bom file
 newVersion=$1
 oldVersion=${bomOldVersion%.*}
-#oldVersion=openbus0.0.1
 
 specOldVersion=`echo $oldVersion | sed s/-/_/g`
 specNewVersion=`echo $newVersion | sed s/-/_/g`

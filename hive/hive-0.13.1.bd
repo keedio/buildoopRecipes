@@ -3,7 +3,7 @@
 		"description": "The Apache Hive data warehouse", 
 		"homepage":    "https://hive.apache.org/",
 		"license":     "Apache-2.0",
-		"filename":    "hive-0.13.1_openbus-0.0.1-r1.bd"
+		"filename":    "hive-0.13.1.bd"
 	},
 	
 	"do_download": {

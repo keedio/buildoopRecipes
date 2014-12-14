@@ -3,7 +3,7 @@
 		"description": "logstash is a tool for managing events and logs", 
 		"homepage":    "http://www.logstash.net/",
 		"license":     "Apache-2.0",
-		"filename":    "logstash-1.4.2_openbus-0.0.1-r1.bd"
+		"filename":    "logstash-1.4.2.bd"
 	},
 	
 	"do_download": {

@@ -3,7 +3,7 @@
 		"description": "kafka-hue-app description", 
 		"homepage":    "https://github.com/danieltardon/kafka-hue",
 		"license":     "Apache-2.0",
-		"filename":    "kafka-hue-app-1.0_openbus-0.0.1-r1.bd"
+		"filename":    "kafka-hue-app-1.0.bd"
 	},
 	
 	"do_download": {

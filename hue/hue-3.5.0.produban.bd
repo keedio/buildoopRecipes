@@ -3,7 +3,7 @@
 		"description": "http://gethue.com/", 
 		"homepage":    "http://www.hue.org/",
 		"license":     "Apache-2.0",
-		"filename":    "hue-3.5.0.produban_openbus-0.0.1-r1.bd"
+		"filename":    "hue-3.5.0.produban.bd"
 	},
 	
 	"do_download": {

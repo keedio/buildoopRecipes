@@ -3,7 +3,7 @@
 		"description": "Apache Flume Source plugin for SNMP Query and Trap consumption", 
 		"homepage":    "https://github.com/javiroman/flume-snmp-source",
 		"license":     "Apache-2.0",
-		"filename":    "flume-snmp-source-0.0.1_openbus-0.0.1-r1.bd"
+		"filename":    "flume-snmp-source-0.0.1.bd"
 	},
 	
 	"do_download": {

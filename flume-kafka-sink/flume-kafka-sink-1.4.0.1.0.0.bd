@@ -3,7 +3,7 @@
 		"description": "Apache Flume Sink for Kafka", 
 		"homepage":    "https://github.com/buildoop/flume-ng-kafka-sink",
 		"license":     "Apache-2.0",
-		"filename":    "flume-kafka-sink-1.4.0.1.0.0_openbus-0.0.1-r1.bd"
+		"filename":    "flume-kafka-sink-1.4.0.1.0.0.bd"
 	},
 	
 	"do_download": {

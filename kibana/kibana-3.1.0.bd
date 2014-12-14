@@ -3,7 +3,7 @@
 		"description": "Kibana is a web tool to visualize and represent elasticsearch data", 
 		"homepage":    "http://www.elasticsearch.org/overview/kibana/",
 		"license":     "Apache-2.0",
-		"filename":    "kibana-3.1.0_elk-0.0.1-r1.bd"
+		"filename":    "kibana-3.1.0.bd"
 	},
 	
 	"do_download": {
