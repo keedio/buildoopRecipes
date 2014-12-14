@@ -14,21 +14,21 @@
 # limitations under the License.
 %define man_dir %{_mandir}
 
-%define jsvc_version 1.0.13
-%define jsvc_base_version 1.0.13
-%define jsvc_release openbus0.0.1_1
+%define jsvcdaemon_version 1.0.13
+%define jsvcdaemon_base_version 1.0.13
+%define jsvcdaemon_release openbus_v1.0_1
 
 %if  %{?suse_version:1}0
-%define bin_jsvc /usr/lib/jsvcdaemon
-%define doc_jsvc %{_docdir}/%{name}
+%define bin_jsvcdaemon /usr/lib/jsvcdaemon
+%define doc_jsvcdaemon %{_docdir}/%{name}
 %else
-%define bin_jsvc /usr/lib/jsvcdaemon
-%define doc_jsvc %{_docdir}/%{name}-%{jsvc_version}
+%define bin_jsvcdaemon /usr/lib/jsvcdaemon
+%define doc_jsvcdaemon %{_docdir}/%{name}-%{jsvcdaemon_version}
 %endif
 
 Name: jsvcdaemon
-Version: %{jsvc_version}
-Release: %{jsvc_release}
+Version: %{jsvcdaemon_version}
+Release: %{jsvcdaemon_release}
 Summary: Application to launch java daemon
 URL: http://commons.apache.org/daemon/
 Vendor: The Redoop Team
@@ -36,16 +36,16 @@ Packager: Javi Roman <javiroman@redoop.org>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}
 License: ASL 2.0
-Source0: commons-daemon-%{jsvc_base_version}-native-src.tar.gz
+Source0: commons-daemon-%{jsvcdaemon_base_version}-native-src.tar.gz
 Source1: rpm-build-stage
-Source2: install_jsvc.sh
+Source2: install_jsvcdaemon.sh
 BuildRequires: autoconf, automake, gcc
 
 %description 
-jsvc executes classfile that implements a Daemon interface.
+jsvcdaemon executes classfile that implements a Daemon interface.
 
 %prep
-%setup -n commons-daemon-%{jsvc_base_version}-native-src
+%setup -n commons-daemon-%{jsvcdaemon_base_version}-native-src
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -57,15 +57,15 @@ bash %{SOURCE1}
 %__rm -rf $RPM_BUILD_ROOT
 sh %{SOURCE2} \
           --build-dir=.         \
-          --bin-dir=%{bin_jsvc} \
-          --doc-dir=%{doc_jsvc} \
+          --bin-dir=%{bin_jsvcdaemon} \
+          --doc-dir=%{doc_jsvcdaemon} \
           --man-dir=%{man_dir}  \
           --prefix=$RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%{bin_jsvc}
-%doc %{doc_jsvc}
+%{bin_jsvcdaemon}
+%doc %{doc_jsvcdaemon}
 
 
 %changelog

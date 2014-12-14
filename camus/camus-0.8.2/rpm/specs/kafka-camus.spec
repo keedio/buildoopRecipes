@@ -19,9 +19,9 @@
 
 %define camus_version 0.8.2
 %define camus_base_version 0.8.2
-%define camus_release openbus0.0.1_1
+%define camus_release openbus_v1.0
 
-Name: kafka-camus
+Name: camus
 Version: %{camus_version}
 Release: %{camus_release}
 Summary: Linkedin Kafka Camus
@@ -35,7 +35,7 @@ License: ASL 2.0
 # Source from commit 3b08d0962e8247bf0373eb3d46cedbe7ee0567b8
 Source0: camus.git.tar.gz
 Source1: rpm-build-stage
-Source2: install_kafka-camus.sh
+Source2: install_camus.sh
 
 %description 
 Camus is LinkedIn's Kafka->HDFS pipeline. It is a mapreduce job that does distributed data loads out of Kafka.

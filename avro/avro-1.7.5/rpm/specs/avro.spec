@@ -20,9 +20,9 @@
 
 %define avro_version 1.7.5
 %define avro_base_version 1.7.5
-%define avro_release openbus0.0.1_1
+%define avro_release openbus_v1.0_1
 
-Name: avro-libs
+Name: avro
 Version: %{avro_version}
 Release: %{avro_release}
 Summary: A data serialization system
@@ -35,7 +35,7 @@ Buildroot: %(mktemp -ud %{_tmppath}/avro-%{version}-%{release}-XXXXXX)
 License: ASL 2.0 
 Source0: avro-src-%{avro_version}.tar.gz
 Source1: rpm-build-stage
-Source2: install_avro-libs.sh
+Source2: install_avro.sh
 Requires: python
 BuildRequires: python-devel
 
@@ -67,7 +67,7 @@ env FULL_VERSION=%{avro_version} bash $RPM_SOURCE_DIR/rpm-build-stage
 
 %install
 %__rm -rf $RPM_BUILD_ROOT
-env FULL_VERSION=%{avro_version} bash $RPM_SOURCE_DIR/install_avro-libs.sh \
+env FULL_VERSION=%{avro_version} bash $RPM_SOURCE_DIR/install_avro.sh \
           --build-dir=./ \
           --prefix=$RPM_BUILD_ROOT
 

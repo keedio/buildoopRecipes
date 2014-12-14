@@ -12,20 +12,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-%define lib_tomcat %{_usr}/lib/%{name}
+%define lib_tomcat_server %{_usr}/lib/%{name}
 
 %if  %{?suse_version:1}0
-  %define doc_tomcat %{_docdir}/%{name}
+  %define doc_tomcat_server %{_docdir}/%{name}
 %else
-  %define doc_tomcat %{_docdir}/%{name}-%{version}
+  %define doc_tomcat_server %{_docdir}/%{name}-%{version}
 %endif
-%define tomcat_version 6.0.36
-%define tomcat_base_version 6.0.36
-%define tomcat_release openbus0.0.1_1
+%define tomcat_server_version 6.0.36
+%define tomcat_server_base_version 6.0.36
+%define tomcat_server_release openbus_v1.0_1
 
-Name: tomcatserver
-Version: %{tomcat_version}
-Release: %{tomcat_release}
+Name: tomcat-server
+Version: %{tomcat_server_version}
+Release: %{tomcat_server_release}
 Summary: Apache Tomcat
 URL: http://tomcat.apache.org/
 Vendor: The Redoop Team
@@ -33,7 +33,7 @@ Group: Development/Libraries
 BuildArch: noarch
 Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 License: ASL 2.0 
-Source0: apache-tomcat-%{tomcat_base_version}-src.tar.gz
+Source0: apache-tomcat-%{tomcat_server_base_version}-src.tar.gz
 Source1: rpm-build-stage
 Source2: install_tomcat-server.sh
 
@@ -42,7 +42,7 @@ Apache Tomcat is an open source software implementation of the
 Java Servlet and JavaServer Pages technologies.
 
 %prep
-%setup -n apache-tomcat-%{tomcat_base_version}-src
+%setup -n apache-tomcat-%{tomcat_server_base_version}-src
 
 %build
 bash %{SOURCE1}
@@ -51,13 +51,13 @@ bash %{SOURCE1}
 %__rm -rf $RPM_BUILD_ROOT
 bash %{SOURCE2} \
           --build-dir=build \
-	  --doc-dir=%{doc_tomcat} \
+	  --doc-dir=%{doc_tomcat_server} \
           --prefix=$RPM_BUILD_ROOT
 
 %files 
 %defattr(-,root,root)
-%attr(0755,root,root) %{lib_tomcat}
-%doc %{doc_tomcat}
+%attr(0755,root,root) %{lib_tomcat_server}
+%doc %{doc_tomcat_server}
 
 %changelog
 

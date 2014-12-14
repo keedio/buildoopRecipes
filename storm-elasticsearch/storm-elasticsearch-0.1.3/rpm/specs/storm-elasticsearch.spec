@@ -15,7 +15,7 @@
 
 %define storm_elasticsearch_version 0.1.3
 %define storm_elasticsearch_base_version 0.1.3
-%define storm_elasticsearch_release openbus0.0.1_1
+%define storm_elasticsearch_release openbus_v1.0
 %define storm_user storm
 %define storm_group storm
 
