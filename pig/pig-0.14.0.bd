@@ -7,7 +7,7 @@
 	},
 	
 	"do_download": {
-		"src_uri":    "http://apache.lauf-forum.at/pig/pig-0.14.0/pig-0.14.0-src.tar.gz"
+		"src_uri":    "http://apache.lauf-forum.at/pig/pig-0.14.0/pig-0.14.0-src.tar.gz",
 		"src_md5sum": "1655997154171f70f561b804e01e33f6"
 	},
 
