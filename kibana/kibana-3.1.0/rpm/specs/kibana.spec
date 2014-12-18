@@ -21,7 +21,7 @@
 %define kibana_user_home /var/lib/%{kibana_user}
 
 %define kibana_version 3.1.0
-%define kibana_release openbus_0.0.1_alpha
+%define kibana_release openbus_v1.0
 
 Name:           %{kibana_name}
 Version:        %{kibana_version}

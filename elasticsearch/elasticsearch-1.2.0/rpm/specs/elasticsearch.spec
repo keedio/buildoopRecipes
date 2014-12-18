@@ -17,7 +17,7 @@
 
 %define elasticsearch_version 1.2.0
 %define elasticsearch_base_version 1.2.0
-%define elasticsearch_release openbus_0.0.1_alpha
+%define elasticsearch_release openbus_v1.0
 
 Name: elasticsearch
 Version: %{elasticsearch_version}
