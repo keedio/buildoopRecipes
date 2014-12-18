@@ -1,0 +1,39 @@
+diff --git a/kafka-hue-app/kafka-hue-app-1.0.bd b/kafka-hue-app/kafka-hue-app-1.0.bd
+index 7882cd2..9b1cc6a 100644
+--- a/kafka-hue-app/kafka-hue-app-1.0.bd
++++ b/kafka-hue-app/kafka-hue-app-1.0.bd
+@@ -8,7 +8,7 @@
+ 	
+ 	"do_download": {
+ 		"src_uri":  "https://github.com/buildoop/kafka-hue.git",
+-		"src_hash": "v0.1"
++		"src_hash": "v1.0"
+ 	},
+ 
+ 	"do_fetch": {
+diff --git a/openbus-v1.0.bom b/openbus-v1.0.bom
+index e09dd56..7c4f17f 100644
+--- a/openbus-v1.0.bom
++++ b/openbus-v1.0.bom
+@@ -39,7 +39,7 @@ STORM_HBASE_VERSION=0.9.1.7f79e191ef
+ KAFKA-PRODUCER-AVRO_VERSION=0.8.1
+ 
+ # Libraries and dependencies
+-AVRO-LIBS_VERSION=1.7.5
++AVRO_VERSION=1.7.5
+ JSVCDAEMON_VERSION=1.0.13
+ TOMCAT-SERVER_VERSION=6.0.36
+ 
+diff --git a/storm-elasticsearch/storm-elasticsearch-0.1.3/rpm/specs/storm-elasticsearch.spec b/storm-elasticsearch/storm-elasticsearch-0.1.3/rpm/specs/storm-elasticsearch.spec
+index 5a8ad62..2969872 100644
+--- a/storm-elasticsearch/storm-elasticsearch-0.1.3/rpm/specs/storm-elasticsearch.spec
++++ b/storm-elasticsearch/storm-elasticsearch-0.1.3/rpm/specs/storm-elasticsearch.spec
+@@ -25,7 +25,7 @@ Name: storm-elasticsearch
+ Version: %{storm_elasticsearch_version}
+ Release: %{storm_elasticsearch_release}
+ Summary: Storm to ElasticSearch connector
+-URL: https://github.com/mvalle/storm-elasticsearch
++URL: https://github.com/mvalleavila/storm-elasticsearch
+ Vendor: The Redoop Team
+ Packager: Marcelo Valle <mvalle@redoop.org>
+ Group: Development/Libraries

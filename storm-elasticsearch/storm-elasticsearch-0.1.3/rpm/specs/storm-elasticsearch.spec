@@ -25,7 +25,7 @@ Name: storm-elasticsearch
 Version: %{storm_elasticsearch_version}
 Release: %{storm_elasticsearch_release}
 Summary: Storm to ElasticSearch connector
-URL: https://github.com/mvalle/storm-elasticsearch
+URL: https://github.com/mvalleavila/storm-elasticsearch
 Vendor: The Redoop Team
 Packager: Marcelo Valle <mvalle@redoop.org>
 Group: Development/Libraries

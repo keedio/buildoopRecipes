@@ -8,7 +8,7 @@
 	
 	"do_download": {
 		"src_uri":  "https://github.com/buildoop/kafka-hue.git",
-		"src_hash": "v0.1"
+		"src_hash": "v1.0"
 	},
 
 	"do_fetch": {
