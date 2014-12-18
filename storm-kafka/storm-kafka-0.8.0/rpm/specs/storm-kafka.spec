@@ -17,7 +17,7 @@
 
 %define storm_kafka_version 0.8.0
 %define storm_kafka_base_version 0.8.0
-%define storm_kafka_release openbus_v1.0
+%define storm_kafka_release openbus_0.0.1_alpha
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
 %define __os_install_post \

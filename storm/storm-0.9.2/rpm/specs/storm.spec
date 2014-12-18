@@ -27,7 +27,7 @@
 
 %define storm_version 0.9.2
 %define storm_base_version 0.9.2
-%define storm_release openbus_v1.0
+%define storm_release openbus_0.0.1_alpha
 
 %define kafka_version 0.8.0
 
