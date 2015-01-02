@@ -69,7 +69,7 @@ function status_ext(){
     elif [ $RETVAL -eq 0 ] && [ -z "$listening" ]; then
 	echo "Service running but not listening port ${clientPort}"
 	RETVAL=151
-    elif [ -n "$listening" ] && [ "${listening}" -ne "${pid}" ]; then
+    elif [ -n "$listening" ] && ( [ -z ${pid} ] || [ "${listening}" -ne "${pid}" ]); then
 	echo "Process listening $clientPort is ${listening}. Expected: ${pid}"
 	RETVAL=152
     fi
