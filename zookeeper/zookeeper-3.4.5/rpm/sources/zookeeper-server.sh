@@ -43,15 +43,16 @@ fi
 command="/usr/bin/zookeeper-server"
 user="zookeeper"
 prog=`basename ${command}`
-zookeeper_pidfile=/var/run/zookeeper/zookeeper-server.pid
 pidfile=/var/run/zookeeper-server.pid
 lockfile=/var/lock/subsys/zookeeper-server
 
 ZOOKEEPER_SHUTDOWN_TIMEOUT=15
-: ${ZOOKEEPER_CONF:="/etc/zookeeper/conf/zoo.cfg"}
+: ${ZOOKEEPER_CONF_DIR:="/etc/zookeeper/conf"}
+: ${ZOOKEEPER_CONF:="${ZOOKEEPER_CONF_DIR}/zoo.cfg"}
 [ -f $ZOOKEEPER_CONF ] &&  clientPort=`grep clientPort $ZOOKEEPER_CONF | cut -d'=' -f2`
 : ${clientPort:=2181}
-
+[ -f "${ZOOKEEPER_CONF_DIR}/zookeeper-env.sh" ] && . "${ZOOKEEPER_CONF_DIR}/zookeeper-env.sh"
+: ${ZOOPIDFILE:="/var/run/zookeeper/zookeeper-server.pid"}
 install -d -m 0755 -o zookeeper -g zookeeper /var/run/zookeeper/
 
 # Checks if the given pid represents a live process.
@@ -97,7 +98,7 @@ function start() {
 	    RETVAL=$?
 	    if [ $RETVAL -eq 0 ]; then
 		touch $lockfile
-		ln $zookeeper_pidfile $pidfile
+		ln $ZOOPIDFILE $pidfile
 	    fi
 	    ;;
 	*)
