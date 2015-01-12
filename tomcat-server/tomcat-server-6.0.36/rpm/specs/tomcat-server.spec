@@ -12,12 +12,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-%define lib_tomcat_server %{_usr}/lib/%{name}
+%define lib_tomcat_server %{_usr}/lib/tomcatserver
 
 %if  %{?suse_version:1}0
-  %define doc_tomcat_server %{_docdir}/%{name}
+  %define doc_tomcat_server %{_docdir}/tomcatserver
 %else
-  %define doc_tomcat_server %{_docdir}/%{name}-%{version}
+  %define doc_tomcat_server %{_docdir}/tomcatserver-%{version}
 %endif
 %define tomcat_server_version 6.0.36
 %define tomcat_server_base_version 6.0.36
@@ -31,7 +31,7 @@ URL: http://tomcat.apache.org/
 Vendor: The Redoop Team
 Group: Development/Libraries
 BuildArch: noarch
-Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
+Buildroot: %(mktemp -ud %{_tmppath}/tomcatserver-%{version}-%{release}-XXXXXX)
 License: ASL 2.0 
 Source0: apache-tomcat-%{tomcat_server_base_version}-src.tar.gz
 Source1: rpm-build-stage
