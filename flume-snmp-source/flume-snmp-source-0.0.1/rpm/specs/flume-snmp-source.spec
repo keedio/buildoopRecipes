@@ -14,7 +14,7 @@
 # limitations under the License.
 %define lib_flume /usr/lib/flume
 %define flume_snmp_source_base_version 1.4.0.0.0.1
-%define flume_snmp_source_release openbus_1.0.0
+%define flume_snmp_source_release openbus_v1.0
 %define etc_flume /etc/flume/conf
 
 %if  %{?suse_version:1}0
