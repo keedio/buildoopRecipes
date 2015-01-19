@@ -29,7 +29,7 @@
 
 %define cassandra_version 2.1.0
 %define cassandra_base_version 2.1.0
-%define cassandra_release openbus_v1.0_dev
+%define cassandra_release openbus_v1.0
 
 Name: %{cassandra_name}
 Version: %{cassandra_version}
