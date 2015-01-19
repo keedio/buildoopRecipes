@@ -17,7 +17,7 @@
 
 %define flume_kafka_avro_sink_version 0.8.0
 %define flume_kafka_avro_sink_base_version 0.8.0
-%define flume_kafka_avro_sink_release openbus_v1.0
+%define flume_kafka_avro_sink_release openbus_v1.1
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
 %define __os_install_post \
