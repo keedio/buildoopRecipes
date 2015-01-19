@@ -37,7 +37,7 @@
 # apache-flume-1.4.0-src.tar.gz
 #
 %define flume_base_version 1.4.0
-%define flume_release openbus_1.0.1
+%define flume_release openbus_v1.0
 
 %define flume_folder apache-%{name}-%{flume_base_version}-src
 
