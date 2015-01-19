@@ -20,7 +20,7 @@
 
 %define avro_version 1.7.5
 %define avro_base_version 1.7.5
-%define avro_release openbus_v1.0
+%define avro_release openbus_v1.0_dev
 
 Name: avro
 Version: %{avro_version}
