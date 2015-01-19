@@ -17,7 +17,7 @@
 - Storm - 0.9.2
 - Siddhi - 3.0.0
 - Logstash - 1.4.2
-- Flume - 1.4.0
+- Flume - 1.5.2
 - Sqoop - 1.4.4
 - Camus 0.8.2
 - Kafka - 0.8.0

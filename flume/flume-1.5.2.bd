@@ -3,12 +3,12 @@
 		"description": "Apache Flume", 
 		"homepage":    "http://flume.apache.org/",
 		"license":     "Apache-2.0",
-		"filename":    "flume-1.4.0.bd"
+		"filename":    "flume-1.5.2.bd"
 	},
 	
 	"do_download": {
-		"src_uri":    "http://www.eu.apache.org/dist/flume/1.4.0/apache-flume-1.4.0-src.tar.gz",
-		"src_md5sum": "a932da09b9edb95b0c4bf52e6480fe21"
+		"src_uri":    "http://www.eu.apache.org/dist/flume/1.5.2/apache-flume-1.5.2-src.tar.gz",
+		"src_md5sum": "8b6b643ad0bb0e977e0c0fcbcf0b0edb"
 	},
 
 	"do_fetch": {

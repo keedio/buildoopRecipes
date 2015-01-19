@@ -87,9 +87,6 @@ Source1: rpm-build-stage
 Source2: install_%{name}.sh
 Source3: %{name}-agent.init
 Source4: flume-agent.default
-Patch0: flume-protobuf-fail.patch
-# Fix: https://issues.apache.org/jira/browse/FLUME-2174
-Patch1: FLUME-2174-partial.patch
 Requires: /usr/sbin/useradd
 Requires: coreutils
 Requires: hadoop-hdfs
