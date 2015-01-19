@@ -30,7 +30,7 @@
 
 %define hbase_version 0.96.1.1
 %define hbase_base_version 0.96.1.1
-%define hbase_release openbus_v1.0_dev
+%define hbase_release openbus_1.0.1
 %define hbase_jar_version 0.96.1.1-hadoop2
 
 

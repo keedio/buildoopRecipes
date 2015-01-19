@@ -15,7 +15,7 @@
 
 # Kafka Producer Avro tag -> release-0.8.1
 %define kafka_producer_avro_base_version 0.8.1
-%define kafka_producer_avro_release openbus_v1.0_dev
+%define kafka_producer_avro_release openbus_1.0.1
 
 %define lib_kafka_producer_avro /usr/lib/kafka/lib/kafka-producer-avro
 %define etc_kafka /etc/kafka/conf

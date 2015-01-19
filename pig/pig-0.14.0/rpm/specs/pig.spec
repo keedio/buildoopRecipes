@@ -17,7 +17,7 @@
 
 %define pig_version 0.14.0
 %define pig_base_version 0.14.0
-%define pig_release openbus_v1.0_dev 
+%define pig_release openbus_1.0.1 
 %define pig_home /usr/lib/pig
 
 Name: pig
