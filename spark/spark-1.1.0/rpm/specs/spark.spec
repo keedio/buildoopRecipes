@@ -28,7 +28,7 @@
 
 %define spark_version 1.1.0
 %define spark_base_version 1.1.0
-%define spark_release openbus_v1.0
+%define spark_release openbus_1.0.1
 
 %if  %{?suse_version:1}0
 %define doc_spark %{_docdir}/spark

@@ -22,7 +22,7 @@
 
 %define oozie_version 4.0.0
 %define oozie_base_version 4.0.0 
-%define oozie_release openbus_v1.0
+%define oozie_release openbus_1.0.1
 
 %if  %{!?suse_version:1}0
   %define doc_oozie %{_docdir}/oozie-%{oozie_version}
