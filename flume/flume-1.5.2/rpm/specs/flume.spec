@@ -133,9 +133,6 @@ Flume is a reliable, scalable, and manageable distributed data collection applic
 %prep
 %setup -n %{flume_folder}
 
-%patch0 -p1
-%patch1 -p1
-
 %build
 sh %{SOURCE1}
 
