@@ -15,7 +15,7 @@
 
 %define hue_version 3.5.0.produban
 %define hue_base_version 3.5.0
-%define hue_release openbus_1.0.1
+%define hue_release openbus_v1.0_dev
 
 Name:    hue
 Version: %{hue_version}
