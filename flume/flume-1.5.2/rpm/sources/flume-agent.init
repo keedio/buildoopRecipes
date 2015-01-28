@@ -53,18 +53,17 @@ STATUS_NOT_RUNNING=3
 ERROR_PROGRAM_NOT_INSTALLED=5
 
 FLUME_LOG_DIR=/var/log/flume
+FLUME_AGENT_CONF_DIR=/etc/flume/conf.d
 FLUME_CONF_DIR=/etc/flume/conf
 FLUME_RUN_DIR=/var/run/flume
 FLUME_HOME=/usr/lib/flume
 FLUME_USER=flume
 
 FLUME_LOCK_DIR="/var/lock/subsys/"
-LOCKFILE="${FLUME_LOCK_DIR}/flume-agent"
+
 desc="Flume NG agent daemon"
 
-FLUME_CONF_FILE=${FLUME_CONF_FILE:-${FLUME_CONF_DIR}/flume.conf}
 EXEC_PATH=/usr/bin/flume-ng
-FLUME_PID_FILE=${FLUME_RUN_DIR}/flume-agent.pid
 
 # These directories may be tmpfs and may or may not exist
 # depending on the OS (ex: /var/lock/subsys does not exist on debian/ubuntu)
@@ -80,37 +79,57 @@ FLUME_SHUTDOWN_TIMEOUT=${FLUME_SHUTDOWN_TIMEOUT:-60}
 start() {
   [ -x $exec ] || exit $ERROR_PROGRAM_NOT_INSTALLED
 
-  checkstatus
-  status=$?
-  if [ "$status" -eq "$STATUS_RUNNING" ]; then
-    exit 0
-  fi
+  getAgentNames
+  for i in $agentNames
+  do
+    checkstatus $i
+    status=$?
+    if [ "$status" -ne "$STATUS_RUNNING" ]; then
+  	globalRetval=0
+        log_success_msg "Starting $desc (flume-agent $i): "
+	flume_pid_file="${FLUME_RUN_DIR}/flume-agent-$i.pid"
+	lockfile="${FLUME_LOCK_DIR}/flume-agent-$i"
 
-  log_success_msg "Starting $desc (flume-agent): "
-  /bin/su -s /bin/bash -c "/bin/bash -c 'echo \$\$ >${FLUME_PID_FILE} && exec ${EXEC_PATH} agent --conf $FLUME_CONF_DIR --conf-file $FLUME_CONF_FILE --name $FLUME_AGENT_NAME >>${FLUME_LOG_DIR}/flume-agent.out 2>&1' &" $FLUME_USER
-  RETVAL=$?
-  [ $RETVAL -eq 0 ] && touch $LOCKFILE
-  return $RETVAL
+        #flume_conf_file=${flume_conf_file:-${FLUME_AGENT_CONF_DIR}/$i.conf}
+        flume_conf_file=${FLUME_AGENT_CONF_DIR}/$i.conf
+
+        /bin/su -s /bin/bash -c "/bin/bash -c 'echo \$\$ >$flume_pid_file && exec ${EXEC_PATH} agent --conf ${FLUME_CONF_DIR} --conf-file $flume_conf_file --name $i >>${FLUME_LOG_DIR}/$i.out 2>&1' &" $FLUME_USER
+        retval=$?
+  	[ $retval -eq 0 ] && touch $lockfile
+	if [ $retval -ne 0 ]; then
+		log_warning_msg "Startup flume-agent $i fails! "
+		globalRetval=$retval
+	fi
+   else
+        log_warning_msg "Flume-agent $i is already running"
+   fi
+  done
+  
+  return $globalRetval
 }
 
 stop() {
-  if [ ! -e $FLUME_PID_FILE ]; then
-    log_failure_msg "Flume agent is not running"
-    exit 0
-  fi
-
-  log_success_msg "Stopping $desc (flume-agent): "
-
-  FLUME_PID=`cat $FLUME_PID_FILE`
-  if [ -n $FLUME_PID ]; then
-    kill -TERM ${FLUME_PID} &>/dev/null
-    for i in `seq 1 ${FLUME_SHUTDOWN_TIMEOUT}` ; do
-      kill -0 ${FLUME_PID} &>/dev/null || break
-      sleep 1
-    done
-    kill -KILL ${FLUME_PID} &>/dev/null
-  fi
-  rm -f $LOCKFILE $FLUME_PID_FILE
+  getAgentNames
+  for i in $agentNames
+  do
+          flume_pid_file="${FLUME_RUN_DIR}/flume-agent-$i.pid"
+	  lockfile="${FLUME_LOCK_DIR}/flume-agent-$i"
+	  if [ ! -e $flume_pid_file ]; then
+	    log_failure_msg "Flume agent $i is not running"
+	  else
+  	    log_success_msg "Stopping $desc (flume-agent) $i:"
+   	    flume_pid=`cat $flume_pid_file`
+ 	     if [ -n $flume_pid ]; then
+    		kill -TERM ${flume_pid} &>/dev/null
+    		for i in `seq 1 ${FLUME_SHUTDOWN_TIMEOUT}` ; do
+      		  kill -0 ${flume_pid} &>/dev/null || break
+      		  sleep 1
+    		done
+    		kill -KILL ${flume_pid} &>/dev/null
+ 		rm -f $lockfile $flume_pid_file
+  	     fi
+	  fi   
+  done
   return 0
 }
 
@@ -119,32 +138,26 @@ restart() {
   start
 }
 
-checkstatus(){
-  pidofproc -p $FLUME_PID_FILE java > /dev/null
+checkstatus()
+{
+  flume_pid_file="${FLUME_RUN_DIR}/flume-agent-$1.pid"
+  pidofproc -p $flume_pid_file java > /dev/null
   status=$?
+ return $status
+}
 
-  case "$status" in
-    $STATUS_RUNNING)
-      log_success_msg "Flume NG agent is running"
-      ;;
-    $STATUS_DEAD)
-      log_failure_msg "Flume NG agent is dead and pid file exists"
-      ;;
-    $STATUS_DEAD_AND_LOCK)
-      log_failure_msg "Flume NG agent is dead and lock file exists"
-      ;;
-    $STATUS_NOT_RUNNING)
-      log_failure_msg "Flume NG agent is not running"
-      ;;
-    *)
-      log_failure_msg "Flume NG agent status is unknown"
-      ;;
-  esac
-  return $status
+getAgentNames()
+{
+  agentNames=`ls $FLUME_AGENT_CONF_DIR | cut -f 1 -d '.'`
 }
 
 condrestart(){
-  [ -e ${LOCKFILE} ] && restart || :
+  getAgentNames
+  for i in $agentNames
+  do
+    lockfile="${FLUME_LOCK_DIR}/flume-agent-$i" 
+    [ -e $lockfile] && restart || :
+  done
 }
 
 case "$1" in
