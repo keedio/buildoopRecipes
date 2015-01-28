@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 %define lib_flume /usr/lib/flume
-%define flume_kafka_sink_base_version 1.4.0.1.0.0
+%define flume_kafka_sink_base_version 1.5.2.1.0.0
 %define flume_kafka_sink_release openbus_v1.1
 %define etc_flume /etc/flume/conf
 

@@ -42,7 +42,7 @@ BuildArch: noarch
 Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{flume_kafka_avro_sink_version}-%{flume_kafka_avro_sink_release}-XXXXXX)
 License: ASL 2.0 
 # Source from commit d853a7a5d033db2d22744345cef8c2c598970dfa
-Source0: flume-kafka-avro-sink.git.tar.gz
+Source0: flume-ng-kafka-avro-sink.git.tar.gz
 Source1: rpm-build-stage
 Source2: install_flume-kafka-avro-sink.sh
 
@@ -50,7 +50,7 @@ Source2: install_flume-kafka-avro-sink.sh
 Flume kafka producer Avro converter.
 
 %prep
-%setup -n flume-kafka-avro-sink.git
+%setup -n flume-ng-kafka-avro-sink.git
 
 %build
 bash %{SOURCE1}

@@ -34,9 +34,9 @@
 
 # Estas definiciones son mias para hacer independiente el SPEC
 # JAVI: flume_base_version -> esta definida en bigtop.mk
-# apache-flume-1.4.0-src.tar.gz
+# apache-flume-1.5.2-src.tar.gz
 #
-%define flume_base_version 1.4.0
+%define flume_base_version 1.5.2
 %define flume_release openbus_v1.1
 
 %define flume_folder apache-%{name}-%{flume_base_version}-src
@@ -132,9 +132,6 @@ Flume is a reliable, scalable, and manageable distributed data collection applic
 
 %prep
 %setup -n %{flume_folder}
-
-%patch0 -p1
-%patch1 -p1
 
 %build
 sh %{SOURCE1}

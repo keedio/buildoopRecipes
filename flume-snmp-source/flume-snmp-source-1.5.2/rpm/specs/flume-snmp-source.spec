@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 %define lib_flume /usr/lib/flume
-%define flume_snmp_source_base_version 1.4.0.0.0.1
+%define flume_snmp_source_base_version 1.5.2.0.0.1
 %define flume_snmp_source_release openbus_v1.1
 %define etc_flume /etc/flume/conf
 
