@@ -19,7 +19,7 @@
 
 %define camus_version 0.8.2
 %define camus_base_version 0.8.2
-%define camus_release openbus_v1.1
+%define camus_release openbus_1.1.0
 
 Name: camus
 Version: %{camus_version}
