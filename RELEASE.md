@@ -1,7 +1,7 @@
-# OPENBUS V-1.0 DEVELOPMENT BRANCH
+# OPENBUS 1.0 BASE BRANCH
 
 ## Working on release
-  openbus-1.0.1
+  openbus-1.0.0
 
 ### Release Notes
   - Initial commit
