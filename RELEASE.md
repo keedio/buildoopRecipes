@@ -1,7 +1,7 @@
-# OPENBUS 1.0 BASE BRANCH
+# OPENBUS V-1.0 DEVELOPMENT BRANCH
 
 ## Working on release
-  openbus-1.0.0
+  openbus-1.0.1
 
 ### Release Notes
   - Initial commit
@@ -17,7 +17,7 @@
 - Storm - 0.9.2
 - Siddhi - 3.0.0
 - Logstash - 1.4.2
-- Flume - 1.4.0
+- Flume - 1.5.2
 - Sqoop - 1.4.4
 - Camus 0.8.2
 - Kafka - 0.8.0
