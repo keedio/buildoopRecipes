@@ -1,4 +1,4 @@
-buildoopRecipes  -  openbus-1.0-update
+buildoopRecipes  -  openbus-1.1-update
 ========================================
 
 buildoopRecipes is a collection of recipes used for 
