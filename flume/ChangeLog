@@ -1,3 +1,5 @@
+06-02-2015 Juan Carlos Fernandez <jcfernandez@keedio.com>
+	* flume 1.5.2: Refactoring flume service and add status
 19-01-2015 Marcelo Valle <mvalle@keedio.com>
 	* flume 1.5.2: Packaging latest flume release
 
