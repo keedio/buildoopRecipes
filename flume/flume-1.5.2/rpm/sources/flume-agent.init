@@ -112,8 +112,8 @@ checkstatus() {
       ((error++))
     fi
   done
-  [ $total -eq $running ] && echo "Running" && return 0
   [ $total -eq $stopped ] && echo "Stopped" && return 3
+  [ $total -eq $running ] && echo "Running" && return 0
   echo "Error: there are $running agents, $stopped stopped and $error in error state" 
   return 1
 }
