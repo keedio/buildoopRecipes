@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-%define hue_version 3.5.0.produban
-%define hue_base_version 3.5.0
-%define hue_release openbus_1.1.0
+%define hue_version 3.7.1
+%define hue_base_version 3.7.1
+%define hue_release openbus_1.2.0
 
 Name:    hue
 Version: %{hue_version}

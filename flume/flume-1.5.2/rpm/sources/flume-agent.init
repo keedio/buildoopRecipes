@@ -19,6 +19,7 @@
 #
 # chkconfig: 345 90 10
 # description: Flume NG agent
+# author Marcelo Valle <mvalle@keedio.com>
 #
 ### BEGIN INIT INFO
 # Provides:          flume-agent
@@ -42,28 +43,19 @@ if [ -f /etc/profile.d/java.sh ]; then
         [ -z "\$JAVA_HOME" ] && echo "JAVA_HOME is not defined" && exit 1
 else
 	echo "enviroment not properly set up"
-        exit 1
+        exit  1
 fi
-
-STATUS_RUNNING=0
-STATUS_DEAD=1
-STATUS_DEAD_AND_LOCK=2
-STATUS_NOT_RUNNING=3
 
 ERROR_PROGRAM_NOT_INSTALLED=5
 
-FLUME_LOG_DIR=/var/log/flume
-FLUME_AGENT_CONF_DIR=/etc/flume/conf.d
-FLUME_CONF_DIR=/etc/flume/conf
-FLUME_RUN_DIR=/var/run/flume
 FLUME_HOME=/usr/lib/flume
+
+FLUME_AGENT_CONF_DIR=/etc/flume/conf.d
+FLUME_RUN_DIR=/var/run/flume
+FLUME_LOCK_DIR=/var/lock/subsys
+EXEC_PATH=$FLUME_HOME/bin/flume-agent
+
 FLUME_USER=flume
-
-FLUME_LOCK_DIR="/var/lock/subsys/"
-
-desc="Flume NG agent daemon"
-
-EXEC_PATH=/usr/bin/flume-ng
 
 # These directories may be tmpfs and may or may not exist
 # depending on the OS (ex: /var/lock/subsys does not exist on debian/ubuntu)
@@ -71,79 +63,65 @@ for dir in "$FLUME_RUN_DIR" "$FLUME_LOCK_DIR"; do
   [ -d "${dir}" ] || install -d -m 0755 -o $FLUME_USER -g $FLUME_USER ${dir}
 done
 
-
-DEFAULT_FLUME_AGENT_NAME="agent"
-FLUME_AGENT_NAME=${FLUME_AGENT_NAME:-${DEFAULT_FLUME_AGENT_NAME}}
-FLUME_SHUTDOWN_TIMEOUT=${FLUME_SHUTDOWN_TIMEOUT:-60}
-
 start() {
   [ -x $exec ] || exit $ERROR_PROGRAM_NOT_INSTALLED
-
   getAgentNames
+  error=0
   for i in $agentNames
   do
-    checkstatus $i
-    status=$?
-    if [ "$status" -ne "$STATUS_RUNNING" ]; then
-  	globalRetval=0
-        log_success_msg "Starting $desc (flume-agent $i): "
-	flume_pid_file="${FLUME_RUN_DIR}/flume-agent-$i.pid"
-	lockfile="${FLUME_LOCK_DIR}/flume-agent-$i"
-
-        #flume_conf_file=${flume_conf_file:-${FLUME_AGENT_CONF_DIR}/$i.conf}
-        flume_conf_file=${FLUME_AGENT_CONF_DIR}/$i.conf
-
-        /bin/su -s /bin/bash -c "/bin/bash -c 'echo \$\$ >$flume_pid_file && exec ${EXEC_PATH} agent --conf ${FLUME_CONF_DIR} --conf-file $flume_conf_file --name $i >>${FLUME_LOG_DIR}/$i.out 2>&1' &" $FLUME_USER
-        retval=$?
-  	[ $retval -eq 0 ] && touch $lockfile
-	if [ $retval -ne 0 ]; then
-		log_warning_msg "Startup flume-agent $i fails! "
-		globalRetval=$retval
-	fi
-   else
-        log_warning_msg "Flume-agent $i is already running"
-   fi
+    /bin/su -s /bin/bash -c "${EXEC_PATH} $i status"
+    rc=$?
+    [ $rc -eq 0 ] && continue
+    [ $rc -ne 3 ] && /bin/su -s /bin/bash -c "${EXEC_PATH} $i stop"
+    /bin/su -s /bin/bash -c "${EXEC_PATH} $i start"
+    ((error+=$?))
   done
-  
-  return $globalRetval
+  [ $error -eq 0 ] && return 0 || return 1
 }
 
 stop() {
   getAgentNames
+  error=0
   for i in $agentNames
   do
-          flume_pid_file="${FLUME_RUN_DIR}/flume-agent-$i.pid"
-	  lockfile="${FLUME_LOCK_DIR}/flume-agent-$i"
-	  if [ ! -e $flume_pid_file ]; then
-	    log_failure_msg "Flume agent $i is not running"
-	  else
-  	    log_success_msg "Stopping $desc (flume-agent) $i:"
-   	    flume_pid=`cat $flume_pid_file`
- 	     if [ -n $flume_pid ]; then
-    		kill -TERM ${flume_pid} &>/dev/null
-    		for i in `seq 1 ${FLUME_SHUTDOWN_TIMEOUT}` ; do
-      		  kill -0 ${flume_pid} &>/dev/null || break
-      		  sleep 1
-    		done
-    		kill -KILL ${flume_pid} &>/dev/null
- 		rm -f $lockfile $flume_pid_file
-  	     fi
-	  fi   
+    /bin/su -s /bin/bash -c "${EXEC_PATH} $i status"
+    rc=$?
+    [ $rc -eq 3 ] && continue
+    /bin/su -s /bin/bash -c "${EXEC_PATH} $i stop"
+    ((error+=$?))
   done
-  return 0
+  [ $error -eq 0 ] && return 0 || return 1
+}
+
+checkstatus() {
+  getAgentNames
+  running=0
+  stopped=0
+  error=0
+  total=0
+  for i in $agentNames
+  do
+    ((total++))
+    /bin/su -s /bin/bash -c "${EXEC_PATH} $i status"
+    rc=$?
+    if [ $rc -eq 0 ]; then
+      ((running++))
+    elif [ $rc -eq 3 ]; then
+      ((stopped++))
+    else
+      ((error++))
+    fi
+  done
+  [ $total -eq $stopped ] && echo "Stopped" && return 3
+  [ $total -eq $running ] && echo "Running" && return 0
+  echo "Error: there are $running agents, $stopped stopped and $error in error state" 
+  return 1
 }
 
 restart() {
   stop
-  start
-}
-
-checkstatus()
-{
-  flume_pid_file="${FLUME_RUN_DIR}/flume-agent-$1.pid"
-  pidofproc -p $flume_pid_file java > /dev/null
-  status=$?
- return $status
+  [ $? -eq 0 ] && start
+  return $?
 }
 
 getAgentNames()
@@ -163,18 +141,23 @@ condrestart(){
 case "$1" in
   start)
     start
+    RETVAL=$?
     ;;
   stop)
     stop
+    RETVAL=$?
     ;;
   status)
     checkstatus
+    RETVAL=$?
     ;;
   restart)
     restart
+    RETVAL=$?
     ;;
   condrestart|try-restart)
     condrestart
+    RETVAL=$?
     ;;
   *)
     echo $"Usage: $0 {start|stop|status|restart|try-restart|condrestart}"

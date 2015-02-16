@@ -15,7 +15,7 @@
 %define lib_avro_schema_repo %{_usr}/lib/avro/%{name} 
 %define avro_schema_repo_version 1.7.4
 %define avro_schema_repo_base_version 1.7.4
-%define avro_schema_repo_release openbus_1.1.0
+%define avro_schema_repo_release openbus_1.2.0
 
 Name: avro-schema-repo
 Version: %{avro_schema_repo_version}

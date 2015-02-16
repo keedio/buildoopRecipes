@@ -17,7 +17,7 @@
 
 %define storm_hbase_version 0.9.1.7f79e191ef
 %define storm_hbase_base_version 0.9.1.7f79e191ef
-%define storm_hbase_release openbus_1.1.0
+%define storm_hbase_release openbus_1.2.0
 %define storm_user storm
 %define storm_group storm
 

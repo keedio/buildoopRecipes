@@ -17,7 +17,7 @@
 
 %define siddhi_version 3.0.0
 %define siddhi_base_version 3.0.0
-%define siddhi_release openbus_1.1.0
+%define siddhi_release openbus_1.2.0
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
 %define __os_install_post \

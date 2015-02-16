@@ -30,7 +30,7 @@
 %global __os_install_post %{nil}
 
 %define logstash_version 1.4.2
-%define logstash_release openbus_1.1.0
+%define logstash_release openbus_1.2.0
 
 Name:           %{logstash_name}
 Version:        %{logstash_version}

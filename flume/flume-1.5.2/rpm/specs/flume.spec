@@ -37,7 +37,7 @@
 # apache-flume-1.5.2-src.tar.gz
 #
 %define flume_base_version 1.5.2
-%define flume_release openbus_1.1.0
+%define flume_release openbus_1.2.0
 
 %define flume_folder apache-%{name}-%{flume_base_version}-src
 
@@ -197,13 +197,16 @@ fi
 
 
 %dir %{etc_flume}.empty
+%dir %{etc_flume}.d
 %dir %{lib_flume}
 %dir %{lib_flume}/bin
 %dir %{lib_flume}/lib
 
 %config(noreplace) %{etc_flume}.empty/*
+%config(noreplace) %{etc_flume}.d/*
 %attr(0755,root,root) %{bin_flume}/flume-ng
 %attr(0755,root,root) %{lib_flume}/bin/flume-ng
+%attr(0755,root,root) %{lib_flume}/bin/flume-agent
 %{lib_flume}/lib/*.jar
 %{lib_flume}/tools/*.jar
 %{lib_flume}/conf

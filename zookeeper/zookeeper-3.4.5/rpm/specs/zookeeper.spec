@@ -25,7 +25,7 @@
 
 %define zookeeper_base_version 3.4.5
 %define zookeeper_version 3.4.5
-%define zookeeper_release openbus_1.1.0
+%define zookeeper_release openbus_1.2.0
 
 %if  %{?suse_version:1}0
 

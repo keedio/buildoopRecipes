@@ -1,7 +1,7 @@
-# OPENBUS V-1.0 DEVELOPMENT BRANCH
+# OPENBUS V-1.2 DEVELOPMENT BRANCH
 
 ## Working on release
-  openbus-1.0.1
+  openbus-1.1.0
 
 ### Release Notes
   - Initial commit
@@ -34,6 +34,6 @@
 - Avro - 1.7.5
 - Jsvc-daemon - 1.0.13
 - Tomcat-server - 6.0.36
-- Hue - 3.5.0.produban
+- Hue - 3.7.1
 - Kafka-hue-app - 1.0
 - Kibana - 3.1.0

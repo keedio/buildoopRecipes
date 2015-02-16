@@ -144,6 +144,9 @@ touch $PREFIX/$ETC_DIR/conf.empty/flume.conf
 unlink $PREFIX/$LIB_DIR/conf || /bin/true
 ln -s /etc/flume/conf $PREFIX/$LIB_DIR/conf
 
+install -d -m 0755 $PREFIX/$ETC_DIR/conf.d
+touch $PREFIX/$ETC_DIR/conf.d/agent1.conf
+
 # Docs
 rm -rf $PREFIX/$LIB_DIR/docs
 install -d -m 0755 $PREFIX/${DOC_DIR}
@@ -157,3 +160,6 @@ for x in CHANGELOG \
     cp -r $x $PREFIX/${DOC_DIR}
   fi
 done
+
+# Bin to start single agent
+install -m 755 $RPM_SOURCE_DIR/flume-agent $PREFIX/$LIB_DIR/bin
