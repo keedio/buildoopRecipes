@@ -28,7 +28,6 @@ Source0: hue.git.tar.gz
 Source1: %{name}.init
 Source2: rpm-build-stage
 Source3: install_hue.sh
-Patch0: hue-pom-cdh5.0.1.patch 
 URL: http://github.com/cloudera/hue
 Requires: %{name}-plugins = %{version}-%{release}
 Requires: %{name}-common = %{version}-%{release}
@@ -147,8 +146,6 @@ It supports a file browser, job tracker interface, cluster health monitor, and m
 
 %prep
 %setup -n %{name}.git
-
-%patch0 -p1
 
 ########################################
 # Build
