@@ -84,14 +84,16 @@ done
 
 LIB_DIR=${LIB_DIR:-/usr/lib/kafka}
 INSTALLED_LIB_DIR=${INSTALLED_LIB_DIR:-/usr/lib/kafka}
-BIN_DIR=${BIN_DIR:-/usr/bin}
 CONF_DIR=${CONF_DIR:-/etc/kafka/conf.dist}
 
 install -d -m 0755 $PREFIX/$LIB_DIR
+install -d -m 0755 $PREFIX/$LIB_DIR/libs
 install -d -m 0755 $PREFIX/$LIB_DIR/bin
 
-cp -ra ${BUILD_DIR}/core/target/scala-*/*.jar $PREFIX/$LIB_DIR
+cp -ra ${BUILD_DIR}/core/build/libs/*.jar $PREFIX/$LIB_DIR/libs
+cp -ra ${BUILD_DIR}/core/build/dependant-libs-2.10.4/*.jar $PREFIX/$LIB_DIR/libs
 cp -ra ${BUILD_DIR}/bin/*.sh $PREFIX/$LIB_DIR/bin
+ln -s /etc/kafka/conf $PREFIX/$LIB_DIR/config 
 
 # Copy in the configuration files
 install -d -m 0755 $PREFIX/$CONF_DIR
@@ -99,81 +101,4 @@ cp -a ${RPM_SOURCE_DIR}/conf.dist/* $PREFIX/$CONF_DIR
 # cp -a ${BUILD_DIR}/config/* $PREFIX/$CONF_DIR
 cd $PREFIX/etc/kafka
 ln -s conf.dist conf
-cd -
-install -d -m 0755 $PREFIX/$BIN_DIR
-
-cat > $PREFIX/$BIN_DIR/kafka <<EOF
-#!/bin/sh 
-
-set -e
-
-usage() {
-  echo "
-usage: \$0 <options>
-     --start                     start kafka service
-     --stop                      stop kafka service
-     --list                      list topics
-  "
-  exit 1
-}
-
-OPTS=\$(getopt \
-  -n \$0 \\
-  -o '' \\
-  -l 'start::' \\
-  -l 'stop::' \\
-  -l 'list::' -- "\$@")
-
-if [ \$? != 0 ] ; then
-    usage
-fi
-
-eval set -- "\$OPTS"
-while true ; do
-    case "\$1" in
-        --start)
-        START=1 ; shift ; break
-        ;;
-        --stop)
-        STOP=1 ; shift ; break
-        ;;
-        --list)
-        LIST=1 ; shift ; break
-        ;;
-        --)
-        usage
-        exit 1
-        ;;
-        *)
-        echo "Unknown option: \$1"
-        usage
-        exit 1
-        ;;
-    esac
-done
-
-# Autodetect JAVA_HOME if not defined
-if [ -f /etc/profile.d/java.sh ]; then
-        . /etc/profile.d/java.sh
-        [ -z "\$JAVA_HOME" ] && echo "JAVA_HOME is not defined" && exit 1
-else
-        echo "enviroment not properly set up"
-        exit 1
-fi
-
-CLASSPATH=$INSTALLED_LIB_DIR/*.jar
-
-if [ ! -z \$START ]; then
-  # we consider we have an external zookeeper for production enviroments
-  # $LIB_DIR/bin/zookeeper-server-start.sh /etc/kafka/conf/zookeeper.properties&
-  $LIB_DIR/bin/kafka-server-start.sh /etc/kafka/conf/server.properties&
-  echo \$! > /var/run/kafka/kafka-server.pid
-elif [ ! -z \$STOP ]; then
-  kill \$(ps -eaf|grep kafka|grep -v grep|awk '{print \$2}')
-elif [ ! -z \$LIST ]; then
-  $LIB_DIR/bin/kafka-list-topic.sh
-fi
-EOF
-chmod 755 $PREFIX/$BIN_DIR/kafka
-
 

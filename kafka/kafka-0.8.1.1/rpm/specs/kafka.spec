@@ -22,8 +22,8 @@
 %define bin_kafka /usr/bin
 %define man_dir /usr/share/man
 
-%define kafka_version 0.8.0
-%define kafka_base_version 0.8.0
+%define kafka_version 0.8.1.1
+%define kafka_base_version 0.8.1.1
 %define kafka_release openbus_1.2.0
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
@@ -66,13 +66,12 @@ Source0: %{name}-%{kafka_base_version}-src.tgz
 Source1: rpm-build-stage
 Source2: install_%{name}.sh
 Source3: kafka-server.sh
-Patch0: hadoop-consumer-for-hadoop2.patch
-Patch1: kafka-server-start.patch
 BuildArch: noarch
 BuildRequires: autoconf, automake
 Requires(pre): coreutils, /usr/sbin/groupadd, /usr/sbin/useradd
 Requires(post): %{alternatives_dep}
 Requires(preun): %{alternatives_dep}
+Requires: jdk, redhat-lsb
 %if  %{?suse_version:1}0
 # Required for init scripts
 Requires: insserv
@@ -93,9 +92,6 @@ Kafka is a high-throughput distributed messaging system.
     
 %prep
 %setup -n %{name}-%{kafka_base_version}-src
-
-%patch0 -p1
-%patch1 -p1
 
 %build
 bash $RPM_SOURCE_DIR/rpm-build-stage
@@ -137,6 +133,6 @@ fi
 %{config_kafka}
 %{etc_rcd}/init.d/kafka
 %{lib_kafka}/bin/*
-%{lib_kafka}/*.jar
+%{lib_kafka}/libs/*.jar
 %{bin_kafka}/kafka
-
+%{lib_kafka}/config

@@ -3,12 +3,12 @@
 		"description": "Apache Kafka", 
 		"homepage":    "http://kafka.apache.org/",
 		"license":     "Apache-2.0",
-		"filename":    "kafka-0.8.0.bd"
+		"filename":    "kafka-0.8.1.1.bd"
 	},
 	
 	"do_download": {
-		"src_uri":    "http://archive.apache.org/dist/kafka/0.8.0/kafka-0.8.0-src.tgz",
-		"src_md5sum": "46b3e65e38f1bde4b6251ea131d905f4"
+		"src_uri":    "http://archive.apache.org/dist/kafka/0.8.1.1/kafka-0.8.1.1-src.tgz",
+		"src_md5sum": "81f1d7067c9848ecacebb16561b992d4"
 	},
 
 	"do_fetch": {
