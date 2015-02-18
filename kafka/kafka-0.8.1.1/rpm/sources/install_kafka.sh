@@ -89,6 +89,7 @@ CONF_DIR=${CONF_DIR:-/etc/kafka/conf.dist}
 install -d -m 0755 $PREFIX/$LIB_DIR
 install -d -m 0755 $PREFIX/$LIB_DIR/libs
 install -d -m 0755 $PREFIX/$LIB_DIR/bin
+install -d -m 0755 $PREFIX/var/lib/kafka
 
 cp -ra ${BUILD_DIR}/core/build/libs/*.jar $PREFIX/$LIB_DIR/libs
 cp -ra ${BUILD_DIR}/core/build/dependant-libs-2.10.4/*.jar $PREFIX/$LIB_DIR/libs

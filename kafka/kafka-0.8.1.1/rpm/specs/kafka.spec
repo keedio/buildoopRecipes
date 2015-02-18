@@ -20,6 +20,7 @@
 %define log_kafka /var/log/%{kafka_name}
 %define run_kafka /var/run/%{kafka_name}
 %define man_dir /usr/share/man
+%define kafka_user_home /var/lib/kafka
 
 %define kafka_version 0.8.1.1
 %define kafka_base_version 0.8.1.1
@@ -65,7 +66,7 @@ Source0: %{name}-%{kafka_base_version}-src.tgz
 Source1: rpm-build-stage
 Source2: install_%{name}.sh
 Source3: kafka-server.sh
-Patch0: log_level_path.patch
+Patch0: log_path.patch
 BuildArch: noarch
 BuildRequires: autoconf, automake
 Requires(pre): coreutils, /usr/sbin/groupadd, /usr/sbin/useradd
@@ -121,6 +122,7 @@ getent passwd kafka > /dev/null || useradd -c "Kafka" -s /sbin/nologin -g kafka 
 chkconfig --add %{name}
 
 %preun
+/etc/init.d/kafka stop
 if [ "$1" = 0 ]; then
         %{alternatives_cmd} --remove %{kafka_name}-conf %{config_kafka}.dist || :
 fi
@@ -131,6 +133,7 @@ fi
 %files 
 %defattr(-,root,root,755)
 %config(noreplace) %{config_kafka}.dist
+%attr(0755,kafka,kafka) %{kafka_user_home}
 %{config_kafka}
 %{etc_rcd}/init.d/kafka
 %{lib_kafka}/bin/*
