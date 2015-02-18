@@ -263,7 +263,7 @@ fi
 
 
 %files -n %{name}-common
-%defattr(-,root,root)
+%defattr(-,%{username},%{username})
 %attr(0755,root,root) %config(noreplace) %{etc_hue}.empty 
 %dir %{hue_dir}
 %{hue_dir}/desktop
