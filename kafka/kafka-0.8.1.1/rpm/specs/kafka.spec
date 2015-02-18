@@ -19,7 +19,6 @@
 %define config_kafka %{etc_kafka}/conf
 %define log_kafka /var/log/%{kafka_name}
 %define run_kafka /var/run/%{kafka_name}
-%define bin_kafka /usr/bin
 %define man_dir /usr/share/man
 
 %define kafka_version 0.8.1.1
@@ -66,6 +65,7 @@ Source0: %{name}-%{kafka_base_version}-src.tgz
 Source1: rpm-build-stage
 Source2: install_%{name}.sh
 Source3: kafka-server.sh
+Patch0: log_level_path.patch
 BuildArch: noarch
 BuildRequires: autoconf, automake
 Requires(pre): coreutils, /usr/sbin/groupadd, /usr/sbin/useradd
@@ -92,6 +92,7 @@ Kafka is a high-throughput distributed messaging system.
     
 %prep
 %setup -n %{name}-%{kafka_base_version}-src
+%patch0 -p1
 
 %build
 bash $RPM_SOURCE_DIR/rpm-build-stage
@@ -134,5 +135,4 @@ fi
 %{etc_rcd}/init.d/kafka
 %{lib_kafka}/bin/*
 %{lib_kafka}/libs/*.jar
-%{bin_kafka}/kafka
 %{lib_kafka}/config

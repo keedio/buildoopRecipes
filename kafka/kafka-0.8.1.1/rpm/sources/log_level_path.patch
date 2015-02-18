@@ -1,0 +1,51 @@
+diff -uprN kafka-0.8.1.1-src_vanilla/bin/kafka-run-class.sh kafka-0.8.1.1-src/bin/kafka-run-class.sh
+--- kafka-0.8.1.1-src_vanilla/bin/kafka-run-class.sh	2014-04-22 20:37:23.000000000 +0200
++++ kafka-0.8.1.1-src/bin/kafka-run-class.sh	2015-02-18 10:48:22.658730984 +0100
+@@ -23,7 +23,7 @@ fi
+ base_dir=$(dirname $0)/..
+ 
+ # create logs directory
+-LOG_DIR=$base_dir/logs
++LOG_DIR=/var/log/kafka
+ if [ ! -d $LOG_DIR ]; then
+ 	mkdir $LOG_DIR
+ fi
+diff -uprN kafka-0.8.1.1-src_vanilla/config/log4j.properties kafka-0.8.1.1-src/config/log4j.properties
+--- kafka-0.8.1.1-src_vanilla/config/log4j.properties	2014-04-22 20:37:23.000000000 +0200
++++ kafka-0.8.1.1-src/config/log4j.properties	2015-02-18 10:50:29.195576648 +0100
+@@ -13,9 +13,9 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-kafka.logs.dir=logs
++kafka.logs.dir=/var/log/kafka
+ 
+-log4j.rootLogger=INFO, stdout 
++log4j.rootLogger=WARN, kafkaAppender 
+ 
+ log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+ log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+@@ -57,7 +57,7 @@ log4j.appender.controllerAppender.layout
+ #log4j.logger.kafka.perf=DEBUG, kafkaAppender
+ #log4j.logger.kafka.perf.ProducerPerformance$ProducerThread=DEBUG, kafkaAppender
+ #log4j.logger.org.I0Itec.zkclient.ZkClient=DEBUG
+-log4j.logger.kafka=INFO, kafkaAppender
++log4j.logger.kafka=WARN, kafkaAppender
+ 
+ log4j.logger.kafka.network.RequestChannel$=WARN, requestAppender
+ log4j.additivity.kafka.network.RequestChannel$=false
+@@ -68,11 +68,11 @@ log4j.additivity.kafka.network.RequestCh
+ log4j.logger.kafka.request.logger=WARN, requestAppender
+ log4j.additivity.kafka.request.logger=false
+ 
+-log4j.logger.kafka.controller=TRACE, controllerAppender
++log4j.logger.kafka.controller=WARN, controllerAppender
+ log4j.additivity.kafka.controller=false
+ 
+-log4j.logger.kafka.log.LogCleaner=INFO, cleanerAppender
++log4j.logger.kafka.log.LogCleaner=WARN, cleanerAppender
+ log4j.additivity.kafka.log.LogCleaner=false
+ 
+-log4j.logger.state.change.logger=TRACE, stateChangeAppender
++log4j.logger.state.change.logger=WARN, stateChangeAppender
+ log4j.additivity.state.change.logger=false
