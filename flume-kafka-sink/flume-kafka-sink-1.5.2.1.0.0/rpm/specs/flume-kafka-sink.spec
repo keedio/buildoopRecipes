@@ -83,8 +83,7 @@ sh %{SOURCE2} \
 %files 
 %defattr(644,root,root,755)
 %dir %{lib_flume}
-%dir %{lib_flume}/lib
-%{lib_flume}/lib/*.jar
+%{lib_flume}/plugins.d
 
 %dir %{etc_flume}
 %config(noreplace) %{etc_flume}/*

@@ -87,6 +87,7 @@ Source1: rpm-build-stage
 Source2: install_%{name}.sh
 Source3: %{name}-agent.init
 Source4: flume-agent.default
+Patch0: hadoop-2-version.patch 
 Requires: /usr/sbin/useradd
 Requires: coreutils
 Requires: hadoop-hdfs
@@ -132,6 +133,7 @@ Flume is a reliable, scalable, and manageable distributed data collection applic
 
 %prep
 %setup -n %{flume_folder}
+%patch0 -p1
 
 %build
 sh %{SOURCE1}
@@ -157,9 +159,9 @@ chmod 755 $init_file
 %__cp %{SOURCE4} $RPM_BUILD_ROOT/etc/default/%{name}-agent
 
 # Get rid of hadoop jar, and instead link to installed hadoop
-rm $RPM_BUILD_ROOT/usr/lib/flume/lib/hadoop-* || true
-ln -s /usr/lib/hadoop/hadoop-common.jar $RPM_BUILD_ROOT/usr/lib/flume/lib/hadoop-common.jar
-ln -s /usr/lib/hadoop/hadoop-auth.jar $RPM_BUILD_ROOT/usr/lib/flume/lib/hadoop-auth.jar
+#rm $RPM_BUILD_ROOT/usr/lib/flume/lib/hadoop-* || true
+#ln -s /usr/lib/hadoop/hadoop-common.jar $RPM_BUILD_ROOT/usr/lib/flume/lib/hadoop-common.jar
+#ln -s /usr/lib/hadoop/hadoop-auth.jar $RPM_BUILD_ROOT/usr/lib/flume/lib/hadoop-auth.jar
 
 %pre
 getent group flume >/dev/null || groupadd -r flume
