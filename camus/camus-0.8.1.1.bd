@@ -8,7 +8,7 @@
 	
 	"do_download": {
 	 "src_uri":    "https://github.com/keedio/camus.git",
-	 "src_hash":   "release-0.8.1.1"
+	 "src_hash":   "0.8.1.1"
 	},
 
 	"do_fetch": {
