@@ -8,7 +8,7 @@
 	
 	"do_download": {
 		"src_uri":  "https://github.com/keedio/flume-ng-kafka-sink.git",
-	 	"src_hash": "1.5.2.1.0.0"
+	 	"src_hash": "1.5.2.1.0.0_kafka_0.8.1.1"
 	},
 
 	"do_fetch": {
