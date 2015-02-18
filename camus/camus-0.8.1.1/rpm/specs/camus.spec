@@ -17,8 +17,8 @@
 %define etc_camus /etc/camus/
 %define config_camus %{etc_camus}/conf.dist
 
-%define camus_version 0.8.2
-%define camus_base_version 0.8.2
+%define camus_version 0.8.1.1
+%define camus_base_version 0.8.1.1
 %define camus_release openbus_1.2.0
 
 Name: camus
