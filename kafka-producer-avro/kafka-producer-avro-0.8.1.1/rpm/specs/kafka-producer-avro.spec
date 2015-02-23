@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Kafka Producer Avro tag -> release-0.8.1
-%define kafka_producer_avro_base_version 0.8.1
+# Kafka Producer Avro tag -> 0.8.1.1
+%define kafka_producer_avro_base_version 0.8.1.1
 %define kafka_producer_avro_release openbus_1.2.0
 
 %define lib_kafka_producer_avro /usr/lib/kafka/lib/kafka-producer-avro
@@ -24,7 +24,7 @@
 Name: kafka-producer-avro
 Version: %{kafka_producer_avro_base_version}
 Release: %{kafka_producer_avro_release}
-Summary: Avro Producer for Kafka v0.8 
+Summary: Avro Producer for Kafka v0.8.1.1 
 URL: https://github.com/buildoop/AvroRepoKafkaProducerTest
 Vendor: The Redoop Team
 Packager: Javi Roman <javiroman@redoop.org>

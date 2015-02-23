@@ -1,3 +1,9 @@
+22-02-2015 Marcelo Valle <mvalle@keedio.com>
+	Version is updated to 0.8.1.1, updated the base project to run
+	with Kafka 0.8.1.1, the new project is downloaded from [2]
+
+	[2] https://github.com/keedio/AvroRepoKafkaProducerTest
+
 16-04-2014 Javi Roman <javiroman@redoop.org>
 
 	* Package for Kafka Producer Avro.
