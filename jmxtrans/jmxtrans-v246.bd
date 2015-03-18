@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "JMXTrans", 
+		"homepage":    "https://github.com/jmxtrans/jmxtrans",
+		"license":     "Apache-2.0",
+		"filename":    "jmxtrans-v246.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "https://github.com/jmxtrans/jmxtrans.git",
+		"src_hash": "v246"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}
