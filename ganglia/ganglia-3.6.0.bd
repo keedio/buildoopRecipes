@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Ganglia is a scalable monitoring system", 
+		"homepage":    "http://ganglia.sourceforge.net/",
+		"license":     "Apache-2.0",
+		"filename":    "ganglia-3.6.0.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "http://downloads.sourceforge.net/project/ganglia/ganglia%20monitoring%20core/3.6.0/ganglia-3.6.0.tar.gz",
+		"src_md5sum": "5926bb18c22af508a3718a90b2e9a2c"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	},
+}
