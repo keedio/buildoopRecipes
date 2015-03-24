@@ -1,0 +1,44 @@
+diff -uprN kafka-0.8.0-src-vanilla/bin/kafka-run-class.sh kafka-0.8.0-src/bin/kafka-run-class.sh
+--- kafka-0.8.0-src-vanilla/bin/kafka-run-class.sh	2013-11-25 19:39:41.000000000 +0100
++++ kafka-0.8.0-src/bin/kafka-run-class.sh	2015-03-24 19:52:39.660759194 +0100
+@@ -23,7 +23,7 @@ fi
+ base_dir=$(dirname $0)/..
+ 
+ # create logs directory
+-LOG_DIR=$base_dir/logs
++LOG_DIR=/var/log/kafka
+ if [ ! -d $LOG_DIR ]; then
+ 	mkdir $LOG_DIR
+ fi
+@@ -66,7 +66,7 @@ fi
+ 
+ # Log4j settings
+ if [ -z "$KAFKA_LOG4J_OPTS" ]; then
+-  KAFKA_LOG4J_OPTS="-Dlog4j.configuration=file:$base_dir/config/tools-log4j.properties"
++  KAFKA_LOG4J_OPTS="-Dlog4j.configuration=file:/etc/kafka/conf/tools-log4j.properties"
+ fi
+ 
+ # Generic jvm settings you want to add
+diff -uprN kafka-0.8.0-src-vanilla/bin/kafka-server-start.sh kafka-0.8.0-src/bin/kafka-server-start.sh
+--- kafka-0.8.0-src-vanilla/bin/kafka-server-start.sh	2013-11-25 19:39:41.000000000 +0100
++++ kafka-0.8.0-src/bin/kafka-server-start.sh	2015-03-24 19:53:27.289240572 +0100
+@@ -20,6 +20,6 @@ then
+ 	exit 1
+ fi
+ base_dir=$(dirname $0)
+-export KAFKA_LOG4J_OPTS="-Dlog4j.configuration=file:$base_dir/../config/log4j.properties"
++export KAFKA_LOG4J_OPTS="-Dlog4j.configuration=file:/etc/kafka/conf/log4j.properties"
+ export KAFKA_HEAP_OPTS="-Xmx1G -Xms1G"
+ exec $base_dir/kafka-run-class.sh daemon kafkaServer kafka.Kafka $@
+diff -uprN kafka-0.8.0-src-vanilla/bin/zookeeper-server-start.sh kafka-0.8.0-src/bin/zookeeper-server-start.sh
+--- kafka-0.8.0-src-vanilla/bin/zookeeper-server-start.sh	2013-11-25 19:39:41.000000000 +0100
++++ kafka-0.8.0-src/bin/zookeeper-server-start.sh	2015-03-24 19:54:25.835603155 +0100
+@@ -20,7 +20,7 @@ then
+ 	exit 1
+ fi
+ base_dir=$(dirname $0)
+-export KAFKA_LOG4J_OPTS="-Dlog4j.configuration=file:$base_dir/../config/log4j.properties"
++export KAFKA_LOG4J_OPTS="-Dlog4j.configuration=file:/etc/kafka/conf/log4j.properties"
+ export KAFKA_HEAP_OPTS="-Xmx512M -Xms512M"
+ exec $base_dir/kafka-run-class.sh daemon zookeeper org.apache.zookeeper.server.quorum.QuorumPeerMain $@
+ 
