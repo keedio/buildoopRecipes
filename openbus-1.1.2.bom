@@ -8,7 +8,9 @@ TARGET=CentOS-6.x
 
 # Injection
 FLUME_VERSION=1.5.2
+
 # Governance and integration
+KAFKA_VERSION=0.8.0
 
 # Connectors
 
