@@ -40,6 +40,9 @@ else
         echo "enviroment not properly set up"
         exit 1
 fi
+if [ -f /etc/profile.d/kafka.sh ] then
+	. /etc/profile.d/kafka.sh
+fi
 
 STATUS_RUNNING=0
 STATUS_DEAD=1
@@ -49,11 +52,14 @@ STATUS_NOT_RUNNING=3
 NAME=kafka-server
 DESC="Kafka daemon"
 
-KAFKA_HOME=/usr/lib/kafka
-KAFKA_CONF=/etc/kafka/conf
-KAFKA_RUN_DIR=/var/run/kafka
-PID_FILE=$KAFKA_RUN_DIR/kafka-server.pid
-KAFKA_SHUTDOWN_TIMEOUT=10
+KAFKA_HOME=${KAFKA_HOME-"/usr/lib/kafka"}
+KAFKA_CONF=${KAFKA_CONF-"/etc/kafka/conf"}
+KAFKA_RUN_DIR=${KAFKA_RUN-"/var/run/kafka"}
+KAFKA_SHUTDOWN_TIMEOUT=${KAFKA_SHUTDOWN_TIMEOUT-10}
+KAFKA_START_TIMEOUT=${KAFKA_START_TIMEOUT-10}
+KAFKA_USER=${KAFKA_USER-"kafka"}
+
+PID_FILE=$KAFKA_RUN_DIR/kafka-server.pid"}
 
 [ -d $KAFKA_RUN_DIR ] || install -d -m 0755 -o $KAFKA_USER -g $KAFKA_USER $KAFKA_RUN_DIR
 
@@ -62,27 +68,30 @@ start() {
     status=$?
     if [ "$status" -eq "$STATUS_NOT_RUNNING" ]; then
     	printf "Starting kafka server..."
-    	
-	su -s /bin/sh kafka -c "$KAFKA_HOME/bin/kafka-server-start.sh -daemon $KAFKA_CONF/server.properties"
-    
-	RETVAL=$?
-    	[ $RETVAL -eq 0 ] && \
-        ps ax | grep -i 'kafka\.Kafka' | grep java | grep -v grep | awk '{print $1}' > $PID_FILE && \
-        log_success_msg ""
-    	return $RETVAL
+	su -s /bin/sh $KAFKA_USER -c "/usr/bin/kafka --start" 
+	su -s /bin/sh $KAFKA_USER -c "$KAFKA_HOME/bin/kafka-server-start.sh -daemon $KAFKA_CONF/server.properties"
+        for i in `seq $KAFKA_START_TIMEOUT`; do
+	    checkstatus
+    	    if [ $? -eq $STATUS_RUNNING ]; then
+	        ps ax | grep -i 'kafka\.Kafka' | grep java | grep -v grep | awk '{print $1}' > $PID_FILE && \
+        	log_success_msg ""
+	    	return 0
+ 	    fi
+	    sleep 1
+	done
    fi
 
-    if [ "$status" -eq "$STATUS_RUNNING" ]; then
-      log_warning_msg "Kafka server is already running"
-    elif [ "$status" -eq "$STATUS_DEAD" ]; then
-      log_failure_msg "Kafka server is dead and pid file exists"
-    elif [ "$status" -eq "$STATUS_DEAD_AND_LOCK" ]; then 
-      log_failure_msg "Kafka server is dead and lock file exists"
-    else
-      log_failure_msg "Kafka server status is unknown"
-    fi
+   if [ "$status" -eq "$STATUS_RUNNING" ]; then
+       log_warning_msg "Kafka server is already running"
+   elif [ "$status" -eq "$STATUS_DEAD" ]; then
+       log_failure_msg "Kafka server is dead and pid file exists"
+   elif [ "$status" -eq "$STATUS_DEAD_AND_LOCK" ]; then 
+       log_failure_msg "Kafka server is dead and lock file exists"
+   else
+       log_failure_msg "Kafka server status is unknown"
+   fi
 
-    return 1
+   return 1
 }
 
 stop() {
@@ -101,6 +110,7 @@ stop() {
         done
         kill -KILL $pid &>/dev/null
       fi
+    kill -0 $pid  &>/dev/null && return 1
     rm -f $PID_FILE
     log_success_msg ""
     return 0
@@ -132,14 +142,19 @@ status(){
 
   if [ "$status" -eq "$STATUS_RUNNING" ];then
     log_success_msg "Kafka server is running"
+    return 0
   elif [ "$status" -eq "$STATUS_NOT_RUNNING" ]; then
     log_failure_msg "Kafka server is not running"
+    return 3
   elif [ "$status" -eq "$STATUS_DEAD" ]; then
     log_failure_msg "Kafka server is dead and pid file exists"
+    return 1
   elif [ "$status" -eq "$STATUS_DEAD_AND_LOCK" ]; then
     log_failure_msg "Kafka server is dead and lock file exists."
+    return 1
   else
     log_failure_msg "Kafka server status is unknown"
+    return 1
   fi
 }
 
@@ -151,15 +166,19 @@ checkstatus(){
 case "$1" in
     start)
 	start
+	exit $?
 	;;
     stop)
 	stop 
+	exit $?
 	;;
     restart)
         restart
+	exit $?
 	;;
     status)
 	status
+	exit $?
 	;;
     *)
 	N=/etc/init.d/$NAME
@@ -167,5 +186,3 @@ case "$1" in
 	exit 1
 	;;
 esac
-
-exit 0
