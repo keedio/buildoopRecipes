@@ -40,7 +40,7 @@ else
         echo "enviroment not properly set up"
         exit 1
 fi
-if [ -f /etc/profile.d/kafka.sh ] then
+if [ -f /etc/profile.d/kafka.sh ]; then
 	. /etc/profile.d/kafka.sh
 fi
 
@@ -59,7 +59,7 @@ KAFKA_SHUTDOWN_TIMEOUT=${KAFKA_SHUTDOWN_TIMEOUT-10}
 KAFKA_START_TIMEOUT=${KAFKA_START_TIMEOUT-10}
 KAFKA_USER=${KAFKA_USER-"kafka"}
 
-PID_FILE=$KAFKA_RUN_DIR/kafka-server.pid"}
+PID_FILE="$KAFKA_RUN_DIR/kafka-server.pid"
 
 [ -d $KAFKA_RUN_DIR ] || install -d -m 0755 -o $KAFKA_USER -g $KAFKA_USER $KAFKA_RUN_DIR
 
