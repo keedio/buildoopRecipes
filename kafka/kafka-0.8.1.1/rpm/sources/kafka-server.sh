@@ -68,7 +68,6 @@ start() {
     status=$?
     if [ "$status" -eq "$STATUS_NOT_RUNNING" ]; then
     	printf "Starting kafka server..."
-	su -s /bin/sh $KAFKA_USER -c "/usr/bin/kafka --start" 
 	su -s /bin/sh $KAFKA_USER -c "$KAFKA_HOME/bin/kafka-server-start.sh -daemon $KAFKA_CONF/server.properties"
         for i in `seq $KAFKA_START_TIMEOUT`; do
 	    checkstatus
