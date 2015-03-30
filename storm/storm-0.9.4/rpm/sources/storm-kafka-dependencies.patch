@@ -1,6 +1,6 @@
-diff -uprN apache-storm-0.9.2-incubating-vanilla/external/storm-kafka/pom.xml apache-storm-0.9.2-incubating/external/storm-kafka/pom.xml
---- apache-storm-0.9.2-incubating-vanilla/external/storm-kafka/pom.xml	2015-02-23 16:48:05.356833466 +0100
-+++ apache-storm-0.9.2-incubating/external/storm-kafka/pom.xml	2015-02-23 18:34:19.814603414 +0100
+diff -uprN apache-storm-0.9.4-vanilla/external/storm-kafka/pom.xml apache-storm-0.9.4/external/storm-kafka/pom.xml
+--- apache-storm-0.9.4-vanilla/external/storm-kafka/pom.xml	2015-02-23 16:48:05.356833466 +0100
++++ apache-storm-0.9.4/external/storm-kafka/pom.xml	2015-02-23 18:34:19.814603414 +0100
 @@ -25,19 +25,37 @@
          <relativePath>../../pom.xml</relativePath>
      </parent>

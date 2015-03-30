@@ -102,8 +102,16 @@ install -d -m 755 ${STORM_HOME}/lib/
 install    -m 644 ${BUILD_DIR}/lib/* ${STORM_HOME}/lib/
  
 install -d -m 755 ${STORM_HOME}/external/storm-kafka
-install    -m 644 ${BUILD_DIR}/external/storm-kafka/storm-kafka-0.9.2-incubating.jar \
+install    -m 644 ${BUILD_DIR}/external/storm-kafka/storm-kafka-0.9.4.jar \
 		  ${STORM_HOME}/external/storm-kafka/ 
+
+install -d -m 755 ${STORM_HOME}/external/storm-hdfs
+install    -m 644 ${BUILD_DIR}/external/storm-hdfs/storm-hdfs-0.9.4.jar \
+		  ${STORM_HOME}/external/storm-hdfs/ 
+
+install -d -m 755 ${STORM_HOME}/external/storm-hbase
+install    -m 644 ${BUILD_DIR}/external/storm-kafka/storm-hbase-0.9.4.jar \
+		  ${STORM_HOME}/external/storm-hbase/ 
 
 install -d -m 755 ${STORM_HOME}/logback/
 install    -m 644 $RPM_SOURCE_DIR/cluster.xml ${STORM_HOME}/logback/cluster.xml

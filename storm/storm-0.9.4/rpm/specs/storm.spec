@@ -25,8 +25,8 @@
 # Only for prevention.
 %global __os_install_post %{nil}
 
-%define storm_version 0.9.2
-%define storm_base_version 0.9.2
+%define storm_version 0.9.4
+%define storm_base_version 0.9.4
 %define storm_release openbus_1.2.0
 
 %define kafka_version 0.8.0
@@ -35,12 +35,12 @@ Name: %{storm_name}
 Version: %{storm_version}
 Release: %{storm_release}
 Summary: Storm is a distributed realtime computation system.
-License: Eclipse Public License 1.0
-URL: https://github.com/nathanmarz/storm/
-Vendor: The Redoop Team
-Packager: Javi Roman <javiroman@redoop.org>
+License: Apache License Version 2.0, January 2004
+URL: https://github.com/apache/storm
+Vendor: The Keedio Team
+Packager: Luca Rosellini <lrosellini@keedio.com>
 Group: Development/Libraries
-Source0: apache-%{storm_name}-%{storm_version}-incubating-src.tar.gz
+Source0: apache-%{storm_name}-%{storm_version}-src.tar.gz
 Source1: cluster.xml
 Source2: storm-ui.init
 Source3: storm-supervisor.init
@@ -52,7 +52,8 @@ Source8: rpm-build-stage
 Source9: install_storm.sh
 Source10: storm-logviewer.init
 Patch0: storm-kafka-dependencies.patch
-Patch1: storm-bin.patch
+Patch1: storm-bin-0.9.4.patch
+Patch2: storm-hbase-dependency.patch
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Requires: sh-utils, textutils, /usr/sbin/useradd, /usr/sbin/usermod, /sbin/chkconfig, /sbin/service
 Provides: storm
@@ -109,14 +110,29 @@ The DRPC server coordinates receiving an RPC request, sending the request to
 the Storm topology, receiving the results from the Storm topology, and sending
 the results back to the waiting client. 
 
+%package hbase
+Summary: Storm HBase Connector.
+Group: Libraries
+Requires: %{name} = %{version}-%{release}, jdk
+BuildArch: noarch
+%description hbase
+Storm-HBase provides Storm/Trident integration for Apache HBase.
+
 %package kafka
 Summary: Storm Kafka Connector.
 Group: Libraries
 Requires: %{name} = %{version}-%{release}, jdk
 BuildArch: noarch
 %description kafka
-Storm-kafka is a connector to support the submit of topologies with
-kafka spouts 
+Provides core storm and Trident spout implementations for consuming data from Apache Kafka 0.8.x.
+
+%package hdfs
+Summary: Storm HDFS Connector.
+Group: Libraries
+Requires: %{name} = %{version}-%{release}, jdk
+BuildArch: noarch
+%description hdfs
+Storm-HDFS provides Storm components for interacting with HDFS file systems.
 
 %package logviewer
 Summary: The Storm LogViewer daemon
@@ -136,10 +152,11 @@ The logviewer daemon runs as a separate process on Storm supervisor nodes.
 
 
 %prep
-%setup -n apache-%{storm_name}-%{storm_version}-incubating
+%setup -n apache-%{storm_name}-%{storm_version}
 
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 bash %{SOURCE8}
@@ -215,31 +232,52 @@ if [ $1 = 0 ]; then
   chkconfig --del %{storm_name}-ui
 fi
 
-
 %files kafka
 %defattr(-,%{storm_user},%{storm_group})
 %{storm_home}/external/storm-kafka/*
 
 %post kafka
-ln -s %{storm_home}/external/storm-kafka/storm-kafka-0.9.2-incubating.jar \
-	%{storm_home}/lib/storm-kafka-0.9.2-incubating.jar
-chown -h %{storm_user}:%{storm_group} %{storm_home}/lib/storm-kafka-0.9.2-incubating.jar
+ln -s %{storm_home}/external/storm-kafka/storm-kafka-%{storm_version}.jar \
+	%{storm_home}/lib/storm-kafka-%{storm_version}.jar
+chown -h %{storm_user}:%{storm_group} %{storm_home}/lib/storm-kafka-%{storm_version}.jar
 
 %postun kafka
-rm -f %{storm_home}/lib/storm-kafka-0.9.2-incubating.jar
-  
+rm -f %{storm_home}/lib/storm-kafka-%{storm_version}.jar
 
+%files hdfs
+%defattr(-,%{storm_user},%{storm_group})
+%{storm_home}/external/storm-hdfs/*
+
+%post hdfs
+ln -s %{storm_home}/external/storm-hdfs/storm-hdfs-%{storm_version}.jar \
+	%{storm_home}/lib/storm-hdfs-%{storm_version}.jar
+chown -h %{storm_user}:%{storm_group} %{storm_home}/lib/storm-hdfs-%{storm_version}.jar
+
+%postun hdfs
+rm -f %{storm_home}/lib/storm-hdfs-%{storm_version}.jar
+
+%files hbase
+%defattr(-,%{storm_user},%{storm_group})
+%{storm_home}/external/storm-hbase/*
+
+%post hbase
+ln -s %{storm_home}/external/storm-hbase/storm-hbase-%{storm_version}.jar \
+	%{storm_home}/lib/storm-hbase-%{storm_version}.jar
+chown -h %{storm_user}:%{storm_group} %{storm_home}/lib/storm-hbase-%{storm_version}.jar
+
+%postun hbase
+rm -f %{storm_home}/lib/storm-hbase-%{storm_version}.jar
+  
 %changelog
+* Mon Mar 30 2015 Luca Rosellini <lrosellini@keedio.com> - 0.9.4
+- Version bump to 0.9.4
 * Mon Jul 31 2013 Nathan Milford <nathan@milford.io> - 0.9.0-wip16-4
 - Removed postun macro. Caused scriptlet error on uninstall.
-
 * Mon Jul 31 2013 Nathan Milford <nathan@milford.io> - 0.9.0-wip16-3
 - Bumped RPM release version.
 - Merged DRPC init script and package declaration by Vitaliy Fuks <https://github.com/vitaliyf>
 - Merged init script additions by Daniel Damiani <https://github.com/ddamiani>
-
 * Mon May 13 2013 Nathan Milford <nathan@milford.io> - 0.9.0-wip16
 - Storm 0.9.0-wip16
-
 * Wed Aug 08 2012 Nathan Milford <nathan@milford.io> - 0.8.0
 - Storm 0.8.0
