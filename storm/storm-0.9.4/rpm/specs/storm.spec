@@ -189,13 +189,13 @@ getent passwd %{storm_user} >/dev/null || /usr/sbin/useradd --comment "Storm Dae
 %{storm_home}/examples/*
 %{storm_home}/lib/*
 %{storm_home}/logback/*
-/etc/storm/*
+%config(noreplace) /etc/storm/*
 /etc/default/storm
 /var/log/*
 /var/lib/storm/
 %attr(755,%{storm_user},%{storm_group}) /usr/bin/*
 /usr/bin/storm
-/etc/sysconfig/storm
+%config(noreplace) /etc/sysconfig/storm
 /etc/security/limits.d/storm.nofiles.conf
 %attr(644,%{storm_user},%{storm_group}) %{storm_user_home}/.bash_profile
 

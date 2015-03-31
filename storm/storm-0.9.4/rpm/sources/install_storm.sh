@@ -110,7 +110,7 @@ install    -m 644 ${BUILD_DIR}/external/storm-hdfs/storm-hdfs-0.9.4.jar \
 		  ${STORM_HOME}/external/storm-hdfs/ 
 
 install -d -m 755 ${STORM_HOME}/external/storm-hbase
-install    -m 644 ${BUILD_DIR}/external/storm-kafka/storm-hbase-0.9.4.jar \
+install    -m 644 ${BUILD_DIR}/external/storm-hbase/storm-hbase-0.9.4.jar \
 		  ${STORM_HOME}/external/storm-hbase/ 
 
 install -d -m 755 ${STORM_HOME}/logback/
