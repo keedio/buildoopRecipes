@@ -47,7 +47,7 @@
 +
 +STORM_DIR=os.getenv("STORM_DIR")
 +USER_CONF_DIR=os.getenv("USER_CONF_DIR")
-+CLUSTER_CONF_DIR=os.getenv("CLUSTER_CONF_DIR")
++STORM_CONF_DIR=os.getenv("STORM_CONF_DIR", None)
  
  if STORM_CONF_DIR == None:
      CLUSTER_CONF_DIR = STORM_DIR + "/conf"
