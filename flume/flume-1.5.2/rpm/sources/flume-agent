@@ -82,6 +82,10 @@ start() {
   status=$?
   if [ "$status" -eq "$STATUS_NOT_RUNNING" ]; then
     printf "Starting flume agent $flume_agent_name...  "
+
+    if [ -f $FLUME_AGENT_CONF_DIR/${flume_agent_name}-env.sh ]; then
+       source $FLUME_AGENT_CONF_DIR/${flume_agent_name}-env.sh
+    fi
     
     /bin/su -s /bin/bash -c "/bin/bash -c 'echo \$\$ >$flume_pid_file && exec ${EXEC_PATH} agent  \
     --conf $FLUME_CONF_DIR --conf-file $FLUME_AGENT_CONF_DIR/$flume_agent_name.conf --name $flume_agent_name \
