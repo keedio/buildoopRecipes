@@ -204,6 +204,7 @@ fi
 
 %config(noreplace) %{etc_flume}.empty/*
 %config(noreplace) %{etc_flume}.d/*
+%config(noreplace) %{etc_flume}/*
 %attr(0755,root,root) %{bin_flume}/flume-ng
 %attr(0755,root,root) %{lib_flume}/bin/flume-ng
 %attr(0755,root,root) %{lib_flume}/bin/flume-agent
