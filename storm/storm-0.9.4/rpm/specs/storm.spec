@@ -51,9 +51,10 @@ Source7: storm-drpc.init
 Source8: rpm-build-stage
 Source9: install_storm.sh
 Source10: storm-logviewer.init
-Patch0: storm-kafka-dependencies.patch
+Patch0: storm-kafka-shaded.patch
 Patch1: storm-bin-0.9.4.patch
 Patch2: storm-hbase-dependency.patch
+Patch3: STORM-643.patch 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 Requires: sh-utils, textutils, /usr/sbin/useradd, /usr/sbin/usermod, /sbin/chkconfig, /sbin/service
 Provides: storm
@@ -157,6 +158,7 @@ The logviewer daemon runs as a separate process on Storm supervisor nodes.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 bash %{SOURCE8}
