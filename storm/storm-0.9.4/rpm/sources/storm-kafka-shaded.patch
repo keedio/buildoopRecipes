@@ -1,7 +1,7 @@
 diff -uprN apache-storm-0.9.4_vanilla/external/storm-kafka/pom.xml apache-storm-0.9.4/external/storm-kafka/pom.xml
---- apache-storm-0.9.4_vanilla/external/storm-kafka/pom.xml	2015-03-18 19:52:04.000000000 +0100
-+++ apache-storm-0.9.4/external/storm-kafka/pom.xml	2015-04-10 12:36:53.248775525 +0200
-@@ -25,13 +25,31 @@
+--- apache-storm-0.9.4_vanilla/external/storm-kafka/pom.xml	2015-04-15 16:46:09.000000000 +0200
++++ apache-storm-0.9.4/external/storm-kafka/pom.xml	2015-04-15 17:01:37.000000000 +0200
+@@ -25,13 +25,39 @@
          <relativePath>../../pom.xml</relativePath>
      </parent>
  
@@ -16,26 +16,33 @@ diff -uprN apache-storm-0.9.4_vanilla/external/storm-kafka/pom.xml apache-storm-
      <name>storm-kafka</name>
      <description>Storm Spouts for Apache Kafka</description>
      <build>
--        <plugins>
+         <plugins>
 -
-+       <plugins>
-+          <plugin>
-+             <groupId>org.apache.maven.plugins</groupId>
-+             <artifactId>maven-shade-plugin</artifactId>
-+             <version>2.3</version>
-+             <executions>
-+                <execution>
-+                   <phase>package</phase>
-+                   <goals>
-+                      <goal>shade</goal>
-+                   </goals>
-+                </execution>
-+             </executions>
-+           </plugin>
++            <plugin>
++                <groupId>org.apache.maven.plugins</groupId>
++                <artifactId>maven-shade-plugin</artifactId>
++                <version>2.3</version>
++                <executions>
++                    <execution>
++                        <phase>package</phase>
++                        <goals>
++                            <goal>shade</goal>
++                        </goals>
++                        <configuration>
++                            <artifactSet>
++                                <excludes>
++                                    <exclude>org.slf4j:slf4j-api</exclude>
++                                    <exclude>jline:jline</exclude>
++                                </excludes>
++                            </artifactSet>
++                        </configuration>
++                    </execution>
++                </executions>
++            </plugin>
          </plugins>
          <sourceDirectory>src/jvm</sourceDirectory>
          <testSourceDirectory>src/test</testSourceDirectory>
-@@ -94,10 +112,8 @@
+@@ -94,10 +120,8 @@
          </dependency>
          <dependency>
              <groupId>org.apache.kafka</groupId>
@@ -48,7 +55,7 @@ diff -uprN apache-storm-0.9.4_vanilla/external/storm-kafka/pom.xml apache-storm-
              <exclusions>
                  <exclusion>
                      <groupId>org.apache.zookeeper</groupId>
-@@ -107,6 +123,10 @@
+@@ -107,6 +131,10 @@
                      <groupId>log4j</groupId>
                      <artifactId>log4j</artifactId>
                  </exclusion>
