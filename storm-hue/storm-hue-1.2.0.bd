@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Storm-HUE is a HUE application to admin and manage a pool of Apache Storm topologies.", 
+		"homepage":    "https://github.com/keedio/storm-hue",
+		"license":     "Apache-2.0",
+		"filename":    "storm-hue-1.2.0.bd"
+	},
+	
+	"do_download": {
+		"src_uri":  "https://github.com/keedio/storm-hue.git",
+		"src_hash": "1.2.0"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}
