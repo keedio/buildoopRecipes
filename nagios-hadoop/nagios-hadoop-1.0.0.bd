@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Nagios-hadoop is a collection of nagios plugins to monitor Hadoop ecosystem.", 
+		"homepage":    "https://github.com/keedio/nagios-hadoop",
+		"license":     "Apache-2.0",
+		"filename":    "nagios-hadoop-1.0.0.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "https://github.com/keedio/nagios-hadoop.git",
+		"src_hash": "1.0.0"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}
