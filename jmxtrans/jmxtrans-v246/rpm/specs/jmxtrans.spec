@@ -141,7 +141,7 @@ if [ $1 = 1 ]; then
   echo "export PIDFILE=/var/run/jmxtrans.pid" >> %{etc_jmxtrans}/jmxtrans.config
 
 fi
-ln -s /etc/jmxtrans/conf.dist /etc/jmxtrans/config
+ln -s /etc/jmxtrans/config.dist /etc/jmxtrans/config
 
 %preun
 %if 0%{?suse_version} > 1140
