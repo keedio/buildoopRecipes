@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 %define lib_flume /usr/lib/flume
-%define flume_sql_src_base_version 1.0.0
+%define flume_sql_src_base_version 1.1.1
 %define flume_sql_src_release openbus_1.2.0
 %define etc_flume /etc/flume/conf
 
@@ -84,7 +84,3 @@ sh %{SOURCE2} \
 %defattr(644,root,root,755)
 %dir %{lib_flume}
 %{lib_flume}/plugins.d
-
-%dir %{etc_flume}
-%config(noreplace) %{etc_flume}/*
-
