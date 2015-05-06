@@ -70,16 +70,16 @@ start() {
     	printf "Starting kafka server..."
 	su -s /bin/sh $KAFKA_USER -c "$KAFKA_HOME/bin/kafka-server-start.sh -daemon $KAFKA_CONF/server.properties"
         for i in `seq $KAFKA_START_TIMEOUT`; do
+	    ps ax | grep -i 'kafka\.Kafka' | grep java | grep -v grep | awk '{print $1}' > $PID_FILE
 	    checkstatus
     	    if [ $? -eq $STATUS_RUNNING ]; then
-	        ps ax | grep -i 'kafka\.Kafka' | grep java | grep -v grep | awk '{print $1}' > $PID_FILE && \
         	log_success_msg ""
 	    	return 0
  	    fi
 	    sleep 1
 	done
    fi
-
+   
    if [ "$status" -eq "$STATUS_RUNNING" ]; then
        log_warning_msg "Kafka server is already running"
    elif [ "$status" -eq "$STATUS_DEAD" ]; then
@@ -89,7 +89,7 @@ start() {
    else
        log_failure_msg "Kafka server status is unknown"
    fi
-
+   
    return 1
 }
 
@@ -97,10 +97,9 @@ stop() {
     checkstatus
     status=$? 
   
-    if [ "$status" -eq "$STATUS_RUNNING" ]; then
-      pid=`cat $PID_FILE`
-      printf "Stopping Kafka server with pid $pid..."
-
+  if [ "$status" -eq "$STATUS_RUNNING" ]; then
+    pid=`cat $PID_FILE`
+    printf "Stopping Kafka server with pid $pid..."
       if [ -n $pid ]; then
         kill -TERM $pid &>/dev/null
         for i in `seq 1 ${KAFKA_SHUTDOWN_TIMEOUT}` ; do
