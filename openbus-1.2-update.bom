@@ -9,7 +9,7 @@ TARGET=CentOS-6.x
 # Injection
 
 # Governance and integration
-
+KAFKA_VERSION=0.8.1.1
 # Connectors
 
 # Test packages
