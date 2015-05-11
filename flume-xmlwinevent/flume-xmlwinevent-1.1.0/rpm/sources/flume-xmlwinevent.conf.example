@@ -1,0 +1,17 @@
+flume.sources.r1.type = org.keedio.watchdir.listener.WatchDirXMLWinEventSourceListener
+flume.sources.r1.dirs.1.dir = /tmp/dir1
+flume.sources.r1.dirs.1.blacklist =
+flume.sources.r1.dirs.1.whitelist = \\.xml
+flume.sources.r1.dirs.1.taglevel = 1
+flume.sources.r1.dirs.1.tag = Event
+flume.sources.r1.dirs.2.dir = /tmp/dir2
+flume.sources.r1.dirs.2.blacklist =
+flume.sources.r1.dirs.2.whitelist = \\.xml,\\.wxml
+flume.sources.r1.dirs.2.tag = Obj
+flume.sources.r1.dirs.2.taglevel = 2
+flume.sources.r1.blacklist =
+flume.sources.r1.whitelist =
+flume.sources.r1.maxworkers = 10
+flume.sources.r1.buffersize = 1024
+flume.sources.r1.readonstartup = true
+flume.sources.r1.suffix = .completed
