@@ -16,4 +16,4 @@
 
 set -ex
 
-mvn clean package dependency:copy-dependencies -DincludeScope=runtime  -DskipTests=true
+mvn clean package   -DskipTests=true
