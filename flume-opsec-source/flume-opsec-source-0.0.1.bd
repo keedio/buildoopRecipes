@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Flume Source for Checkpoint OPSEC", 
+		"homepage":    "https://github.com/keedio/flume-opsec-source",
+		"license":     "Apache-2.0",
+		"filename":    "flume-opsec-source-0.0.1.bd"
+	},
+	
+	"do_download": {
+		"src_uri":  "https://github.com/keedio/flume-opsec-source.git",
+	 	"src_hash": "0.0.1"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}
