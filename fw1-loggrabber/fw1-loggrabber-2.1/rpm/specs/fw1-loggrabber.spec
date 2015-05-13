@@ -52,11 +52,11 @@ Vendor: The Redoop Team
 Packager: Alessio Comisso <acomisso@keedio.com> 
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}
-BuildArch: i686 
+BuildArch: i386
 License: APL2
 Source0: fw1-loggrabber.git.tar.gz 
 Source2: install-fw1-loggrabber.sh
-Requires: compat-libstdc++-33.i686 
+Requires: compat-libstdc++-33 
 %if  0%{?mgaversion}
 Requires: bsh-utils
 %else
