@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /tmp
+
 ask() {
     # http://djm.me/ask
     while true; do
@@ -16,7 +18,7 @@ ask() {
         fi
  
         # Ask the question - use /dev/tty in case stdin is redirected from somewhere else
-        read -p "$1 [$prompt] " REPLY </dev/tty
+        read -p "$1 [$prompt] " REPLY 
  
         # Default?
         if [ -z "$REPLY" ]; then
@@ -33,7 +35,7 @@ ask() {
 }
  
 
-echo "Fw1-loggrabber requires the Checkpoint OPSEC SDK. Please read below the Checkpoint terms. You have to accepot them if you wan to proceed woth the installation of Fw1-loggrabber."
+echo "Fw1-loggrabber requires the Checkpoint OPSEC SDK. Please read below the Checkpoint terms. You have to accepot them if you want to proceed with the configuration of Fw1-loggrabber."
 echo " "                                                                                                                                            
 echo "                      ##################################LICENSE AGREEMENT###########################################"
 echo "This Software Download Agreement (“Agreement”) is between you (either as an individual or company) and Check Point Software Technologies Ltd. ("Check Point"), for the software and documentation provided by this Agreement (“Software”).
@@ -55,7 +57,7 @@ else
     exit 2
 fi
 
-echo" "
+echo " "
 echo "Downloading the SDK" 
 wget -O mainpage   http://supportcontent.checkpoint.com/file_download?id=7385
 link=`egrep  http:\/\/dl3.checkpoint.com\/paid\/9a\/OPSEC_SDK_6.0_Linux\.zip.+\.zip mainpage  -o | head`
@@ -77,7 +79,7 @@ then
     exit $err
 fi
 
-tar zxvf OPSEC_SDK_6_0.linux30.tar.gz 
+tar zxf OPSEC_SDK_6_0.linux30.tar.gz 
 err=$?
 if [ $err -ne 0 ]
 then
@@ -94,14 +96,14 @@ then
     exit $err
 fi
 
-tar zxvf RoamAdmin_linux30.tar.gz
+tar zxf RoamAdmin_linux30.tar.gz
 if [ $err -ne 0 ]
 then
     echo "Untar of tools Roadadmin failed  with error code $err"
     exit $err
 fi
 
-tar zxvf OpsecSicUtils_linux30.tar.gz
+tar zxf OpsecSicUtils_linux30.tar.gz
 if [ $err -ne 0 ]
 then
     echo "Untar of OpsecSicUtils failed  with error code $err"
@@ -115,3 +117,9 @@ then
     exit $err
 fi
 
+rm RoamAdmin_linux*
+rm OpsecSicUtils*
+rm opsec-test.zip
+rm -rf linux30/
+rm -rf pkg_rel
+rm -rf OPSEC_SDK_6_0*.tar.gz

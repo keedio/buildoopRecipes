@@ -44,6 +44,7 @@
 %endif
 
 Name: fw1-loggrabber
+AutoReq: 0
 Version: %{fw1_loggrabber_base_version}
 Release: %{fw1_loggrabber_release}
 Summary: Command line Checkpoint tool (Requires external OPSEC SDK)
@@ -57,7 +58,6 @@ License: APL2
 Source0: fw1-loggrabber.git.tar.gz 
 Source1: rpm-build-stage 
 Source2: install-fw1-loggrabber.sh
-Source3: license.sh
 Requires:  compat-libstdc++-33%{_isa}
 %if %{__isa_bits} == 64
 Requires: compat-libstdc++-33(%{__isa_name}-32)
@@ -70,7 +70,8 @@ Requires:  pam%{_isa}
 %if %{__isa_bits} == 64
 Requires: pam(%{__isa_name}-32)
 %endif
-
+Requires: curl
+Requires: wget
 %if  0%{?mgaversion}
 Requires: bsh-utils
 %else
@@ -84,7 +85,6 @@ Command line Checkpoint tool (Requires external OPSEC SDK)
 %setup -n fw1-loggrabber.git
 
 %pre
-sh %{SOURCE3}
 
 %build
 sh %{SOURCE1}
@@ -96,8 +96,9 @@ sh %{SOURCE2} \
           --prefix=$RPM_BUILD_ROOT
 
 %files 
-%defattr(644,root,root,755)
+%defattr(744,root,root,755)
 /usr/bin/fw1-loggrabber
+/usr/bin/fw1-loggrabber-setup.sh
 %dir %{etc_fw1}
 %config(noreplace) %{etc_fw1}/*
 

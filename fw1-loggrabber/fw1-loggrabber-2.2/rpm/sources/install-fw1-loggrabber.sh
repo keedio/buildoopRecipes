@@ -97,6 +97,8 @@ FW1_CONF=/etc/fw1-loggrabber/
 install -d -m 0755 ${PREFIX}/${FW1_CONF}
 install -d -m 0755 ${PREFIX}/usr/bin
 pwd
-cp ${BUILD_DIR}/fw1-loggrabber ${PREFIX}/usr/bin/
-cp ${RPM_SOURCE_DIR}/*.conf.example ${PREFIX}/${FW1_CONF}
+install -m 0755 ${BUILD_DIR}/fw1-loggrabber ${PREFIX}/usr/bin/
+install -m 0755 ${RPM_SOURCE_DIR}/*.conf.example ${PREFIX}/${FW1_CONF}
+install -m 0755 ${RPM_SOURCE_DIR}/fw1-loggrabber-setup.sh ${PREFIX}/usr/bin/
+ls -l ${PREFIX}/usr/bin/
 

@@ -58,6 +58,7 @@ Source0: flume-opsec-source.git.tar.gz
 Source1: rpm-build-stage
 Source2: install-flume-opsec-source.sh
 Requires: flume
+Requires: fw1-loggrabber 
 
 %if  0%{?mgaversion}
 Requires: bsh-utils
