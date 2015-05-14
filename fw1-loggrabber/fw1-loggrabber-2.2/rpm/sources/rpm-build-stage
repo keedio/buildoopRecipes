@@ -16,4 +16,5 @@
 
 set -ex
 
-mvn clean package   -DskipTests=true
+
+make

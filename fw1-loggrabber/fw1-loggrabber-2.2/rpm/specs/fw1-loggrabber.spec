@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-%define fw1_loggrabber_base_version 2.1
+%define fw1_loggrabber_base_version 2.2
 %define fw1_loggrabber_release openbus_1.2.3
 %define etc_fw1 /etc/fw1-loggrabber
 
@@ -52,11 +52,25 @@ Vendor: The Redoop Team
 Packager: Alessio Comisso <acomisso@keedio.com> 
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}
-BuildArch: i386
+#BuildArch: i386
 License: APL2
 Source0: fw1-loggrabber.git.tar.gz 
+Source1: rpm-build-stage 
 Source2: install-fw1-loggrabber.sh
-Requires: compat-libstdc++-33 
+Source3: license.sh
+Requires:  compat-libstdc++-33%{_isa}
+%if %{__isa_bits} == 64
+Requires: compat-libstdc++-33(%{__isa_name}-32)
+%endif	 
+Requires:  elfutils-libelf%{_isa}
+%if %{__isa_bits} == 64
+Requires: elfutils-libelf(%{__isa_name}-32)
+%endif
+Requires:  pam%{_isa}
+%if %{__isa_bits} == 64
+Requires: pam(%{__isa_name}-32)
+%endif
+
 %if  0%{?mgaversion}
 Requires: bsh-utils
 %else
@@ -69,8 +83,11 @@ Command line Checkpoint tool (Requires external OPSEC SDK)
 %prep
 %setup -n fw1-loggrabber.git
 
-#%build
-#sh %{SOURCE1}
+%pre
+sh %{SOURCE3}
+
+%build
+sh %{SOURCE1}
 
 %install
 %__rm -rf $RPM_BUILD_ROOT
