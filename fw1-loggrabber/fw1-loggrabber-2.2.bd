@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "command-line tool to grab logfiles from Checkpoint FW-1 remotely using Checkpoints LEA", 
+		"homepage":    "https://github.com/keedio/fw1-loggrabber",
+		"license":     "Apache-2.0",
+		"filename":    "fw1-loggrabber-2.2.bd"
+	},
+	
+	"do_download": {
+		"src_uri":  "https://github.com/keedio/fw1-loggrabber.git",
+	 	"src_hash": "2.2"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}

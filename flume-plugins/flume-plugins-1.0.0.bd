@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Flume plugins metainstaller", 
+		"homepage":    "https://github.com/keedio/flume-ftp-source",
+		"license":     "Apache-2.0",
+		"filename":    "flume-plugins-1.0.0.bd"
+	},
+	
+	"do_download": {
+		"src_uri":  "https://github.com/keedio/flume-ftp-source.git",
+	 	"src_hash": "2.0.5"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}

@@ -1,0 +1,13 @@
+agent.sources = opsec
+agent.channels = memoryChannel
+agent.sinks = loggerSink
+
+agent.sources.opsec.type = com.keedio.flume.source.OpsecSource
+agent.sources.opsec.loggrabber.config.path=/path/to/fw1-loggrabber/conf/dir/
+agent.sources.opsec.channels = memoryChannel
+
+agent.sinks.loggerSink.type = logger
+agent.sinks.loggerSink.channel = memoryChannel
+
+agent.channels.memoryChannel.type = memory
+agent.channels.memoryChannel.capacity = 10000
