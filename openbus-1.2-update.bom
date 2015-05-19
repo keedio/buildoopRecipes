@@ -1,7 +1,7 @@
 TARGET=CentOS-6.x
 
 # Data Management
-
+HADOOP_VERSION=2.2.0
 # Data storage
 
 # Data procces and access
