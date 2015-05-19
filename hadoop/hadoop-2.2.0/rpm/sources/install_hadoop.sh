@@ -168,6 +168,10 @@ BUILD_SRC_DIR=./build/src
 HADOOP_VERSION=0.23.1
 
 
+install -d -m 0755 ${PREFIX}/etc/profile.d/.
+echo "export HADOOP_CONF_DIR=/etc/hadoop/conf" >${PREFIX}/etc/profile.d/hadoop-env.sh
+echo "export YARN_CONF_DIR=/etc/hadoop/conf" >>${PREFIX}/etc/profile.d/hadoop-env.sh
+cat ${PREFIX}/etc/profile.d/hadoop-env.sh
 ##Needed for some distros to find ldconfig
 export PATH="/sbin/:$PATH"
 
@@ -271,8 +275,6 @@ for library in `cd ${BUILD_DIR}/lib ; ls libsnappy.so.1.* 2>/dev/null` libhadoop
   ln -s ${library} ${HADOOP_NATIVE_LIB_DIR}/${library/.so.*/}.so
 done
 install -d -m 0755 ${PREFIX}/etc/profile.d/.
-echo "export HADOOP_CONF_DIR=/etc/hadoop/conf" >${PREFIX}/etc/profile.d/hadoop-env.sh
-echo "export YARN_CONF_DIR=/etc/hadoop/conf" >>${PREFIX}/etc/profile.d/hadoop-env.sh
 # Install fuse wrapper
 fuse_wrapper=${BIN_DIR}/hadoop-fuse-dfs
 cat > $fuse_wrapper << EOF

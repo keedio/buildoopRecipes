@@ -612,7 +612,6 @@ fi
 
 %files hdfs
 %defattr(-,root,root)
-/etc/profile.d/hadoop-env.sh
 %config(noreplace) %{etc_hadoop}/conf.empty/hdfs-site.xml
 %config(noreplace) /etc/default/hadoop-fuse
 %config(noreplace) /etc/security/limits.d/hdfs.conf
@@ -639,6 +638,7 @@ fi
 
 %files
 %defattr(-,root,root)
+/etc/profile.d/hadoop-env.sh
 %config(noreplace) %{etc_hadoop}/conf.empty/core-site.xml
 %config(noreplace) %{etc_hadoop}/conf.empty/hadoop-metrics.properties
 %config(noreplace) %{etc_hadoop}/conf.empty/hadoop-metrics2.properties
