@@ -1,6 +1,0 @@
-16-02-2015 Marcelo Valle <mvalle@keedio.com>
-
-	* Initial commit based on Cloudera CDH-5.0.0b2 package.
-	We are using the tag release-3.7.1 from Cloudera GitHub.
-
-	
