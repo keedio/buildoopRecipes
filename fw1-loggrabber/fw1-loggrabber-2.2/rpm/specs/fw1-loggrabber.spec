@@ -14,7 +14,7 @@
 # limitations under the License.
 
 %define fw1_loggrabber_base_version 2.2
-%define fw1_loggrabber_release openbus_1.2.3
+%define fw1_loggrabber_release openbus_1.2.5
 %define etc_fw1 /etc/fw1-loggrabber
 
 %if  %{?suse_version:1}0
