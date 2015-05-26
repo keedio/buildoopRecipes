@@ -13,10 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-%define python_storm_version 1.0.0
+%define python_storm_version 0.9.2
 %define python_storm_release openbus_1.2.0
 
-Name:    storm
+Name:    python-storm
 Version: %{python_storm_version}
 Release: %{python_storm_release}
 Group: Applications/Engineering
@@ -32,7 +32,7 @@ URL: http://github.com/apache/storm
 Python-storm. 
 
 %prep
-%setup -q -n %{name}.git
+%setup -q -n storm.git
 
 %install
 %__rm -rf $RPM_BUILD_ROOT
