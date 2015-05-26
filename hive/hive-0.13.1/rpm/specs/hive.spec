@@ -32,7 +32,7 @@
 
 %define hive_version 0.13.1
 %define hive_base_version 0.13.1
-%define hive_release openbus_1.2.0
+%define hive_release openbus_1.2.5
 
 %if  %{!?suse_version:1}0
 
