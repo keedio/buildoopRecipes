@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "The Apache Hive data warehouse", 
+		"homepage":    "https://hive.apache.org/",
+		"license":     "Apache-2.0",
+		"filename":    "hive-0.13.1.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "https://github.com/apache/hive.git",
+	         "src_hash": "release-0.13.1-rc3"	
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}
