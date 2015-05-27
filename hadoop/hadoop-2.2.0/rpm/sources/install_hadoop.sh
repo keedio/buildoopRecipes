@@ -172,6 +172,9 @@ install -d -m 0755 ${PREFIX}/etc/profile.d/.
 echo "export HADOOP_CONF_DIR=/etc/hadoop/conf" >${PREFIX}/etc/profile.d/hadoop-env.sh
 echo "export YARN_CONF_DIR=/etc/hadoop/conf" >>${PREFIX}/etc/profile.d/hadoop-env.sh
 cat ${PREFIX}/etc/profile.d/hadoop-env.sh
+
+install -d -m 0755 ${PREFIX}/etc/ld.so.conf.d/.
+echo "/usr/lib/hadoop/lib/native" >>${PREFIX}/etc/ld.so.conf.d/hadoop.sh
 ##Needed for some distros to find ldconfig
 export PATH="/sbin/:$PATH"
 
@@ -226,7 +229,7 @@ chmod 644 ${HADOOP_DIR}/lib/*.jar ${MAPREDUCE_DIR}/lib/*.jar ${HDFS_DIR}/lib/*.j
 # issue [buildoop-github-#44]
 # used this link by oozie and flume, and probably other tools.
 ln -sf /usr/lib/hadoop/hadoop-auth-2.2.0.jar $RPM_BUILD_ROOT/usr/lib/hadoop/hadoop-auth.jar || true
-ln -sf /usr/lib/hadoop/hadoop-commmon-2.2.0.jar $RPM_BUILD_ROOT/usr/lib/hadoop/hadoop-common.jar || true
+ln -sf /usr/lib/hadoop/hadoop-common-2.2.0.jar $RPM_BUILD_ROOT/usr/lib/hadoop/hadoop-common.jar || true
 
 # Install webapps
 cp -ra ${BUILD_DIR}/share/hadoop/hdfs/webapps ${HDFS_DIR}/

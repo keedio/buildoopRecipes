@@ -65,7 +65,7 @@
 %define static_images_dir src/webapps/static/images
 
 %define hadoop_base_version 2.2.0
-%define hadoop_release openbus_1.2.5
+%define hadoop_release openbus_1.2.6
 
 %ifarch i386
 %global hadoop_arch Linux-i386-32
@@ -567,6 +567,7 @@ getent passwd yarn >/dev/null || /usr/sbin/useradd --comment "Hadoop Yarn" --she
 getent passwd mapred >/dev/null || /usr/sbin/useradd --comment "Hadoop MapReduce" --shell /bin/bash -M -r -G hadoop --home %{state_mapreduce} mapred
 
 %post
+/sbin/ldconfig
 %{alternatives_cmd} --install %{config_hadoop} %{name}-conf %{etc_hadoop}/conf.empty 10
 
 %post httpfs
