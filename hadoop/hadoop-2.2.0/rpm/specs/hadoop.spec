@@ -640,6 +640,7 @@ fi
 %files
 %defattr(-,root,root)
 /etc/profile.d/hadoop-env.sh
+/etc/ld.so.conf.d/hadoop.sh
 %config(noreplace) %{etc_hadoop}/conf.empty/core-site.xml
 %config(noreplace) %{etc_hadoop}/conf.empty/hadoop-metrics.properties
 %config(noreplace) %{etc_hadoop}/conf.empty/hadoop-metrics2.properties

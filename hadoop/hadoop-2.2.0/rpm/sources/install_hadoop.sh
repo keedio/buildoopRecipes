@@ -174,7 +174,8 @@ echo "export YARN_CONF_DIR=/etc/hadoop/conf" >>${PREFIX}/etc/profile.d/hadoop-en
 cat ${PREFIX}/etc/profile.d/hadoop-env.sh
 
 install -d -m 0755 ${PREFIX}/etc/ld.so.conf.d/.
-echo "/usr/lib/hadoop/lib/native" >>${PREFIX}/etc/ld.so.conf.d/hadoop.sh
+echo "/usr/lib/hadoop/lib/native/" >> ${PREFIX}/etc/ld.so.conf.d/hadoop.sh
+cat ${PREFIX}/etc/ld.so.conf.d/hadoop.sh
 ##Needed for some distros to find ldconfig
 export PATH="/sbin/:$PATH"
 
