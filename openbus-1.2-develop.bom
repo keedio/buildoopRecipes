@@ -17,7 +17,7 @@ OOZIE_VERSION=4.0.0
 # Libraries and dependencies
 
 # Interfaces
-ZEPPELIN=0.5.0
+ZEPPELIN_VERSION=0.5.0
 
 # Monitoring
 
