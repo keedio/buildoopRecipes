@@ -9,7 +9,7 @@ TARGET=CentOS-6.x
 # Injection
 
 # Governance and integration
-
+OOZIE_VERSION=4.0.0
 # Connectors
 
 # Test packages
