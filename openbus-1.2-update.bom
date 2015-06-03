@@ -8,7 +8,7 @@ HIVE_VERSION=0.13.1
 # Data procces and access
 
 # Injection
-
+FLUME_VERSION=1.5.2
 # Governance and integration
 KAFKA_VERSION=0.8.1.1
 SPARK_VERSION=1.3.1
