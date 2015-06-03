@@ -24,7 +24,7 @@
 
 %define spark_version 1.3.1
 %define spark_base_version 1.3.1
-%define spark_release openbus_1.2.5
+%define spark_release openbus_1.2.7
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
 %define __os_install_post \
@@ -105,10 +105,18 @@ sh $RPM_SOURCE_DIR/install_spark.sh \
 %__install -d -m 0755 $RPM_BUILD_ROOT/%{initd_dir}/
 
 
+%post
+%{alternatives_cmd} --install /usr/lib/spark/default spark  /usr/lib/spark/%{name}-%{spark_base_version}-bin-2.2.0 30
+
+%preun
+if [ "$1" = 0 ]; then
+        %{alternatives_cmd} --remove spark  /usr/lib/spark/%{name}-%{spark_base_version}-bin-2.2.0  || :
+fi
 
 #######################
 #### FILES SECTION ####
 #######################
 %files 
 %defattr(-,root,root,755)
-/usr/lib/spark/*
+/usr/lib/%{name}/*
+%config(noreplace) /etc/%{name}/*
