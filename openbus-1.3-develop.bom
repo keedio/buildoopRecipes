@@ -9,7 +9,7 @@ TARGET=CentOS-6.x
 # Injection
 
 # Governance and integration
-OOZIE_VERSION=4.0.0
+
 # Connectors
 
 # Test packages
@@ -17,7 +17,6 @@ OOZIE_VERSION=4.0.0
 # Libraries and dependencies
 
 # Interfaces
-ZEPPELIN_VERSION=0.5.0
 
 # Monitoring
 
