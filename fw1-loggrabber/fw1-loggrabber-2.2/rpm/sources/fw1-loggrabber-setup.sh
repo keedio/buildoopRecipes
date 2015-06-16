@@ -57,21 +57,27 @@ else
     exit 2
 fi
 
-echo " "
-echo "Downloading the SDK" 
-wget -O mainpage   http://supportcontent.checkpoint.com/file_download?id=7385
-link=`egrep  http:\/\/dl3.checkpoint.com\/paid\/9a\/OPSEC_SDK_6.0_Linux\.zip.+\.zip mainpage  -o | head`
-curl -H "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" -H "Accept-Encoding:gzip, deflate" -H "Accept-Language:es-ES,es;q=0.8,en-US;q=0.5,en;q=0.3" -H "Connection:keep-alive"  -H "Host:dl3.checkpoint.com" -H "User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:37.0) Gecko/20100101 Firefox/37.0" "$link" -o opsec-test.zip
-
-err=$?
-if [ $err -ne 0 ]
+if [ ! -f OPSEC_SDK_6.0_Linux.zip ]
 then
-    echo "Download of the SDK Failed with error code $err"
-    exit $err
+
+echo " "
+    echo "Downloading the SDK" 
+    wget -O mainpage   http://supportcontent.checkpoint.com/file_download?id=7385
+    link=`egrep  http:\/\/dl3.checkpoint.com\/paid\/9a\/OPSEC_SDK_6.0_Linux\.zip.+\.zip mainpage  -o | head`
+    curl -H "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" -H "Accept-Encoding:gzip, deflate" -H "Accept-Language:es-ES,es;q=0.8,en-US;q=0.5,en;q=0.3" -H "Connection:keep-alive"  -H "Host:dl3.checkpoint.com" -H "User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:37.0) Gecko/20100101 Firefox/37.0" "$link" -o OPSEC_SDK_6.0_Linux.zip 
+
+    err=$?
+    if [ $err -ne 0 ]
+      then
+      echo "Download of the SDK Failed with error code $err"
+      exit $err
+    fi
+else
+echo "File OPSEC_SDK_6.0_Linux.zip found in /tmp " 
+
 fi
 
-
-unzip opsec-test.zip
+unzip OPSEC_SDK_6.0_Linux.zip 
 err=$?
 if [ $err -ne 0 ]
 then
@@ -119,7 +125,7 @@ fi
 
 rm RoamAdmin_linux*
 rm OpsecSicUtils*
-rm opsec-test.zip
+rm OPSEC_SDK_6.0_Linux.zip 
 rm -rf linux30/
 rm -rf pkg_rel
 rm -rf OPSEC_SDK_6_0*.tar.gz
