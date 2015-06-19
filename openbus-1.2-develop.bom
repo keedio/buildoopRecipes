@@ -5,11 +5,13 @@ TARGET=CentOS-6.x
 # Data storage
 
 # Data procces and access
-
+HADOOP-LZO_VERSION=0.4.19
 # Injection
 
 # Governance and integration
 OOZIE_VERSION=4.0.0
+AMBARI_VERSION=1.7.0
+KAFKA_VERSION=0.8.1.1
 # Connectors
 
 # Test packages

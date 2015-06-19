@@ -82,19 +82,30 @@ for var in PREFIX BUILD_DIR ; do
   fi
 done
 
-INSTALLATION_DIR=/usr/lib/zeppelin
-CONFIGURATION_DIR=/etc/zeppelin
-install -d -m 0755 $PREFIX/$INSTALLATION_DIR
-install -d -m 0755 $PREFIX/$INSTALLATION_DIR/conf
-install -d -m 0755 $PREFIX/$CONFIGURATION_DIR
-install -d -m 0755 $PREFIX/$CONFIGURATION_DIR/conf.dist
-install -d -m 0755 $PREFIX/etc/init.d
-install -d -m 0755 $PREFIX/var/run/zeppelin
-install -d -m 0755 $PREFIX/var/log/zeppelin
-tar xvf  ${BUILD_DIR}/zeppelin-distribution/target/zeppelin-*-incubating-SNAPSHOT.tar.gz  --strip-components=1 -C $PREFIX/$INSTALLATION_DIR
-mv $PREFIX/$INSTALLATION_DIR/conf $PREFIX/$CONFIGURATION_DIR/conf.dist
-ln -s $CONFIGURATION_DIR/conf.dist $PREFIX/$CONFIGURATION_DIR/conf
-ln -s $CONFIGURATION_DIR/conf  $PREFIX/$INSTALLATION_DIR/conf
+LIB_DIR=${LIB_DIR:-/usr/lib/kafka}
+INSTALLED_LIB_DIR=${INSTALLED_LIB_DIR:-/usr/lib/kafka}
+CONF_DIR=${CONF_DIR:-/etc/kafka/conf.dist}
 
+install -d -m 0755 $PREFIX/$LIB_DIR
+install -d -m 0755 $PREFIX/$LIB_DIR/libs
+install -d -m 0755 $PREFIX/$LIB_DIR/bin
+install -d -m 0755 $PREFIX/var/lib/kafka
 
+cp -ra ${BUILD_DIR}/core/build/libs/*.jar $PREFIX/$LIB_DIR/libs
+cp -ra ${BUILD_DIR}/core/build/dependant-libs-2.10.4/*.jar $PREFIX/$LIB_DIR/libs
+cp -ra ${BUILD_DIR}/bin/*.sh $PREFIX/$LIB_DIR/bin
+ln -s /etc/kafka/conf $PREFIX/$LIB_DIR/config 
+
+# Get slf4j-log4j12.jar to avoid StaticBindingError (KAFKA-1354)
+cd ${RPM_SOURCE_DIR}
+wget http://central.maven.org/maven2/org/slf4j/slf4j-log4j12/1.7.2/slf4j-log4j12-1.7.2.jar
+cp slf4j-log4j12-1.7.2.jar $PREFIX/$LIB_DIR/libs
+cd -
+
+# Copy in the configuration files
+install -d -m 0755 $PREFIX/$CONF_DIR
+cp -a ${RPM_SOURCE_DIR}/conf.dist/* $PREFIX/$CONF_DIR
+# cp -a ${BUILD_DIR}/config/* $PREFIX/$CONF_DIR
+cd $PREFIX/etc/kafka
+ln -s conf.dist conf
 

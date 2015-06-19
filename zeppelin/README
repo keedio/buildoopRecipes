@@ -1,0 +1,7 @@
+zeppelin user should be created
+Default installation is spected at /usr/lib/zeppelin
+Default log at /var/log/zeppelin 
+Default pid at /var/run/zeppelin
+Default UI port is 8080 but is not checked to be free because port configurations could be placed in 3 places (interpreter.json, zeppelin-env or zeppelin.json)
+
+Directories owner should be zeppelin

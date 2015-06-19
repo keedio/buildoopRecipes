@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Ambari", 
+		"homepage":    "https://ambari.apache.org/",
+		"license":     "Apache-2.0",
+		"filename":    "ambari-1.7.0.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "http://archive.apache.org/dist/ambari/ambari-1.7.0/ambari-1.7.0.tar.gz",
+		"src_md5sum": "8612ef553e025163ee5a72cd9ad00c61"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	},
+}

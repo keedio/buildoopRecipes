@@ -1,5 +1,4 @@
 #!/bin/sh
-
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -15,19 +14,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+set -ex
 
 usage() {
   echo "
 usage: $0 <options>
   Required not-so-options:
-     --build-dir=DIR             path to dist.dir
+     --build-dir=DIR             path to flumedist.dir
      --prefix=PREFIX             path to install into
 
   Optional options:
-     --lib-dir=DIR               path to install Kafka home [/usr/lib/kafka]
-     --installed-lib-dir=DIR     path where lib-dir will end up on target system
+     --doc-dir=DIR               path to install docs into [/usr/share/doc/flume]
+     --lib-dir=DIR               path to install flume home [/usr/lib/flume]
      --bin-dir=DIR               path to install bins [/usr/bin]
+     --examples-dir=DIR          path to install examples [doc-dir/examples]
      ... [ see source for more similar options ]
   "
   exit 1
@@ -37,9 +37,10 @@ OPTS=$(getopt \
   -n $0 \
   -o '' \
   -l 'prefix:' \
+  -l 'doc-dir:' \
   -l 'lib-dir:' \
-  -l 'installed-lib-dir:' \
   -l 'bin-dir:' \
+  -l 'examples-dir:' \
   -l 'build-dir:' -- "$@")
 
 if [ $? != 0 ] ; then
@@ -47,6 +48,7 @@ if [ $? != 0 ] ; then
 fi
 
 eval set -- "$OPTS"
+
 while true ; do
     case "$1" in
         --prefix)
@@ -55,14 +57,17 @@ while true ; do
         --build-dir)
         BUILD_DIR=$2 ; shift 2
         ;;
+        --doc-dir)
+        DOC_DIR=$2 ; shift 2
+        ;;
         --lib-dir)
         LIB_DIR=$2 ; shift 2
         ;;
-        --installed-lib-dir)
-        INSTALLED_LIB_DIR=$2 ; shift 2
-        ;;
         --bin-dir)
         BIN_DIR=$2 ; shift 2
+        ;;
+        --examples-dir)
+        EXAMPLES_DIR=$2 ; shift 2
         ;;
         --)
         shift ; break
@@ -82,19 +87,17 @@ for var in PREFIX BUILD_DIR ; do
   fi
 done
 
-INSTALLATION_DIR=/usr/lib/zeppelin
-CONFIGURATION_DIR=/etc/zeppelin
-install -d -m 0755 $PREFIX/$INSTALLATION_DIR
-install -d -m 0755 $PREFIX/$INSTALLATION_DIR/conf
-install -d -m 0755 $PREFIX/$CONFIGURATION_DIR
-install -d -m 0755 $PREFIX/$CONFIGURATION_DIR/conf.dist
-install -d -m 0755 $PREFIX/etc/init.d
-install -d -m 0755 $PREFIX/var/run/zeppelin
-install -d -m 0755 $PREFIX/var/log/zeppelin
-tar xvf  ${BUILD_DIR}/zeppelin-distribution/target/zeppelin-*-incubating-SNAPSHOT.tar.gz  --strip-components=1 -C $PREFIX/$INSTALLATION_DIR
-mv $PREFIX/$INSTALLATION_DIR/conf $PREFIX/$CONFIGURATION_DIR/conf.dist
-ln -s $CONFIGURATION_DIR/conf.dist $PREFIX/$CONFIGURATION_DIR/conf
-ln -s $CONFIGURATION_DIR/conf  $PREFIX/$INSTALLATION_DIR/conf
+if [ -z "${JAVA_HOME}" ]; then
+    echo Missing env. var JAVA_HOME
+    usage
+fi
 
+
+lib_hadoop_lzo=/usr/lib/hadoop/lib
+lib_hadoop_lzo_native=/usr/lib/hadoop/lib/native
+install -d -m 0755 ${PREFIX}/${lib_hadoop_lzo}
+install -d -m 0755 ${PREFIX}/${lib_hadoop_lzo_native}
+cp ${BUILD_DIR}/target/*.jar ${PREFIX}/${lib_hadoop_lzo}
+cp ${BUILD_DIR}/target/native/Linux-amd64-64/lib/*  ${PREFIX}/${lib_hadoop_lzo_native}
 
 

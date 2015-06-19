@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Zeppelin keedio fork", 
+		"homepage":    "https://github.com/keedio/incubator-zeppelin.git",
+		"license":     "Apache-2.0",
+		"filename":    "zeppelin-0.5.0.bd"
+	},
+	
+	"do_download": {
+		"src_uri":  "https://github.com/keedio/incubator-zeppelin.git",
+	 	"src_hash": "0.5.0_keedio"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}
