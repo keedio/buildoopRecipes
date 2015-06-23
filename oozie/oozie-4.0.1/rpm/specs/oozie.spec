@@ -20,8 +20,8 @@
 %define tomcat_conf_oozie %{_sysconfdir}/%{name}/tomcat-conf
 %define data_oozie /var/lib/oozie
 
-%define oozie_version 4.0.0
-%define oozie_base_version 4.0.0 
+%define oozie_version 4.0.1
+%define oozie_base_version 4.0.1 
 %define oozie_release openbus_1.2.8
 
 %if  %{!?suse_version:1}0
@@ -74,7 +74,7 @@ Requires(post): /sbin/chkconfig
 Requires(preun): /sbin/chkconfig, /sbin/service
 Requires: oozie-client = %{version}, hadoop-client, tomcat-server
 #Requires: avro-libs, parquet
-Patch0: build-error-2.2.0-SNAPSHOT-dependency.patch
+#Patch0: build-error-2.2.0-SNAPSHOT-dependency.patch
 BuildArch: noarch
 
 %description 
@@ -138,7 +138,7 @@ BuildArch: noarch
 %prep
 %setup -n oozie-%{oozie_version}
 
-%patch0 -p1
+#%patch0 -p1
 
 %build
     mkdir -p distro/downloads

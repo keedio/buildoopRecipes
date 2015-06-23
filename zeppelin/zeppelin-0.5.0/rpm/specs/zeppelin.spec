@@ -24,7 +24,7 @@
 
 %define zeppelin_version 0.5.0
 %define zeppelin_base_version 0.5.0
-%define zeppelin_release openbus_1.2.7
+%define zeppelin_release openbus_1.2.9
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
 %define __os_install_post \
@@ -125,6 +125,7 @@ getent passwd %{name} >/dev/null || /usr/sbin/useradd --comment "Zeppelin servic
 %files 
 %defattr(-,%{name},root,755)
 /usr/lib/%{name}/*
+%config(noreplace) /usr/lib/%{name}/notebook/*
 %config(noreplace) /etc/%{name}/*
 %attr(0755,root,root) /etc/init.d/zeppelin
 /var/run/zeppelin
