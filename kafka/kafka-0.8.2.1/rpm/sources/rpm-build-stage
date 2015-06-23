@@ -18,5 +18,5 @@ set -ex
 
 gradle
 ./gradlew clean
-./gradlew -PscalaVersion=2.10.4 jar
+./gradlew  jar
  

@@ -66,7 +66,7 @@ Source0: %{name}-%{kafka_base_version}-src.tgz
 Source1: rpm-build-stage
 Source2: install_%{name}.sh
 Source3: kafka-server.sh
-Patch0: log_path.patch
+#Patch0: log_path.patch
 BuildArch: noarch
 BuildRequires: autoconf, automake
 Requires(pre): coreutils, /usr/sbin/groupadd, /usr/sbin/useradd
