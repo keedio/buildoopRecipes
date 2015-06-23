@@ -37,7 +37,7 @@
 # apache-flume-1.5.2-src.tar.gz
 #
 %define flume_base_version 1.5.2
-%define flume_release openbus_1.2.7
+%define flume_release openbus_1.2.8
 
 %define flume_folder apache-%{name}-%{flume_base_version}-src
 
@@ -91,7 +91,7 @@ Patch0: flume-ng-env.patch
 Patch1: flume_1_5_2_http_source_extension_patch.diff 
 Requires: /usr/sbin/useradd
 Requires: coreutils
-Requires: hadoop-hdfs
+#Requires: hadoop-hdfs
 
 %if  0%{?mgaversion}
 Requires: bsh-utils
