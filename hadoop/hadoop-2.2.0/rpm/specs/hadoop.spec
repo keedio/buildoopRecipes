@@ -65,7 +65,7 @@
 %define static_images_dir src/webapps/static/images
 
 %define hadoop_base_version 2.2.0
-%define hadoop_release openbus_1.2.6
+%define hadoop_release openbus_1.2.8
 
 %ifarch i386
 %global hadoop_arch Linux-i386-32
@@ -327,7 +327,7 @@ blocks of data over the network to Hadoop Distributed Filesystem
 %package httpfs
 Summary: HTTPFS for Hadoop
 Group: System/Daemons
-Requires: %{name}-hdfs = %{version}-%{release}, tomcatserver
+Requires: %{name}-hdfs = %{version}-%{release}, tomcat-server
 Requires(pre): %{name} = %{version}-%{release}
 
 %description httpfs
