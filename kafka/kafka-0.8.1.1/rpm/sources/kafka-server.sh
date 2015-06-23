@@ -40,8 +40,8 @@ else
         echo "enviroment not properly set up"
         exit 1
 fi
-if [ -f /etc/profile.d/kafka.sh ]; then
-	. /etc/profile.d/kafka.sh
+if [ -f /etc/default/kafka.sh ]; then
+	. /etc/default/kafka.sh
 fi
 
 STATUS_RUNNING=0
