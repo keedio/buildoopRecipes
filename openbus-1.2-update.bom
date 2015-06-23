@@ -34,7 +34,10 @@ CACHEABLE-INTERCEPTOR_VERSION=0.0.6
 # Libraries and dependencies
 
 # Interfaces
+KAFKA-HUE_VERSION=2.1.0
+STORM-HUE_VERSION=1.3.0
 
 # Monitoring
 JMXTRANS_VERSION=v246
+
 #Plugins
