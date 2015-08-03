@@ -65,7 +65,7 @@
 %define static_images_dir src/webapps/static/images
 
 %define hadoop_base_version 2.2.0
-%define hadoop_release openbus_1.2.8
+%define hadoop_release openbus_1.2.10
 
 %ifarch i386
 %global hadoop_arch Linux-i386-32
@@ -558,7 +558,7 @@ getent passwd hdfs >/dev/null || /usr/sbin/useradd --comment "Hadoop HDFS" --she
 
 %pre httpfs 
 getent group httpfs >/dev/null   || groupadd -r httpfs
-getent passwd httpfs >/dev/null || /usr/sbin/useradd --comment "Hadoop HTTPFS" --shell /bin/bash -M -r -g httpfs -G httpfs --home %{run_httpfs} httpfs
+getent passwd httpfs >/dev/null || /usr/sbin/useradd --comment "Hadoop HTTPFS" --shell /bin/bash -M -r -g httpfs -G hadoop --home %{run_httpfs} httpfs
 
 %pre yarn
 getent passwd yarn >/dev/null || /usr/sbin/useradd --comment "Hadoop Yarn" --shell /bin/bash -M -r -G hadoop --home %{state_yarn} yarn
