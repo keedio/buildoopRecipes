@@ -74,7 +74,7 @@ Requires(post): /sbin/chkconfig
 Requires(preun): /sbin/chkconfig, /sbin/service
 Requires: oozie-client = %{version}, hadoop-client, tomcat-server
 #Requires: avro-libs, parquet
-#Patch0: build-error-2.2.0-SNAPSHOT-dependency.patch
+Patch0: codehaus-1.patch 
 BuildArch: noarch
 
 %description 
@@ -138,7 +138,7 @@ BuildArch: noarch
 %prep
 %setup -n oozie-%{oozie_version}
 
-#%patch0 -p1
+%patch0 -p1
 
 %build
     mkdir -p distro/downloads

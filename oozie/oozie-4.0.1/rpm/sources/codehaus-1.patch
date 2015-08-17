@@ -1,0 +1,17 @@
+diff -rupN oozie-4.0.1-save/pom.xml oozie-4.0.1/pom.xml
+--- oozie-4.0.1-save/pom.xml	2015-06-24 09:41:29.926189989 +0200
++++ oozie-4.0.1/pom.xml	2015-06-24 09:41:46.098993118 +0200
+@@ -136,13 +136,6 @@
+             </snapshots>
+         </repository>
+         <repository>
+-            <id>Codehaus repository</id>
+-            <url>http://repository.codehaus.org/</url>
+-            <snapshots>
+-                <enabled>false</enabled>
+-            </snapshots>
+-        </repository>
+-        <repository>
+             <id>apache.snapshots.repo</id>
+             <url>https://repository.apache.org/content/groups/snapshots</url>
+             <name>Apache Snapshots Repository</name>
