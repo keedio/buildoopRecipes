@@ -66,7 +66,7 @@ Source0: %{name}-%{kafka_base_version}-src.tgz
 Source1: rpm-build-stage
 Source2: install_%{name}.sh
 Source3: kafka-server.sh
-#Patch0: log_path.patch
+Patch0: log_path.patch
 BuildArch: noarch
 BuildRequires: autoconf, automake
 Requires(pre): coreutils, /usr/sbin/groupadd, /usr/sbin/useradd
@@ -93,7 +93,7 @@ Kafka is a high-throughput distributed messaging system.
     
 %prep
 %setup -n %{name}-%{kafka_base_version}-src
-#%patch0 -p1
+%patch0 -p1
 
 %build
 bash $RPM_SOURCE_DIR/rpm-build-stage
