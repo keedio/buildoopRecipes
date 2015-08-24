@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-%define kafka_hue_version 2.1.0
-%define kafka_hue_base_version 2.1.0
+%define kafka_hue_version 3.0.0
+%define kafka_hue_base_version 3.0.0
 %define kafka_hue_release openbus_1.2.0
 
 Name:    kafka-hue
@@ -28,6 +28,7 @@ Source0: kafka-hue.git.tar.gz
 Source1: install_kafka-hue.sh
 URL: https://github.com/keedio/kafka-hue
 Requires: hue
+Requires: kafka-core
 
 ############### DESKTOP SPECIFIC CONFIGURATION ##################
 

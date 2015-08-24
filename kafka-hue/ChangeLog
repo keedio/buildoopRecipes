@@ -5,3 +5,7 @@
 23-06-2015 Jose Juan Mart√nez <jjmartinez@keedio.com>
 
 	* Export dataTables in JSON, XLS, CSV and PDF formats.
+
+20-08-2015 Jose Juan Mart?nez <jjmartinez@keedio.com>
+	* Kafka topics administration (add).
+	* Kazoo Higher Level Zookeeper Client usage.
