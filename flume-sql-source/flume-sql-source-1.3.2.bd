@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Flume SQL Source", 
+		"homepage":    "https://github.com/keedio/flume-ng-sql-source",
+		"license":     "Apache-2.0",
+		"filename":    "flume-sql-source-1.3.2.bd"
+	},
+	
+	"do_download": {
+		"src_uri":  "https://github.com/keedio/flume-ng-sql-source.git",
+	 	"src_hash": "1.3.2"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}
