@@ -22,7 +22,7 @@
 
 %define oozie_version 4.0.0
 %define oozie_base_version 4.0.0 
-%define oozie_release openbus_1.2.5
+%define oozie_release openbus_1.2.8
 
 %if  %{!?suse_version:1}0
   %define doc_oozie %{_docdir}/oozie-%{oozie_version}
@@ -75,6 +75,7 @@ Requires(preun): /sbin/chkconfig, /sbin/service
 Requires: oozie-client = %{version}, hadoop-client, tomcat-server
 #Requires: avro-libs, parquet
 Patch0: build-error-2.2.0-SNAPSHOT-dependency.patch
+Patch1: codehaus.patch 
 BuildArch: noarch
 
 %description 
@@ -139,6 +140,7 @@ BuildArch: noarch
 %setup -n oozie-%{oozie_version}
 
 %patch0 -p1
+%patch1 -p1
 
 %build
     mkdir -p distro/downloads
@@ -163,12 +165,20 @@ BuildArch: noarch
 getent group oozie >/dev/null || /usr/sbin/groupadd -r oozie >/dev/null
 getent passwd oozie >/dev/null || /usr/sbin/useradd --comment "Oozie User" --shell /bin/false -M -r -g oozie --home %{data_oozie} oozie >/dev/null
 
+%pre client
+getent group oozie >/dev/null || /usr/sbin/groupadd -r oozie >/dev/null
+getent passwd oozie >/dev/null || /usr/sbin/useradd --comment "Oozie User" --shell /bin/false -M -r -g oozie --home %{data_oozie} oozie >/dev/null
+
 %post 
 %{alternatives_cmd} --install %{tomcat_conf_oozie} %{name}-tomcat-deployment %{tomcat_conf_oozie}.http 30
 %{alternatives_cmd} --install %{tomcat_conf_oozie} %{name}-tomcat-deployment %{tomcat_conf_oozie}.https 20
 %{alternatives_cmd} --install %{conf_oozie} %{name}-conf %{conf_oozie_dist} 30
 
 /sbin/chkconfig --add oozie 
+
+%post client
+%{alternatives_cmd} --install %{conf_oozie} %{name}-conf %{conf_oozie_dist} 30
+
 
 %preun
 if [ "$1" = 0 ]; then
@@ -210,6 +220,8 @@ fi
 
 %files client
 %defattr(-,root,root)
+%config(noreplace) %{conf_oozie_dist}
+%config(noreplace) %{tomcat_conf_oozie}.*
 %{usr_bin}/oozie
 %dir %{lib_oozie}/bin
 %{lib_oozie}/bin/oozie
