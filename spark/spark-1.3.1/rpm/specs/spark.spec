@@ -21,10 +21,11 @@
 %define run_spark /var/run/%{spark_name}
 %define man_dir /usr/share/man
 %define spark_user_home /var/lib/spark
+%define rc_dir /etc/init.d
 
 %define spark_version 1.3.1
 %define spark_base_version 1.3.1
-%define spark_release openbus_1.2.7
+%define spark_release openbus_1.2.10
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
 %define __os_install_post \
@@ -57,7 +58,7 @@ Version: %{spark_version}
 Release: %{spark_release}
 Summary: A high-throughput distributed messaging system.
 URL: http://spark.apache.org
-Vendor: The Redoop Team
+Vendor: The  Keedio Team
 Packager: Alessio Comisso <acomisso@keedio.com>
 Group: Development/Libraries
 Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
@@ -117,6 +118,8 @@ fi
 #### FILES SECTION ####
 #######################
 %files 
-%defattr(-,root,root,755)
+%defattr(-,spark,hadoop,755)
 /usr/lib/%{name}/*
 %config(noreplace) /etc/%{name}/*
+%attr(0755,root,root) %{rc_dir}/spark-history-server
+/var/log/spark-history-server

@@ -1,5 +1,4 @@
 #!/bin/sh
-
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -15,19 +14,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+set -ex
 
 usage() {
   echo "
 usage: $0 <options>
   Required not-so-options:
-     --build-dir=DIR             path to dist.dir
+     --build-dir=DIR             path to flumedist.dir
      --prefix=PREFIX             path to install into
 
   Optional options:
-     --lib-dir=DIR               path to install Kafka home [/usr/lib/kafka]
-     --installed-lib-dir=DIR     path where lib-dir will end up on target system
+     --doc-dir=DIR               path to install docs into [/usr/share/doc/flume]
+     --lib-dir=DIR               path to install flume home [/usr/lib/flume]
      --bin-dir=DIR               path to install bins [/usr/bin]
+     --examples-dir=DIR          path to install examples [doc-dir/examples]
      ... [ see source for more similar options ]
   "
   exit 1
@@ -37,9 +37,10 @@ OPTS=$(getopt \
   -n $0 \
   -o '' \
   -l 'prefix:' \
+  -l 'doc-dir:' \
   -l 'lib-dir:' \
-  -l 'installed-lib-dir:' \
   -l 'bin-dir:' \
+  -l 'examples-dir:' \
   -l 'build-dir:' -- "$@")
 
 if [ $? != 0 ] ; then
@@ -47,6 +48,7 @@ if [ $? != 0 ] ; then
 fi
 
 eval set -- "$OPTS"
+
 while true ; do
     case "$1" in
         --prefix)
@@ -55,14 +57,17 @@ while true ; do
         --build-dir)
         BUILD_DIR=$2 ; shift 2
         ;;
+        --doc-dir)
+        DOC_DIR=$2 ; shift 2
+        ;;
         --lib-dir)
         LIB_DIR=$2 ; shift 2
         ;;
-        --installed-lib-dir)
-        INSTALLED_LIB_DIR=$2 ; shift 2
-        ;;
         --bin-dir)
         BIN_DIR=$2 ; shift 2
+        ;;
+        --examples-dir)
+        EXAMPLES_DIR=$2 ; shift 2
         ;;
         --)
         shift ; break
@@ -82,18 +87,37 @@ for var in PREFIX BUILD_DIR ; do
   fi
 done
 
-INSTALLATION_DIR=/usr/lib/spark
-CONFIGURATION_DIR=/etc/spark
-RC_DIR=/etc/init.d
-LOG_DIR=/var/log/spark-history-server
-install -d -m 0755 $PREFIX/$INSTALLATION_DIR
-install -d -m 0755 $PREFIX/$CONFIGURATION_DIR
-install -d -m 0755 $PREFIX/$RC_DIR
-install -d -m 0755 $PREFIX/$LOG_DIR
-tar xvf ${BUILD_DIR}/spark*.tgz -C $PREFIX/$INSTALLATION_DIR
-version_name=`ls $PREFIX/$INSTALLATION_DIR`
-ln -s $INSTALLATION_DIR/default/conf $PREFIX/$CONFIGURATION_DIR/conf.d
-ln -s $LOG_DIR $PREFIX/$INSTALLATION_DIR/$version_name/logs 
-ln -s $CONFIGURATION_DIR/conf.d $PREFIX/$CONFIGURATION_DIR/conf
-cp $RPM_SOURCE_DIR/spark-history-server $PREFIX/$RC_DIR
+if [ -z "${JAVA_HOME}" ]; then
+    echo Missing env. var JAVA_HOME
+    usage
+fi
+
+PLUGIN_DIR=/usr/lib/flume/plugins.d/http-source-json
+PLUGIN_LIB_DIR=${PLUGIN_DIR}/lib
+PLUGIN_LIBEXT_DIR=${PLUGIN_DIR}/libext
+FLUME_CONFD=/etc/flume/conf.d
+
+install -d -m 0755 ${PREFIX}/${PLUGIN_DIR}
+install -d -m 0755 ${PREFIX}/${PLUGIN_LIB_DIR}
+install -d -m 0755 ${PREFIX}/${PLUGIN_LIBEXT_DIR}
+cp ${BUILD_DIR}/target/*.jar ${PREFIX}/${PLUGIN_LIB_DIR}
+#cp ${BUILD_DIR}/target/libs/*.jar ${PREFIX}/${PLUGIN_LIBEXT_DIR}
+
+# Copy dependency
+cp ${BUILD_DIR}/target/dependency/scala-library-*.jar ${PREFIX}/${PLUGIN_LIBEXT_DIR}
+cp ${BUILD_DIR}/target/dependency/jackson-annotations-*.jar ${PREFIX}/${PLUGIN_LIBEXT_DIR}
+cp ${BUILD_DIR}/target/dependency/jackson-core-*.jar ${PREFIX}/${PLUGIN_LIBEXT_DIR}
+cp ${BUILD_DIR}/target/dependency/jackson-databind-*.jar ${PREFIX}/${PLUGIN_LIBEXT_DIR}
+cp ${BUILD_DIR}/target/dependency/json4s-ast*.jar ${PREFIX}/${PLUGIN_LIBEXT_DIR}
+cp ${BUILD_DIR}/target/dependency/json4s-core*.jar ${PREFIX}/${PLUGIN_LIBEXT_DIR}
+cp ${BUILD_DIR}/target/dependency/json4s-jackson*.jar ${PREFIX}/${PLUGIN_LIBEXT_DIR}
+cp ${BUILD_DIR}/target/dependency/kafka*.jar ${PREFIX}/${PLUGIN_LIBEXT_DIR}
+
+
+
+
+
+install -d -m 0755 ${PREFIX}/${FLUME_CONFD}
+cp ${RPM_SOURCE_DIR}/ahttp00* ${PREFIX}/${FLUME_CONFD}
+
 
