@@ -24,7 +24,7 @@
 
 %define kafka_version 0.8.1.1
 %define kafka_base_version 0.8.1.1
-%define kafka_release openbus_1.2.8
+%define kafka_release openbus_1.2.10.1
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
 %define __os_install_post \
@@ -73,6 +73,7 @@ Requires(pre): coreutils, /usr/sbin/groupadd, /usr/sbin/useradd
 Requires(post): %{alternatives_dep}
 Requires(preun): %{alternatives_dep}
 Requires: jdk, redhat-lsb
+Requires: kafka-core
 %if  %{?suse_version:1}0
 # Required for init scripts
 Requires: insserv
@@ -90,6 +91,19 @@ Requires: redhat-lsb
 
 %description 
 Kafka is a high-throughput distributed messaging system.
+
+%package core
+Version: %{version}
+Release: %{release}
+Summary:  Core Kafka components
+URL: http://incubator.apache.org/oozie/
+Group: Development/Libraries
+License: APL2
+BuildArch: noarch
+
+%description core
+ Core components required by Kafka-HUE
+
     
 %prep
 %setup -n %{name}-%{kafka_base_version}-src
@@ -109,7 +123,7 @@ orig_init_file=%{SOURCE3}
 %__cp $orig_init_file $init_file
 chmod 755 $init_file
 
-%pre
+%pre core
 getent group kafka >/dev/null || groupadd -r kafka
 getent passwd kafka > /dev/null || useradd -c "Kafka" -s /sbin/nologin -g kafka -r -d %{lib_kafka} kafka 2> /dev/null || :
 
@@ -118,11 +132,15 @@ getent passwd kafka > /dev/null || useradd -c "Kafka" -s /sbin/nologin -g kafka 
 %__install -d -o kafka -g kafka -m 0755 %{lib_kafka}
 
 %post
-%{alternatives_cmd} --install %{config_kafka} %{kafka_name}-conf %{config_kafka}.dist 30
 chkconfig --add %{name}
+
+%post core
+%{alternatives_cmd} --install %{config_kafka} %{kafka_name}-conf %{config_kafka}.dist 30
 
 %preun
 /etc/init.d/kafka stop
+
+%preun core
 if [ "$1" = 0 ]; then
         %{alternatives_cmd} --remove %{kafka_name}-conf %{config_kafka}.dist || :
 fi
@@ -130,12 +148,13 @@ fi
 #######################
 #### FILES SECTION ####
 #######################
-%files 
+%files
+%{etc_rcd}/init.d/kafka
+%files core 
 %defattr(-,root,root,755)
 %config(noreplace) %{config_kafka}.dist
 %attr(0755,kafka,kafka) %{kafka_user_home}
 %{config_kafka}
-%{etc_rcd}/init.d/kafka
 %{lib_kafka}/bin/*
 %{lib_kafka}/libs/*.jar
 %{lib_kafka}/config
