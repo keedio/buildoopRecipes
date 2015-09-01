@@ -84,10 +84,16 @@ done
 
 INSTALLATION_DIR=/usr/lib/spark
 CONFIGURATION_DIR=/etc/spark
+RC_DIR=/etc/init.d
+LOG_DIR=/var/log/spark-history-server
 install -d -m 0755 $PREFIX/$INSTALLATION_DIR
 install -d -m 0755 $PREFIX/$CONFIGURATION_DIR
+install -d -m 0755 $PREFIX/$RC_DIR
+install -d -m 0755 $PREFIX/$LOG_DIR
 tar xvf ${BUILD_DIR}/spark*.tgz -C $PREFIX/$INSTALLATION_DIR
+version_name=`ls $PREFIX/$INSTALLATION_DIR`
 ln -s $INSTALLATION_DIR/default/conf $PREFIX/$CONFIGURATION_DIR/conf.d
+ln -s $LOG_DIR $PREFIX/$INSTALLATION_DIR/$version_name/logs 
 ln -s $CONFIGURATION_DIR/conf.d $PREFIX/$CONFIGURATION_DIR/conf
-
+cp $RPM_SOURCE_DIR/spark-history-server $PREFIX/$RC_DIR
 
