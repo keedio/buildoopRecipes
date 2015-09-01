@@ -1,0 +1,73 @@
+## /etc/flume/conf.d/ahttp00.conf
+## Last modified: 15-jul-2015
+##
+
+## Flume agent base topology
+
+ahttp00.sources = http
+ahttp00.channels = memoryChannel
+
+## Make sure you have a kafka sink enabled
+#ahttp00.sinks = loggerSink kafkaSink
+ahttp00.sinks = kafkaSink
+
+## KEEDIO HTTP Source configuration
+
+# Type of the HTTP source, do NOT change this
+ahttp00.sources.http.type = com.keedio.flume.source.http.KeedioHTTPSource
+
+# HTTP handler, do NOT change this
+ahttp00.sources.http.handler = com.keedio.flume.source.http.json.handler.KeedioJSONHandler
+
+# Mandatory: address and port on which the embedded Jetty server will bind to
+ahttp00.sources.http.bind = <binding_ip>
+ahttp00.sources.http.port = 3200
+
+## SSL configuration
+# Set to 'true' if you want the embedded Jetty server to only listen to HTTPS request.
+# If you set this to 'true', you must provide a valid keystore and keystore password below.
+ahttp00.sources.http.enableSSL = false
+
+# Not used while enableSSL is false
+#ahttp00.sources.http.keystore = /path/to/keystore.jks
+#ahttp00.sources.http.keystorePassword = password
+
+# The channel can be defined as follows.
+ahttp00.sources.http.channels = memoryChannel
+
+# Each sink's type must be defined
+#ahttp00.sinks.loggerSink.type = logger
+
+## KafkaSink configuration
+
+# do NOT change this
+ahttp00.sinks.kafkaSink.type = org.apache.flume.sink.kafka.KafkaSink
+ahttp00.sinks.kafkaSink.partitioner.class = kafka.producer.DefaultPartitioner
+
+# comma separated list of kafka brokers and ports. example: host1:9091,host2:9092,...
+ahttp00.sinks.kafkaSink.metadata.broker.list = kafka_broker_ip:kafka_broker_port
+
+# name of the topic this source will write to
+ahttp00.sinks.kafkaSink.topic = kafka_topic_name
+ahttp00.sinks.kafkaSink.batch.num.messages = 5
+
+# Standard async producer configuration
+ahttp00.sinks.kafkaSink.producer.type = async
+ahttp00.sinks.kafkaSink.queue.buffering.max.ms = 5000
+ahttp00.sinks.kafkaSink.queue.buffering.max.messages = 10000
+ahttp00.sinks.kafkaSink.queue.enqueue.timeout.ms = -1
+ahttp00.sinks.kafkaSink.serializer.class = kafka.serializer.DefaultEncoder
+ahttp00.sinks.kafkaSink.key.serializer.class = kafka.serializer.DefaultEncoder
+ahttp00.sinks.kafkaSink.compression.codec = 2
+
+#Specify the channel the sink should use
+ahttp00.sinks.loggerSink.channel = memoryChannel
+ahttp00.sinks.kafkaSink.channel = memoryChannel
+
+# Each channel's type is defined.
+ahttp00.channels.memoryChannel.type = memory
+
+# Other config values specific to each type of channel(sink or source)
+# can be defined as well
+# In this case, it specifies the capacity of the memory channel
+ahttp00.channels.memoryChannel.capacity = 1000

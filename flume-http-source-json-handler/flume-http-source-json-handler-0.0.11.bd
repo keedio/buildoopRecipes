@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "HTTP Source handler needed to process JSON file coming from Microsoft's SIMON desktop utility", 
+		"homepage":    "https://github.com/keedio/flume-http-source-json-handler",
+		"license":     "Apache-2.0",
+		"filename":    "flume-http-source-json-handler-0.0.11.bd"
+	},
+	
+	"do_download": {
+		"src_uri":  "https://github.com/keedio/flume-http-source-json-handler.git",
+	 	"src_hash": "0.0.11"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}
