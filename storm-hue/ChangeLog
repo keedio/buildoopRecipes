@@ -5,3 +5,8 @@
 23-06-2015 Jose Juan Martínez <jjmartinez@keedio.com>
 
 	* Export dataTables in JSON, XLS, CSV and PDF formats.
+
+01-09-2015 Jose Juan Martínez <jjmartinez@keedio.com>
+
+        * Support for HUE 3.8 or higher.
+	* Config validator at HUE start.

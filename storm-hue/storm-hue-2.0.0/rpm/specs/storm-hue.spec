@@ -13,22 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-%define kafka_hue_version 3.0.0
-%define kafka_hue_base_version 3.0.0
-%define kafka_hue_release openbus_1.2.0
+%define storm_hue_version 2.0.0
+%define storm_hue_base_version 2.0.0
+%define storm_hue_release openbus_1.2.0
 
-Name:    kafka-hue
-Version: %{kafka_hue_version}
-Release: %{kafka_hue_release}
+Name:    storm-hue
+Version: %{storm_hue_version}
+Release: %{storm_hue_release}
 Group: Applications/Engineering
-Summary: Apache Kafka HUE Application
+Summary: Apache Storm HUE Application
 License: ASL 2.0
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id} -u -n)
-Source0: kafka-hue.git.tar.gz
-Source1: install_kafka-hue.sh
-URL: https://github.com/keedio/kafka-hue
+Source0: storm-hue.git.tar.gz
+Source1: install_storm-hue.sh
+URL: https://github.com/keedio/storm-hue
 Requires: hue
-Requires: kafka-core
 
 ############### DESKTOP SPECIFIC CONFIGURATION ##################
 
@@ -36,14 +35,15 @@ Requires: kafka-core
 %define hue_dir /usr/lib/hue
 %define username hue
 %define apps_dir %{hue_dir}/apps
-%define kafka_hue_app_dir %{hue_dir}/apps/kafka
+%define storm_hue_app_dir %{hue_dir}/apps/storm
 
 %post
-%{hue_dir}/build/env/bin/python %{hue_dir}/tools/app_reg/app_reg.py --install %{apps_dir}/kafka --relative-paths \
+%{hue_dir}/build/env/bin/python %{hue_dir}/tools/app_reg/app_reg.py --install %{apps_dir}/storm --relative-paths \
 chown -R hue:hue /var/log/hue /var/lib/hue
 
+
 %description
-Kafka-HUE is a HUE application to admin and manage a pool of Apache Kafka clusters.
+Storm-HUE is a HUE application to admin and manage a pool of Apache Storm topologies.
 
 %prep
 %setup -n %{name}.git
@@ -55,7 +55,7 @@ sh %{SOURCE1} \
           --prefix=$RPM_BUILD_ROOT
 
 %files
-%{kafka_hue_app_dir}
+%{storm_hue_app_dir}
 
 %clean
 %__rm -rf $RPM_BUILD_ROOT
