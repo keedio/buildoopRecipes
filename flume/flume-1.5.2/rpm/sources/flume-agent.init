@@ -126,7 +126,7 @@ restart() {
 
 getAgentNames()
 {
-  agentNames=`ls $FLUME_AGENT_CONF_DIR | cut -f 1 -d '.'`
+  agentNames=`ls $FLUME_AGENT_CONF_DIR | grep '\.conf$' | cut -f 1 -d '.'`
 }
 
 condrestart(){
