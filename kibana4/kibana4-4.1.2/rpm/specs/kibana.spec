@@ -17,6 +17,7 @@
 %define kibana_name kibana
 %define kibana_home /usr/lib/kibana4
 %define kibana_user kibana
+%define kibana_user_home /var/lib/kibana4
 %define kibana_group kibana
 
 %define kibana_version 4.1.2
@@ -78,13 +79,22 @@ if ! getent passwd kibana >/dev/null; then
 fi
 
 %post
+/sbin/chkconfig --add kibana4 
 
 %preun
+/sbin/service kibana4 stop > /dev/null
+/sbin/chkconfig --del kibana4
 
+%postun 
+if [ $1 -ge 1 ]; then
+  /sbin/service kibana4 condrestart > /dev/null
+fi
 %files
 %defattr(-,%{kibana_user},%{kibana_group})
 %dir %attr(755, %{kibana_user},%{kibana_group}) %{kibana_home}
 %{kibana_home}/*
 %attr(0755,root,root) /etc/init.d/kibana4 
-
+%config(noreplace) /etc/kibana4/*
+%{kibana_user_home}
+/var/log/kibana4
 %changelog
