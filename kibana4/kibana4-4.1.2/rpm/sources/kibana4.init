@@ -40,8 +40,9 @@ do_start()      {
                         return 1
         else
                         $DAEMON $DAEMON_ARGS 1>"$LOG" 2>&1 &
-                        echo $! > "$PIDFILE"
                         PID=$!
+                        echo $PID > "$PIDFILE"
+           
                         if [ "$PID" > 0 ]
                         then
                                 echo "Kibana started with pid $!"

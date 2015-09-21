@@ -71,7 +71,7 @@ install -d -m 755 ${KIBANA_HOME}
 install -d -m 755 ${PREFIX}/etc/init.d
 install -d -m 755 ${PREFIX}/etc/kibana4
 install -d -m 755 ${PREFIX}/var/lib/kibana4
-install -d -m 755 ${PREFIX}/var/log/kibana4
+install -d -m 755 ${PREFIX}/var/log/kibana
 
 cp -Rpd ${BUILD_DIR}/* ${KIBANA_HOME}
 mv ${KIBANA_HOME}/config ${PREFIX}/etc/kibana4/conf.dist
