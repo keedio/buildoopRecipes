@@ -96,5 +96,5 @@ fi
 %attr(0755,root,root) /etc/init.d/kibana4 
 %config(noreplace) /etc/kibana4/*
 %{kibana_user_home}
-/var/log/kibana4
+/var/log/kibana
 %changelog
