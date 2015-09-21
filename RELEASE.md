@@ -1,4 +1,4 @@
-# OPENBUS V-1.2 DEVELOPMENT BRANCH
+# OPENBUS V-1.3 DEVELOPMENT BRANCH
 
 ## Working on release
   openbus-1.1.0

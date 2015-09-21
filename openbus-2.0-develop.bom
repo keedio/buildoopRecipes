@@ -10,6 +10,7 @@ TARGET=CentOS-6.x
 
 # Governance and integration
 KAFKA_VERSION=0.8.2.1
+HADOOP_VERSION=2.7.1
 # Connectors
 
 # Test packages
