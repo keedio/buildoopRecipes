@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Kafka-HUE is a HUE application to admin and manage a pool of Apache Kafka clusters.", 
+		"homepage":    "https://github.com/keedio/kafka-hue",
+		"license":     "Apache-2.0",
+		"filename":    "kafka-hue-3.0.0.bd"
+	},
+	
+	"do_download": {
+		"src_uri":  "https://github.com/keedio/kafka-hue.git",
+		"src_hash": "3.0.0"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}

@@ -1,0 +1,7 @@
+## LEA Config Section
+lea_server auth_type sslca
+lea_server ip 22.15.237.33
+lea_server auth_port 18184
+opsec_sic_name "CN=my_app_name,O=IDENTIFIER..xxxxxx"    # full OPSEC sic name as provided by opsec_pull_cert
+opsec_sslca_file /path/to/opsec.p12     # cert file as provided by opsec_pull_cert
+lea_server opsec_entity_sic_name "CN=cp_mgmt,O=IDENTIFIER..xxxxxx"

@@ -1,0 +1,18 @@
+--- storm-0.9.4-before/external/storm-hbase/pom.xml	2015-03-30 15:48:35.115846775 +0200
++++ storm/external/storm-hbase/pom.xml	2015-03-30 16:58:47.230054692 +0200
+@@ -36,7 +36,7 @@
+     </developers>
+ 
+     <properties>
+-        <hbase.version>0.98.1-hadoop2</hbase.version>
++        <hbase.version>0.96.1.1-hadoop2</hbase.version>
+         <hdfs.version>2.2.0</hdfs.version>
+     </properties>
+ 
+@@ -74,4 +74,4 @@
+             </exclusions>
+         </dependency>
+     </dependencies>
+-</project>
+\ No hay ningún carácter de nueva línea al final del fichero
++</project>

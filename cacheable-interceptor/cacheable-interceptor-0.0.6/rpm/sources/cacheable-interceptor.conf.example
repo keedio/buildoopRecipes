@@ -1,0 +1,17 @@
+# Interceptor
+a1.sources.r1.interceptors = i1
+a1.sources.r1.interceptors.i1.type = org.apache.flume.interceptor.CacheableInterceptor$Builder
+
+# Cache eviction
+# interval is expressed in seconds, default to 10 seconds
+a1.sources.r1.interceptors.i1.properties.lock.filename = /var/tmp/flume-cache.lock
+a1.sources.r1.interceptors.i1.properties.lock.interval = 3600
+
+# Data insertion
+# CSV separator defaults to comma ","
+a1.sources.r1.interceptors.i1.properties.csv.directory = /opt/myfiles
+a1.sources.r1.interceptors.i1.properties.csv.separator = ,
+# A map of criteria where the criterion name is a user defined subproperty
+a1.sources.r1.interceptors.i1.properties.selection.criteria.1 = mapping#1
+a1.sources.r1.interceptors.i1.properties.selection.criteria.2 = mapping#2
+a1.sources.r1.interceptors.i1.properties.selection.criteria.n = mapping#n

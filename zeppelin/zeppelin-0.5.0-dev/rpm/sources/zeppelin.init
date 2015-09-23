@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+# chkconfig: 345 96 4
+# description: zeppelin server
+
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+if [ -f "/etc/default/zeppelin" ]; then
+	. /etc/default/zeppelin
+fi
+
+export ZEPPELIN_HOME=${ZEPPELIN_HOME:-"/usr/lib/zeppelin"}
+export ZEPPELIN_LOG_DIR=${ZEPPELIN_LOG_DIR:-"/var/log/zeppelin"}
+export ZEPPELIN_PID_DIR=${ZEPPELIN_PID_DIR:-"/var/run/zeppelin"}
+USER=${ZEPPELIN_USER:-"zeppelin"}
+ZEPPELIN_PID="${ZEPPELIN_PID_DIR}/zeppelin-${USER}-${HOSTNAME}.pid"
+ZEPPELIN_CMD=${ZEPPELIN_CMD:-"${ZEPPELIN_HOME}/bin/zeppelin-daemon.sh"}
+
+start(){
+	su -s /bin/bash ${USER} -c "${ZEPPELIN_CMD} start" 
+	return $?
+}
+
+stop(){
+	su -s /bin/bash ${USER} -c "${ZEPPELIN_CMD} stop"
+	rc=$?
+	if [ $rc -eq 0 ]; then
+		[ -f ${ZEPPELIN_PID} ] && rm ${ZEPPELIN_PID}
+		rc=$?
+	fi
+	return $rc
+}
+
+status(){
+	su -s /bin/bash ${USER} -c "${ZEPPELIN_CMD} status"
+	if [ $? -ne 0 ]; then
+		if [ -f "${ZEPPELIN_PID}"  ]; then
+			echo "Zeppelin service stopped but PID File exists"
+			return 1
+		fi
+		return 3
+	fi
+        return 0
+}
+
+case "$1" in
+  start)
+	start
+        exit $?  
+        ;;
+  stop)
+	stop
+        exit $?  
+        ;;
+  status)
+	status
+        exit $?
+        ;;
+  restart)
+        stop
+        start
+	exit $?
+        ;;
+  *)
+        echo "Usage: $0 {start|stop|status|restart}"
+        exit 1
+esac
+
+exit 1

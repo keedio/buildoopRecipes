@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "The Apache Hive data warehouse", 
+		"homepage":    "https://hive.apache.org/",
+		"license":     "Apache-2.0",
+		"filename":    "hive-1.2.1.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "http://ftp.cixug.es/apache/hive/hive-1.2.1/apache-hive-1.2.1-src.tar.gz",
+		"src_md5sum": "fdb5177ba931cf65149d395faebf9dda"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	},
+}

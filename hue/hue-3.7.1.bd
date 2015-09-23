@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Hue is a Web interface for analyzing data with Apache Hadoop.", 
+		"homepage":    "http://www.gethue.com/",
+		"license":     "Apache-2.0",
+		"filename":    "hue-3.7.1.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "https://github.com/cloudera/hue.git",
+		"src_hash": "release-3.7.1"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}

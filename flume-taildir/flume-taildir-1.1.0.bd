@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Flume tail directory", 
+		"homepage":    "https://github.com/keedio/flume-taildirectory-source",
+		"license":     "Apache-2.0",
+		"filename":    "flume-taildir-1.1.0.bd"
+	},
+	
+	"do_download": {
+		"src_uri":  "https://github.com/keedio/flume-taildirectory-source.git",
+	 	"src_hash": "1.1.0"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}

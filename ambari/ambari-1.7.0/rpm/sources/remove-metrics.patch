@@ -1,0 +1,69 @@
+diff -rupN ambari-1.7.0-new/ambari-web/app/data/service_graph_config.js ambari-1.7.0-new2/ambari-web/app/data/service_graph_config.js
+--- ambari-1.7.0-new/ambari-web/app/data/service_graph_config.js	2015-06-18 12:15:23.138223233 +0200
++++ ambari-1.7.0-new2/ambari-web/app/data/service_graph_config.js	2015-06-19 12:37:59.581164153 +0200
+@@ -27,65 +27,5 @@ The name of the object is of the format:
+ is one of the items below.
+ **/
+ App.service_graph_config = {
+-	'hdfs': [
+-		'HDFS_SpaceUtilization',
+-		'HDFS_FileOperations',
+-		'HDFS_BlockStatus',
+-		'HDFS_IO',
+-		'HDFS_RPC',
+-		'HDFS_GC',
+-		'HDFS_JVMHeap',
+-		'HDFS_JVMThreads'
+-	],
+-
+-	'yarn': [
+-		'YARN_AllocatedMemory',
+-		'YARN_QMR',
+-		'YARN_AllocatedContainer',
+-		'YARN_NMS',
+-		'YARN_ApplicationCurrentStates',
+-		'YARN_ApplicationFinishedStates',
+-		'YARN_RPC',
+-		'YARN_GC',
+-		'YARN_JVMThreads',
+-		'YARN_JVMHeap'
+-	],
+-
+-	'mapreduce': [
+-		'MapReduce_JobsStatus',
+-		'MapReduce_TasksRunningWaiting',
+-		'MapReduce_MapSlots',
+-		'MapReduce_ReduceSlots',
+-		'MapReduce_GC',
+-		'MapReduce_RPC',
+-		'MapReduce_JVMHeap',
+-		'MapReduce_JVMThreads'
+-	],
+-
+-	'hbase': [
+-		'HBASE_ClusterRequests',
+-		'HBASE_RegionServerReadWriteRequests',
+-		'HBASE_RegionServerRegions',
+-		'HBASE_RegionServerQueueSize',
+-		'HBASE_HlogSplitTime',
+-		'HBASE_HlogSplitSize'
+-	],
+-
+-	'flume': [
+-		'Flume_ChannelSizeMMA',
+-		'Flume_ChannelSizeSum',
+-		'Flume_IncommingMMA',
+-		'Flume_IncommingSum',
+-		'Flume_OutgoingMMA',
+-		'Flume_OutgoingSum'
+-	],
+-
+-	'storm': [
+-		'STORM_SlotsNumber',
+-		'STORM_Executors',
+-		'STORM_Topologies',
+-		'STORM_Tasks'
+-	],
+-
+ 
+ };

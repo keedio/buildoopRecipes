@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Flume tail directory", 
+		"homepage":    "https://github.com/keedio/flume-filedump-interceptor",
+		"license":     "Apache-2.0",
+		"filename":    "flume-filedump-0.0.3.bd"
+	},
+	
+	"do_download": {
+		"src_uri":  "https://github.com/keedio/flume-filedump-interceptor",
+	 	"src_hash": "0.0.3"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}
