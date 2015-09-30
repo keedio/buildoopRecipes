@@ -1,4 +1,14 @@
-23-04-2014 Javi Rooman <javiroman@redoop.org>
+23-04-2014 Marcelo Valle <mvalle@keedio.com>
+
+	* Version 2.0.0 of keedio-camus. Synchronized with last Linkedin
+	changes, and added new Features:
+	
+	Generic compression codecs supported
+
+	String Message Decoder
+	Json4Scala Message Decoder
+
+23-04-2014 Javi Roman <javiroman@redoop.org>
 
 	* This version is superset by release-0.8.2. And from
 	now on is based on the buildoop repository forked projects.
