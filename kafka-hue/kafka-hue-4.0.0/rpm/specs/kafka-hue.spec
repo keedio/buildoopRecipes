@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-%define kafka_hue_version 3.0.0
-%define kafka_hue_base_version 3.0.0
+%define kafka_hue_version 4.0.0
+%define kafka_hue_base_version 4.0.0
 %define kafka_hue_release openbus_1.3.0
 
 Name:    kafka-hue
