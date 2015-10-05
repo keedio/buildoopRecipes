@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Zookeeper", 
+		"homepage":    "http://zookeeper.apache.org/",
+		"license":     "Apache-2.0",
+		"filename":    "zookeeper-3.4.6.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "http://archive.apache.org/dist/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz",
+		"src_md5sum": "971c379ba65714fd25dc5fe8f14e9ad1"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	}
+}
