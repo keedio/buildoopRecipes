@@ -16,4 +16,4 @@
 
 set -ex
 export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m"
-./make-distribution.sh --tgz --skip-java-test  -Pyarn -Phadoop-2.4 -Dhadoop.version=2.4.0  -DskipTests
+./make-distribution.sh --tgz --skip-java-test  -Pyarn -Phadoop-2.6 -Phive -Pnetlib-lgpl -Pscala-2.10 -Dhadoop.version=2.6.0  -DskipTests
