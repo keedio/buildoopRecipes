@@ -62,7 +62,7 @@
 %define httpfs_services httpfs
 %define mapreduce_services mapreduce-historyserver
 %define hdfs_services hdfs-namenode hdfs-secondarynamenode hdfs-datanode hdfs-zkfc hdfs-journalnode 
-%define yarn_services yarn-resourcemanager yarn-nodemanager yarn-proxyserver
+%define yarn_services yarn-resourcemanager yarn-nodemanager yarn-proxyserver yarn-timelineserver
 %define hadoop_services %{hdfs_services} %{mapreduce_services} %{yarn_services} %{httpfs_services}
 # Hadoop outputs built binaries into %{hadoop_build}
 %define hadoop_build_path build
@@ -146,8 +146,8 @@ Release: %{hadoop_release}
 Summary: Hadoop is a software platform for processing vast amounts of data
 License: Apache License v2.0
 URL: http://hadoop.apache.org/core/
-Vendor: The Redoop Team
-Packager: Javi Roman <javiroman@redoop.org>
+Vendor: Keedio 
+Packager: Alessio Comisso <acomisso@keedio.org>
 Group: Development/Libraries
 Source0: %{name}-%{hadoop_base_version}-src.tar.gz 
 Source1: rpm-build-stage
@@ -176,6 +176,7 @@ Source23: hadoop-hdfs-zkfc.svc
 Source24: hadoop-hdfs-journalnode.svc
 Source25: hadoop-hdfs-nfs3.default 
 Source26: hadoop-hdfs-nfs3
+Source27: hadoop-yarn-timelineserver.svc
 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id} -u -n)
 
@@ -395,6 +396,17 @@ The NodeManager is the per-machine framework agent who is responsible for
 containers, monitoring their resource usage (cpu, memory, disk, network) and
 reporting the same to the ResourceManager/Scheduler.
 
+%package yarn-timelineserver
+Summary: YARN Application Timeline Server
+Group: System/Daemons
+Requires: %{name}-yarn = %{version}-%{release}
+Requires(pre): %{name} = %{version}-%{release}
+Requires(pre): %{name}-yarn = %{version}-%{release}
+
+%description yarn-timelineserver
+The Storage and retrieval of application’s current and historic information in a generic fashion is addressed in YARN through the Timeline Server.
+
+
 %package yarn-proxyserver
 Summary: YARN Web Proxy
 Group: System/Daemons
@@ -434,6 +446,7 @@ Requires: %{name}-hdfs-datanode = %{version}-%{release}
 Requires: %{name}-hdfs-secondarynamenode = %{version}-%{release}
 Requires: %{name}-yarn-resourcemanager = %{version}-%{release}
 Requires: %{name}-yarn-nodemanager = %{version}-%{release}
+Requires: %{name}-yarn-timelineserver = %{version}-%{release}
 Requires: %{name}-mapreduce-historyserver = %{version}-%{release}
 
 %description conf-pseudo
@@ -809,6 +822,7 @@ fi
 %service_macro hdfs-nfs3
 %service_macro yarn-resourcemanager
 %service_macro yarn-nodemanager
+%service_macro yarn-timelineserver
 %service_macro yarn-proxyserver
 %service_macro mapreduce-historyserver
 

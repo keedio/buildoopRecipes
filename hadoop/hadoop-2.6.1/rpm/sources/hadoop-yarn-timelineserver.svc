@@ -1,4 +1,3 @@
-#!/bin/sh
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -13,7 +12,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-set -ex
-export MAVEN_OPTS="-Xmx2g -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512m"
-mvn clean package -Pspark-1.5 -Dhadoop.version=2.6.0 -Phadoop-2.6 -Pyarn -DskipTests -P build-distr
+HADOOP_NAME="timelineserver"
+DAEMON="hadoop-yarn-$HADOOP_NAME"
+DESC="Hadoop $HADOOP_NAME"
+EXEC_PATH="/usr/lib/hadoop-yarn/sbin/yarn-daemon.sh"
+SVC_USER="yarn"
+DAEMON_FLAGS="$HADOOP_NAME"
+CONF_DIR="/etc/hadoop/conf"
+PIDFILE="/var/run/hadoop-yarn/yarn-$SVC_USER-$HADOOP_NAME.pid"
+LOCKDIR="/var/lock/subsys"
+LOCKFILE="hadoop-$HADOOP_NAME"
