@@ -79,6 +79,7 @@ done
 
 CAMUS_HOME=${CAMUS_HOME:-$PREFIX/usr/lib/camus}
 CAMUS_CONF=${PREFIX}/etc/camus/conf.dist
+CAMUS_CONF_EXAMPLES=${PREFIX}/etc/camus/conf.examples
 
 # base libraries: only one, recomendations of Cloudera.
 install -d -m 755 ${CAMUS_HOME}
@@ -90,8 +91,10 @@ cp ${RPM_SOURCE_DIR}/run-camus-example.sh ${CAMUS_HOME}/bin
 
 # config
 install -d -m 755 ${CAMUS_CONF}
+ln -s ${CAMUS_CONF} ${CAMUS_CONF}/../conf
 cp ${RPM_SOURCE_DIR}/log4j.xml ${CAMUS_CONF}
-cp ${RPM_SOURCE_DIR}/camus*properties ${CAMUS_CONF}
+install -d -m 755 ${CAMUS_CONF}
+cp ${RPM_SOURCE_DIR}/camus*properties ${CAMUS_CONF_EXAMPLES}
 
 
 
