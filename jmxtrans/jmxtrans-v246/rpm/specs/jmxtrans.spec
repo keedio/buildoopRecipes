@@ -137,7 +137,7 @@ if [ $1 = 1 ]; then
   echo "export NEW_SIZE=${NEW_SIZE}" >> %{etc_jmxtrans}/jmxtrans.config
   echo "export CPU_CORES=${CPU_CORES}" >> %{etc_jmxtrans}/jmxtrans.config
   echo "export NEW_RATIO=${NEW_RATIO}" >> %{etc_jmxtrans}/jmxtrans.config
-  echo "export LOG_LEVEL=debug" >> %{etc_jmxtrans}/jmxtrans.config
+  echo "#export LOG_LEVEL=debug" >> %{etc_jmxtrans}/jmxtrans.config
   echo "export PIDFILE=/var/run/jmxtrans.pid" >> %{etc_jmxtrans}/jmxtrans.config
 
 fi
