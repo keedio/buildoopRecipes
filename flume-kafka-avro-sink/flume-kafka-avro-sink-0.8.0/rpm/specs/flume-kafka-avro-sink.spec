@@ -17,7 +17,7 @@
 
 %define flume_kafka_avro_sink_version 0.8.0
 %define flume_kafka_avro_sink_base_version 0.8.0
-%define flume_kafka_avro_sink_release openbus_1.3.0
+%define flume_kafka_avro_sink_release 1.3.0
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
 %define __os_install_post \
@@ -35,8 +35,8 @@ Version: %{flume_kafka_avro_sink_version}
 Release: %{flume_kafka_avro_sink_release}
 Summary: "Flume kafka producer Avro converter"
 URL: https://github.com/buildoop/flume-kafka-avro-sink
-Vendor: The Redoop Team
-Packager: Javi Roman <javiroman@redoop.org>
+Vendor: Keedio
+Packager: Systems <systems@keedio.com>
 Group: Development/Libraries
 BuildArch: noarch
 Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{flume_kafka_avro_sink_version}-%{flume_kafka_avro_sink_release}-XXXXXX)

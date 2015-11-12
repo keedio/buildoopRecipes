@@ -24,7 +24,7 @@
 
 %define kafka_version 0.8.2.1
 %define kafka_base_version 0.8.2.1
-%define kafka_release openbus_1.3.0
+%define kafka_release 1.3.0
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
 %define __os_install_post \
@@ -57,8 +57,8 @@ Version: %{kafka_version}
 Release: %{kafka_release}
 Summary: A high-throughput distributed messaging system.
 URL: http://kafka.apache.org
-Vendor: The Redoop Team
-Packager: Javi Roman <javiroman@redoop.org>
+Vendor: Keedio
+Packager: Systems <systems@keedio.com>
 Group: Development/Libraries
 Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 License: APL2

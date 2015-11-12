@@ -14,11 +14,13 @@
 # limitations under the License.
 
 %define nagios_hadoop_version 1.0.0
-%define nagios_hadoop_release openbus_1.3.0
+%define nagios_hadoop_release 1.3.0
 
 Name:    nagios-hadoop
 Version: %{nagios_hadoop_version}
 Release: %{nagios_hadoop_release}
+Vendor: Keedio
+Packager: Systems <systems@keedio.com>
 Group: Applications/Engineering
 Summary: Nagios-hadoop is a collection of nagios plugins to monitor Hadoop ecosystem.
 License: ASL 2.0

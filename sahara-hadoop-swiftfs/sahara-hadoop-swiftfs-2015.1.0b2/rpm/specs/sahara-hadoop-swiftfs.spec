@@ -14,7 +14,7 @@
 # limitations under the License.
 %define lib_hadoop_swiftfs /usr/lib/hadoop/lib/
 %define hadoop_swiftfs_src_base_version 2015.1.0b2
-%define hadoop_swiftfs_src_release openbus_1.3.0
+%define hadoop_swiftfs_src_release 1.3.0
 
 %if  %{?suse_version:1}0
 
@@ -47,7 +47,7 @@ Version: %{hadoop_swiftfs_src_base_version}
 Release: %{hadoop_swiftfs_src_release}
 Summary: Sahara hadoop swiftfs patch
 URL: https://github.com/openstack/sahara-extra/
-Vendor: The Redoop Team
+Vendor: Keedio 
 Packager: Rodrigo Olmo <rolmovel@keedio.org>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}

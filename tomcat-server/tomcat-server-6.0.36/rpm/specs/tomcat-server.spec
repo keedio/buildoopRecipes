@@ -21,14 +21,16 @@
 %endif
 %define tomcat_server_version 6.0.36
 %define tomcat_server_base_version 6.0.36
-%define tomcat_server_release openbus_1.3.0
+%define tomcat_server_release 1.3.0
 
 Name: tomcat-server
 Version: %{tomcat_server_version}
 Release: %{tomcat_server_release}
-Summary: Apache Tomcat
+Summary: Apache Tomcat is an open source software implementation of the
+Java Servlet and JavaServer Pages technologies.
 URL: http://tomcat.apache.org/
-Vendor: The Redoop Team
+Vendor: Keedio
+Packager: Systems <systems@keedio.com>
 Group: Development/Libraries
 BuildArch: noarch
 Buildroot: %(mktemp -ud %{_tmppath}/tomcatserver-%{version}-%{release}-XXXXXX)

@@ -14,7 +14,7 @@
 # limitations under the License.
 %define nagiosplugin_version 1.2.2
 %define nagiosplugin_base_version 1.2.2
-%define nagiosplugin_release openbus_1.3.0
+%define nagiosplugin_release 1.3.0
 
 Name: nagiosplugin
 Version: %{nagiosplugin_version}
@@ -22,6 +22,7 @@ Release: %{nagiosplugin_release}
 Summary: Library which helps writing Nagios (or Icinga) compatible plugins easily
 URL: https://projects.gocept.com/projects/nagiosplugin/wiki
 Vendor: Keedio
+Packager: Systems <systems@keedio.com>
 Group: Development/Libraries
 License: ASL 2.0 
 Source0: nagiosplugin-%{nagiosplugin_base_version}.tar.gz

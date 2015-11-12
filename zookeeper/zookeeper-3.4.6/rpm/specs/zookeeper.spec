@@ -25,7 +25,7 @@
 
 %define zookeeper_base_version 3.4.6
 %define zookeeper_version 3.4.6
-%define zookeeper_release openbus_1.3.0
+%define zookeeper_release 1.3.0
 
 %if  %{?suse_version:1}0
 
@@ -70,8 +70,8 @@ Version: %{zookeeper_version}
 Release: %{zookeeper_release}
 Summary: A high-performance coordination service for distributed applications.
 URL: http://zookeeper.apache.org/
-Vendor: The Redoop Team
-Packager: Javi Roman <javiroman@redoop.org>
+Vendor: Keedio
+Packager: Systems <systems@keedio.com>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}
 License: APL2

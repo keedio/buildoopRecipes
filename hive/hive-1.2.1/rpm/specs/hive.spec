@@ -32,7 +32,7 @@
 
 %define hive_version 1.2.1
 %define hive_base_version 1.2.1
-%define hive_release openbus_1.3.0
+%define hive_release 1.3.0
 
 %if  %{!?suse_version:1}0
 
@@ -64,6 +64,8 @@
 Name: hive
 Version: %{hive_version}
 Release: %{hive_release}
+Vendor: Keedio
+Packager: Systems <systems@keedio.com>
 Summary: Hive is a data warehouse infrastructure built on top of Hadoop
 License: ASL 2.0
 URL: http://hive.apache.org/

@@ -21,7 +21,7 @@
 %define kibana_group kibana
 
 %define kibana_version 4.1.2
-%define kibana_release openbus_1.3.0
+%define kibana_release 1.3.0
 %define debug_package %{nil}
 
 # Added a 4 for compatibility issues with kibana 3

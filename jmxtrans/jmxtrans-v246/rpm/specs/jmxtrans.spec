@@ -15,7 +15,7 @@
 # apache-flume-1.5.2-src.tar.gz
 #
 %define jmxtrans_base_version v246
-%define jmxtrans_release openbus_1.3.0
+%define jmxtrans_release 1.3.0
 
 Name: jmxtrans
 Version: %{jmxtrans_base_version}
@@ -23,7 +23,7 @@ Release: %{jmxtrans_release}
 Summary: JMX Transformer - more than meets the eye
 Group: Development/Libraries
 URL: https://github.com/jmxtrans/jmxtrans/
-Vendor: Jon Stevens
+Vendor: Keedio 
 Packager: Rodrigo Olmo <rolmo@keedio.org>
 License: APL2
 BuildArch:  noarch

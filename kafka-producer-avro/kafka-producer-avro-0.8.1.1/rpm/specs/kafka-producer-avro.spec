@@ -15,7 +15,7 @@
 
 # Kafka Producer Avro tag -> 0.8.1.1
 %define kafka_producer_avro_base_version 0.8.1.1
-%define kafka_producer_avro_release openbus_1.3.0
+%define kafka_producer_avro_release 1.3.0
 
 %define lib_kafka_producer_avro /usr/lib/kafka/lib/kafka-producer-avro
 %define etc_kafka /etc/kafka/conf
@@ -26,8 +26,8 @@ Version: %{kafka_producer_avro_base_version}
 Release: %{kafka_producer_avro_release}
 Summary: Avro Producer for Kafka v0.8.1.1 
 URL: https://github.com/buildoop/AvroRepoKafkaProducerTest
-Vendor: The Redoop Team
-Packager: Javi Roman <javiroman@redoop.org>
+Vendor: Keedio
+Packager: Systems <systems@keedio.com>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}
 BuildArch: noarch

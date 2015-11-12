@@ -29,16 +29,16 @@
 
 %define cassandra_version 2.1.0
 %define cassandra_base_version 2.1.0
-%define cassandra_release openbus_1.3.0
+%define cassandra_release 1.3.0
 
 Name: %{cassandra_name}
 Version: %{cassandra_version}
 Release: %{cassandra_release}
 Summary: Cassandra is a scalable and high availabe database without compromising performance.
 License: APL2
-URL: http://http://cassandra.apache.orgn
-Vendor: The Redoop Team
-Packager: Marcelo Valle <mvalle@redoop.org>
+URL: http://http://cassandra.apache.org
+Vendor: Keedio 
+Packager: Marcelo Valle <mvalle@keedio.com>
 Group: Applications/Databases
 Source0: apache-%{cassandra_name}-%{cassandra_version}-src.tar.gz
 Source1: rpm-build-stage

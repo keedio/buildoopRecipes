@@ -14,7 +14,7 @@
 # limitations under the License.
 %define lib_flume /usr/lib/flume
 %define flume_sql_src_base_version 1.3.1
-%define flume_sql_src_release openbus_1.3.0
+%define flume_sql_src_release 1.3.0
 %define etc_flume /etc/flume/conf
 
 %if  %{?suse_version:1}0
@@ -48,7 +48,7 @@ Version: %{flume_sql_src_base_version}
 Release: %{flume_sql_src_release}
 Summary: Flume SQL Source for Kafka v0.8
 URL: https://github.com/keedio/flume-ng-sql-source
-Vendor: The Redoop Team
+Vendor: Keedio
 Packager: Rodrigo Olmo <rolmovel@keedio.org>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}

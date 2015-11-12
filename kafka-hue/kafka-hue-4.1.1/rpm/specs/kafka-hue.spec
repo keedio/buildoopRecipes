@@ -15,13 +15,15 @@
 
 %define kafka_hue_version 4.1.1
 %define kafka_hue_base_version 4.1.1
-%define kafka_hue_release openbus_1.3.0
+%define kafka_hue_release 1.3.0
 
 Name:    kafka-hue
 Version: %{kafka_hue_version}
 Release: %{kafka_hue_release}
 Group: Applications/Engineering
 Summary: Apache Kafka HUE Application
+Vendor: Keedio
+Packager: Systems <systems@keedio.com>
 License: ASL 2.0
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id} -u -n)
 Source0: kafka-hue.git.tar.gz

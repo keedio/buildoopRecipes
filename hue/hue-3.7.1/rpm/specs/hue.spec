@@ -15,11 +15,13 @@
 
 %define hue_version 3.7.1
 %define hue_base_version 3.7.1
-%define hue_release openbus_1.3.0
+%define hue_release 1.3.0
 
 Name:    hue
 Version: %{hue_version}
 Release: %{hue_release}
+Vendor: Keedio
+Packager: Systems <systems@keedio.com>
 Group: Applications/Engineering
 Summary: The hue metapackage
 License: ASL 2.0

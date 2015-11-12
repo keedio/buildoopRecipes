@@ -24,7 +24,7 @@
 
 %define zeppelin_version 0.5.0dev 
 %define zeppelin_base_version 0.5.0dev
-%define zeppelin_release openbus_1.3.0
+%define zeppelin_release 1.3.0
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
 %define __os_install_post \
@@ -57,7 +57,7 @@ Version: %{zeppelin_version}
 Release: %{zeppelin_release}
 Summary: "A web-based notebook that enables interactive data analytics. You can make beautiful data-driven, interactive and collaborative documents with SQL, Scala and more. " 
 URL: http://zeppelin.apache.org
-Vendor: The Redoop Team
+Vendor: Vendor
 Packager: Alessio Comisso <acomisso@keedio.com>
 Group: Development/Libraries
 Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)

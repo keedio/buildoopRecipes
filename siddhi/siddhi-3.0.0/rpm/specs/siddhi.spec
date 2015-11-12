@@ -17,7 +17,7 @@
 
 %define siddhi_version 3.0.0
 %define siddhi_base_version 3.0.0
-%define siddhi_release openbus_1.3.0
+%define siddhi_release 1.3.0
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
 %define __os_install_post \
@@ -35,8 +35,8 @@ Version: %{siddhi_version}
 Release: %{siddhi_release}
 Summary: "WSO2 Siddhi Complex Event Processor"
 URL: https://github.com/wso2/siddhi
-Vendor: The Redoop Team
-Packager: Javi Roman <javiroman@redoop.org>
+Vendor: Keedio
+Packager: Systems <systems@keedio.com>
 Group: Development/Libraries
 BuildArch: noarch
 Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{siddhi_version}-%{siddhi_release}-XXXXXX)

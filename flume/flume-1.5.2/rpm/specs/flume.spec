@@ -37,7 +37,7 @@
 # apache-flume-1.5.2-src.tar.gz
 #
 %define flume_base_version 1.5.2
-%define flume_release openbus_1.3.0
+%define flume_release 1.3.0
 
 %define flume_folder apache-%{name}-%{flume_base_version}-src
 
@@ -75,9 +75,9 @@ Name: flume
 Version: %{flume_base_version}
 Release: %{flume_release}
 Summary:  Flume is a reliable, scalable, and manageable distributed log collection application for collecting data such as logs and delivering it to data stores such as Hadoop's HDFS.
-URL: http://incubator.apache.org/projects/flume.html
-Vendor: The Keedio Team
-Packager: Javi Roman <javiroman@redoop.org> Marcelo Valle <mvalle@keedio.com>
+URL: https://flume.apache.org/
+Vendor: Keedio
+Packager: Marcelo Valle <mvalle@keedio.com>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}
 BuildArch: noarch

@@ -14,7 +14,7 @@
 # limitations under the License.
 %define thrift_version 0.9.2
 %define thrift_base_version 0.9.2
-%define thrift_release openbus_1.3.0
+%define thrift_release 1.3.0
 
 Name: thrift
 Version: %{thrift_version}
@@ -22,16 +22,14 @@ Release: %{thrift_release}
 Summary: Thrift Python Software Library
 URL: http://pypi.python.org/pypi/thrift
 Vendor: Keedio
+Packager: Systems <systems@keedio.com>
 Group: Development/Libraries
 License: ASL 2.0 
 Source0: thrift-%{thrift_base_version}.tar.gz
 BuildRequires:  python-devel
 
 %description 
-nagiosplugin is a Python class library which helps writing Nagios 
-(or Icinga) compatible plugins easily in Python. It cares for much 
-of the boilerplate code and default logic commonly found in Nagios 
-checks.
+The Apache Thrift software framework, for scalable cross-language services development, combines a software stack with a code generation engine to build services that work efficiently and seamlessly between C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, OCaml and Delphi and other languages. 
 
 %prep
 %setup -n thrift-%{thrift_base_version}
