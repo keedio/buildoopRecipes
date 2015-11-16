@@ -156,6 +156,7 @@ install -d -m 755 ${PREFIX}/var/log/storm
 install -d -m 755 ${PREFIX}/var/lib/storm/
 install    -m 755 $RPM_SOURCE_DIR/storm-supervisor-bash_profile ${PREFIX}/var/lib/storm/.bash_profile
 
+install -d -m 755 ${PREFIX}/var/run/storm
 
 install -d -m 755 ${PREFIX}/
 
