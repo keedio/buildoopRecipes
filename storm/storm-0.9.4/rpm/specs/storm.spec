@@ -182,6 +182,7 @@ getent passwd %{storm_user} >/dev/null || /usr/sbin/useradd --comment "Storm Dae
 %defattr(-,%{storm_user},%{storm_group})
 %dir %attr(755, %{storm_user},%{storm_group}) %{storm_home}
 %dir %attr(755, %{storm_user},%{storm_group}) /etc/storm
+%dir %attr(755, %{storm_user},%{storm_group}) /var/run/storm
 %{storm_home}/CHANGELOG.md
 %{storm_home}/DISCLAIMER
 %{storm_home}/LICENSE
@@ -272,6 +273,8 @@ chown -h %{storm_user}:%{storm_group} %{storm_home}/lib/storm-hbase-%{storm_vers
 rm -f %{storm_home}/lib/storm-hbase-%{storm_version}.jar
   
 %changelog
+* Fri Nov 13 2015 Juan Carlos Fernandez <jcfernandez@keedio.com> - 0.9.4
+- Service scripts refact
 * Mon Mar 30 2015 Luca Rosellini <lrosellini@keedio.com> - 0.9.4
 - Version bump to 0.9.4
 * Mon Jul 31 2013 Nathan Milford <nathan@milford.io> - 0.9.0-wip16-4
