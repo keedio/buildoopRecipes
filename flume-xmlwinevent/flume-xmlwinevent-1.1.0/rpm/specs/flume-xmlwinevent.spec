@@ -14,7 +14,7 @@
 # limitations under the License.
 %define lib_flume /usr/lib/flume
 %define flume_xmlwinevent_base_version 1.1.0
-%define flume_xmlwinevent_release 1.3.0
+%define flume_xmlwinevent_release 1.3.0%{?dist}
 %define etc_flume /etc/flume/conf
 
 %if  %{?suse_version:1}0

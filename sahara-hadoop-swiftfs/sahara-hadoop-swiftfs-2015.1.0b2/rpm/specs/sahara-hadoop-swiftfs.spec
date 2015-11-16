@@ -14,7 +14,7 @@
 # limitations under the License.
 %define lib_hadoop_swiftfs /usr/lib/hadoop/lib/
 %define hadoop_swiftfs_src_base_version 2015.1.0b2
-%define hadoop_swiftfs_src_release 1.3.0
+%define hadoop_swiftfs_src_release 1.3.0%{?dist}
 
 %if  %{?suse_version:1}0
 

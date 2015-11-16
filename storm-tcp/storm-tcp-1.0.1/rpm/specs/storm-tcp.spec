@@ -15,7 +15,7 @@
 
 %define storm_tcp_version 1.0.1
 %define storm_tcp_base_version 1.0.1
-%define storm_tcp_release 1.3.0
+%define storm_tcp_release 1.3.0%{?dist}
 %define storm_user storm
 %define storm_group storm
 

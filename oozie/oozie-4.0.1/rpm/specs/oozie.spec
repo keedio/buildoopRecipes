@@ -22,7 +22,7 @@
 
 %define oozie_version 4.0.1
 %define oozie_base_version 4.0.1 
-%define oozie_release 1.3.0
+%define oozie_release 1.3.0%{?dist}
 
 %if  %{!?suse_version:1}0
   %define doc_oozie %{_docdir}/oozie-%{oozie_version}

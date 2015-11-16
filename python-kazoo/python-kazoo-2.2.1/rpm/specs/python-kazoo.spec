@@ -13,7 +13,7 @@
 
 Name:           python-%{pypi_name}
 Version:        2.2.1
-Release:        1.3.0 
+Release:        1.3.0%{?dist} 
 Summary:        Higher level Python Zookeeper client
 
 License:        ASL 2.0

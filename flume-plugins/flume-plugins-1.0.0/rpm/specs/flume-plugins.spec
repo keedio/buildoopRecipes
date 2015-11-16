@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 %define base_version 1.0.0
-%define release 1.3.0
+%define release 1.3.0%{?dist}
 
 %if  %{?suse_version:1}0
 

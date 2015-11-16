@@ -16,7 +16,7 @@
 
 %define jsvcdaemon_version 1.0.13
 %define jsvcdaemon_base_version 1.0.13
-%define jsvcdaemon_release 1.3.0
+%define jsvcdaemon_release 1.3.0%{?dist}
 
 %if  %{?suse_version:1}0
 %define bin_jsvcdaemon /usr/lib/jsvcdaemon

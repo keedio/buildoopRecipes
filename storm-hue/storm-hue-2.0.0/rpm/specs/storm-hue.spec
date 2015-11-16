@@ -15,7 +15,7 @@
 
 %define storm_hue_version 2.0.0
 %define storm_hue_base_version 2.0.0
-%define storm_hue_release 1.3.0
+%define storm_hue_release 1.3.0%{?dist}
 
 Name:    storm-hue
 Version: %{storm_hue_version}

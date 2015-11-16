@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -21,12 +21,14 @@ usage() {
   echo "
 usage: $0 <options>
   Required not-so-options:
-     --build-dir=DIR             path to Whirr dist.dir
+     --build-dir=DIR             path to dist.dir
      --prefix=PREFIX             path to install into
 
   Optional options:
-     --doc-dir=DIR               path to install docs into [/usr/share/doc/whirr]
-     --lib-dir=DIR               path to install Whirr home [/usr/lib/whirr]
+     --lib-dir=DIR               path to install Kafka home [/usr/lib/kafka]
+     --installed-lib-dir=DIR     path where lib-dir will end up on target system
+     --bin-dir=DIR               path to install bins [/usr/bin]
+     ... [ see source for more similar options ]
   "
   exit 1
 }
@@ -35,8 +37,9 @@ OPTS=$(getopt \
   -n $0 \
   -o '' \
   -l 'prefix:' \
-  -l 'doc-dir:' \
   -l 'lib-dir:' \
+  -l 'installed-lib-dir:' \
+  -l 'bin-dir:' \
   -l 'build-dir:' -- "$@")
 
 if [ $? != 0 ] ; then
@@ -52,11 +55,14 @@ while true ; do
         --build-dir)
         BUILD_DIR=$2 ; shift 2
         ;;
-        --doc-dir)
-        DOC_DIR=$2 ; shift 2
-        ;;
         --lib-dir)
         LIB_DIR=$2 ; shift 2
+        ;;
+        --installed-lib-dir)
+        INSTALLED_LIB_DIR=$2 ; shift 2
+        ;;
+        --bin-dir)
+        BIN_DIR=$2 ; shift 2
         ;;
         --)
         shift ; break
@@ -76,28 +82,18 @@ for var in PREFIX BUILD_DIR ; do
   fi
 done
 
-
-CAMUS_HOME=${CAMUS_HOME:-$PREFIX/usr/lib/camus}
-CAMUS_CONF=${PREFIX}/etc/camus/conf.dist
-CAMUS_CONF_EXAMPLES=${PREFIX}/etc/camus/conf.examples
-
-# base libraries: only one, recomendations of Cloudera.
-install -d -m 755 ${CAMUS_HOME}
-cp $BUILD_DIR/camus-etl-kafka/target/*-shaded.jar $CAMUS_HOME
-
-# run-example
-install -d -m 755 ${CAMUS_HOME}/bin
-cp ${RPM_SOURCE_DIR}/run-camus-example.sh ${CAMUS_HOME}/bin
-
-# config
-install -d -m 755 ${CAMUS_CONF}
-ln -s /etc/camus/conf.dist $PREFIX/etc/camus/conf
-cp ${RPM_SOURCE_DIR}/log4j.xml ${CAMUS_CONF}
-install -d -m 755 ${CAMUS_CONF}
-install -d -m 755 ${CAMUS_CONF_EXAMPLES}
-cp ${RPM_SOURCE_DIR}/camus*properties ${CAMUS_CONF_EXAMPLES}
-
-
-
-
+INSTALLATION_DIR=/usr/lib/spark
+CONFIGURATION_DIR=/etc/spark
+RC_DIR=/etc/init.d
+LOG_DIR=/var/log/spark-history-server
+install -d -m 0755 $PREFIX/$INSTALLATION_DIR
+install -d -m 0755 $PREFIX/$CONFIGURATION_DIR
+install -d -m 0755 $PREFIX/$RC_DIR
+install -d -m 0755 $PREFIX/$LOG_DIR
+tar xvf ${BUILD_DIR}/spark*.tgz -C $PREFIX/$INSTALLATION_DIR
+version_name=`ls $PREFIX/$INSTALLATION_DIR`
+ln -s $INSTALLATION_DIR/default/conf $PREFIX/$CONFIGURATION_DIR/conf.d
+ln -s $LOG_DIR $PREFIX/$INSTALLATION_DIR/$version_name/logs 
+ln -s $CONFIGURATION_DIR/conf.d $PREFIX/$CONFIGURATION_DIR/conf
+cp $RPM_SOURCE_DIR/spark-history-server $PREFIX/$RC_DIR
 

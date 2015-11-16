@@ -14,7 +14,7 @@
 # limitations under the License.
 %define lib_flume /usr/lib/flume
 %define flume_ftp_src_base_version 2.0.5
-%define flume_ftp_src_release 1.3.0
+%define flume_ftp_src_release 1.3.0%{?dist}
 %define etc_flume /etc/flume/conf
 
 %if  %{?suse_version:1}0

@@ -15,7 +15,7 @@
 # apache-flume-1.5.2-src.tar.gz
 #
 %define jmxtrans_base_version v246
-%define jmxtrans_release 1.3.0
+%define jmxtrans_release 1.3.0%{?dist}
 
 Name: jmxtrans
 Version: %{jmxtrans_base_version}

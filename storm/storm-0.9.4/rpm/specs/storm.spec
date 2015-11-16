@@ -27,7 +27,7 @@
 
 %define storm_version 0.9.4
 %define storm_base_version 0.9.4
-%define storm_release 1.3.0
+%define storm_release 1.3.0%{?dist}
 
 %define kafka_version 0.8.2.1
 

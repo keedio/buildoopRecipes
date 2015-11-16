@@ -15,7 +15,7 @@
 
 %define kafka_hue_version 2.0.0
 %define kafka_hue_base_version 2.0.0
-%define kafka_hue_release 1.3.0
+%define kafka_hue_release 1.3.0%{?dist}
 
 Name:    kafka-hue
 Version: %{kafka_hue_version}

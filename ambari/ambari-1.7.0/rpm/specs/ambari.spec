@@ -27,7 +27,7 @@
 
 %define ambari_version 1.7.0
 %define ambari_base_version 1.7.0
-%define ambari_release 1.3.0
+%define ambari_release 1.3.0%{?dist}
 
 
 Name: %{ambari_name}

@@ -17,7 +17,7 @@
 
 %define elasticsearch_version 1.7.2
 %define elasticsearch_base_version 1.7.2
-%define elasticsearch_release 1.3.0
+%define elasticsearch_release 1.3.0%{?dist}
 
 Name: elasticsearch
 Version: %{elasticsearch_version}

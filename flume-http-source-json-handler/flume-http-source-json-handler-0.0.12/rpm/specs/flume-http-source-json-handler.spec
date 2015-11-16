@@ -14,7 +14,7 @@
 # limitations under the License.
 %define lib_flume /usr/lib/flume
 %define flume_json_handler_src_base_version 0.0.12
-%define flume_json_handler_src_release 1.3.0
+%define flume_json_handler_src_release 1.3.0%{?dist}
 %define etc_flume_confd /etc/flume/conf.d
 
 %if  %{?suse_version:1}0

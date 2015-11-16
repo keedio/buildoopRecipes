@@ -14,7 +14,7 @@
 # limitations under the License.
 
 %define python_storm_version 0.9.2
-%define python_storm_release 1.3.0
+%define python_storm_release 1.3.0%{?dist}
 
 Name:    python-storm
 Version: %{python_storm_version}

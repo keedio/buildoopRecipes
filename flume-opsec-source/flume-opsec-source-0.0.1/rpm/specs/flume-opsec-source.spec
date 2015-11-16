@@ -14,7 +14,7 @@
 # limitations under the License.
 %define lib_flume /usr/lib/flume
 %define flume_opsec_src_base_version 0.0.1
-%define flume_opsec_src_release 1.3.0
+%define flume_opsec_src_release 1.3.0%{?dist}
 %define etc_flume /etc/flume/conf
 
 %if  %{?suse_version:1}0

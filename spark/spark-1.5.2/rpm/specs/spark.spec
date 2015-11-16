@@ -23,8 +23,8 @@
 %define spark_user_home /var/lib/spark
 %define rc_dir /etc/init.d
 
-%define spark_version 1.5.1
-%define spark_base_version 1.5.1
+%define spark_version 1.5.2
+%define spark_base_version 1.5.2
 %define spark_release 1.3.0%{?dist}
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues

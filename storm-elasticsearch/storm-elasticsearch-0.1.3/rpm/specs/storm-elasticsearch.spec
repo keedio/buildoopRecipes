@@ -15,7 +15,7 @@
 
 %define storm_elasticsearch_version 0.1.3
 %define storm_elasticsearch_base_version 0.1.3
-%define storm_elasticsearch_release 1.3.0
+%define storm_elasticsearch_release 1.3.0%{?dist}
 %define storm_user storm
 %define storm_group storm
 

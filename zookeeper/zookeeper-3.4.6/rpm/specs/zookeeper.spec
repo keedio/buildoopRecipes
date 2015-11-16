@@ -25,7 +25,7 @@
 
 %define zookeeper_base_version 3.4.6
 %define zookeeper_version 3.4.6
-%define zookeeper_release 1.3.0
+%define zookeeper_release 1.3.0%{?dist}
 
 %if  %{?suse_version:1}0
 
