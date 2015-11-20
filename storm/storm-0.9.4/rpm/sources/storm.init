@@ -73,13 +73,13 @@ status() {
     if [ $service == "ui" ]; then
      pid=$(pgrep -f backtype.storm.ui.core)
     else
-     pid=$(pgrep -f backtype.storm.daemon.$stormSvc)
+     pid=$(pgrep -f backtype.storm.daemon.$service)
     fi
     if [ -z "$pid" ]; then
       echo "$service is stopped"
       return 3
     else
-      echo "PID doesn't exists, but process storm-$srvice found. PID: $pid"
+      echo "PID doesn't exists, but process storm-$service found. PID: $pid"
       return 2
     fi
   fi
