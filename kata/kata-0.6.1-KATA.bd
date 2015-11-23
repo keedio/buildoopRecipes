@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Zeppelin keedio fork", 
+		"homepage":    "https://github.com/keedio/incubator-zeppelin.git",
+		"license":     "Apache-2.0",
+		"filename":    "kata-0.6.1-KATA.bd"
+	},
+	
+	"do_download": {
+		"src_uri":  "https://alcuma@github.com/keedio/kata.git",
+	 	"src_hash": "v0.6.1-KATA"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}

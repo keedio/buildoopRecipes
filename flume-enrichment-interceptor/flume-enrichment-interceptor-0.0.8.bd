@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Flume Interceptor: Enriched Event", 
+		"homepage":    "https://github.com/keedio/flume-enrichment-interceptor-skeleton",
+		"license":     "Apache-2.0",
+		"filename":    "flume-enrichment-interceptor-0.0.8.bd"
+	},
+	
+	"do_download": {
+		"src_uri":  "https://github.com/keedio/flume-enrichment-interceptor-skeleton.git",
+	 	"src_hash": "0.0.8"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}

@@ -3,7 +3,7 @@
 		"description": "Apache Flume Sink for Kafka", 
 		"homepage":    "https://github.com/keedio/flume-ng-kafka-sink",
 		"license":     "Apache-2.0",
-		"filename":    "flume-kafka-sink-1.5.2.1.0.5.bd"
+		"filename":    "flume-kafka-sink-0.0.5.bd"
 	},
 	
 	"do_download": {

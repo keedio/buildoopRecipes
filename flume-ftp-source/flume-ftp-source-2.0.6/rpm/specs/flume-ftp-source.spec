@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 %define lib_flume /usr/lib/flume
-%define flume_kafka_sink_base_version 1.5.2.1.0.5
-%define flume_kafka_sink_release 1.3.0%{?dist}
+%define flume_ftp_src_base_version 2.0.6
+%define flume_ftp_src_release 1.3.0%{?dist}
 %define etc_flume /etc/flume/conf
 
 %if  %{?suse_version:1}0
@@ -43,20 +43,20 @@
 
 %endif
 
-Name: flume-kafka-sink
-Version: %{flume_kafka_sink_base_version}
-Release: %{flume_kafka_sink_release}
-Summary: Flume Sink for Kafka v0.8
-URL: https://github.com/buildoop/flume-ng-kafka-sink
-Vendor: Keedio 
-Packager: Systems <systems@keedio.com>
+Name: flume-ftp-source
+Version: %{flume_ftp_src_base_version}
+Release: %{flume_ftp_src_release}
+Summary: Flume FTP Source
+URL: https://github.com/keedio/flume-ftp-source/
+Vendor: Keedio
+Packager: Rodrigo Olmo <rolmovel@keedio.org>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}
 BuildArch: noarch
 License: APL2
-Source0: flume-ng-kafka-sink.git.tar.gz
+Source0: flume-ftp-source.git.tar.gz
 Source1: rpm-build-stage
-Source2: install_flume-kafka-sink.sh
+Source2: install-flume-ftp-source.sh
 Requires: flume
 
 %if  0%{?mgaversion}
@@ -66,10 +66,10 @@ Requires: sh-utils
 %endif
 
 %description 
-Flume Kafka Sink for Kafka 0.8
+Flume FTP source
 
 %prep
-%setup -n flume-ng-kafka-sink.git
+%setup -n flume-ftp-source.git
 
 %build
 sh %{SOURCE1}
