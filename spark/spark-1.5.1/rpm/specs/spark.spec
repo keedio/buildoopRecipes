@@ -106,7 +106,7 @@ sh $RPM_SOURCE_DIR/install_spark.sh \
 
 
 %post
-%{alternatives_cmd} --install /usr/lib/spark/default spark  /usr/lib/spark/%{name}-%{spark_base_version}-bin-2.4.0 30
+%{alternatives_cmd} --install /usr/lib/spark/default spark  /usr/lib/spark/%{name}-%{spark_base_version}-bin-2.4.0 32
 
 %preun
 if [ "$1" = 0 ]; then
