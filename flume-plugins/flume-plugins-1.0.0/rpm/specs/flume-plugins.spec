@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 %define base_version 1.0.0
-%define release openbus_1.3.0
+%define release 1.3.0%{?dist}
 
 %if  %{?suse_version:1}0
 
@@ -45,7 +45,7 @@ Name: flume-plugins
 Version: %{base_version}
 Release: %{release}
 Summary: Flume Plugins meta-installer
-Vendor: The Redoop Team
+Vendor: Keedio 
 Packager: Alessio Comisso <acomisso@keedio.com> 
 Group: Development/Libraries
 Buildroot: %{_topdir}/%{name}-%{version}

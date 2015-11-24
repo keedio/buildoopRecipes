@@ -22,7 +22,7 @@
 
 %define oozie_version 4.0.1
 %define oozie_base_version 4.0.1 
-%define oozie_release openbus_1.3.0
+%define oozie_release 1.3.0%{?dist}
 
 %if  %{!?suse_version:1}0
   %define doc_oozie %{_docdir}/oozie-%{oozie_version}
@@ -55,8 +55,8 @@ Version: %{oozie_version}
 Release: %{oozie_release}
 Summary:  Oozie is a system that runs workflows of Hadoop jobs.
 URL: http://incubator.apache.org/oozie/
-Vendor: The Redoop Team
-Packager: Javi Roman <javiroman@redoop.org>
+Vendor: Keedio
+Packager: Systems <systems@keedio.com>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}
 License: APL2

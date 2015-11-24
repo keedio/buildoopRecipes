@@ -17,14 +17,14 @@
 
 %define elasticsearch_version 1.7.2
 %define elasticsearch_base_version 1.7.2
-%define elasticsearch_release openbus_1.3.0
+%define elasticsearch_release 1.3.0%{?dist}
 
 Name: elasticsearch
 Version: %{elasticsearch_version}
 Release: %{elasticsearch_release}
 Summary: A distributed, highly available, RESTful search engine
-Vendor: The Redoop Team
-Packager: Javi Roman <javiroman@redoop.org>
+Vendor: Keedio 
+Packager: Systems <systems@keedio.com>
 Group: System Environment/Daemons
 License: ASL 2.0
 URL: http://www.elasticsearch.com

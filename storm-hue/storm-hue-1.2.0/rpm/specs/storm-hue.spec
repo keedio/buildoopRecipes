@@ -15,7 +15,7 @@
 
 %define storm_hue_version 1.2.0
 %define storm_hue_base_version 1.2.0
-%define storm_hue_release openbus_1.3.0
+%define storm_hue_release openbus_1.3.0%{?dist}
 
 Name:    storm-hue
 Version: %{storm_hue_version}

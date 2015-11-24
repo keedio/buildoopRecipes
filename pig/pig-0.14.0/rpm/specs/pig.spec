@@ -17,7 +17,7 @@
 
 %define pig_version 0.14.0
 %define pig_base_version 0.14.0
-%define pig_release openbus_1.3.0 
+%define pig_release 1.3.0%{?dist} 
 %define pig_home /usr/lib/pig
 
 Name: pig
@@ -26,8 +26,8 @@ Release: %{pig_release}
 Summary: Apache Pig is a platform for analyzing large data sets that consists of a high-level language
 License: APL2
 URL: http://pig.apache.org/
-Vendor: The Redoop Team
-Packager: Marcelo Valle <mvalle@redoop.org>
+Vendor: Keedio
+Packager: Marcelo Valle <mvalle@keedio.com>
 Group: Development/Libraries
 Source0: %{name}-%{pig_version}-src.tar.gz
 Source1: rpm-build-stage

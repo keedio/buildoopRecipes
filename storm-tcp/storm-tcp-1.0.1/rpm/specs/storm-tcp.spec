@@ -15,7 +15,7 @@
 
 %define storm_tcp_version 1.0.1
 %define storm_tcp_base_version 1.0.1
-%define storm_tcp_release openbus_1.3.0
+%define storm_tcp_release 1.3.0%{?dist}
 %define storm_user storm
 %define storm_group storm
 
@@ -26,7 +26,7 @@ Version: %{storm_tcp_version}
 Release: %{storm_tcp_release}
 Summary: Storm TCP connector
 URL: https://github.com/keedio/Storm-TCP-Topology
-Vendor: The Redoop Team
+Vendor: Keedio
 Packager: Rodrigo Olmo <rolmo@keedio.org>
 Group: Development/Libraries
 BuildArch: noarch

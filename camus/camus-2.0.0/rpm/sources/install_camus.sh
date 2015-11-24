@@ -91,9 +91,10 @@ cp ${RPM_SOURCE_DIR}/run-camus-example.sh ${CAMUS_HOME}/bin
 
 # config
 install -d -m 755 ${CAMUS_CONF}
-ln -s ${CAMUS_CONF} ${CAMUS_CONF}/../conf
+ln -s /etc/camus/conf.dist $PREFIX/etc/camus/conf
 cp ${RPM_SOURCE_DIR}/log4j.xml ${CAMUS_CONF}
 install -d -m 755 ${CAMUS_CONF}
+install -d -m 755 ${CAMUS_CONF_EXAMPLES}
 cp ${RPM_SOURCE_DIR}/camus*properties ${CAMUS_CONF_EXAMPLES}
 
 

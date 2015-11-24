@@ -14,7 +14,7 @@
 # limitations under the License.
 %define lib_flume /usr/lib/flume
 %define flume_json_handler_src_base_version 0.0.12
-%define flume_json_handler_src_release openbus_1.3.0
+%define flume_json_handler_src_release 1.3.0%{?dist}
 %define etc_flume_confd /etc/flume/conf.d
 
 %if  %{?suse_version:1}0
@@ -48,7 +48,7 @@ Version: %{flume_json_handler_src_base_version}
 Release: %{flume_json_handler_src_release}
 Summary: Flume SQL Source for Kafka v0.8
 URL: https://github.com/keedio/flume-ng-sql-source
-Vendor: The Keedio Team
+Vendor: Keedio 
 Packager: Alessio Comisso <acomisso@keedio.org>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}

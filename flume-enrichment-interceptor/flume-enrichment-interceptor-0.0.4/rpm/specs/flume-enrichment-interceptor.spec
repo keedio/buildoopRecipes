@@ -14,7 +14,7 @@
 # limitations under the License.
 %define lib_flume /usr/lib/flume
 %define flume_enrichment_interceptor_base_version 0.0.4
-%define flume_enrichment_interceptor_release openbus_1.3.0
+%define flume_enrichment_interceptor_release 1.3.0%{?dist}
 %define etc_flume /etc/flume/conf
 
 %if  %{?suse_version:1}0
@@ -48,7 +48,7 @@ Version: %{flume_enrichment_interceptor_base_version}
 Release: %{flume_enrichment_interceptor_release}
 Summary: Its  a flume interceptor  to enrich event body with custom data  
 URL: https://github.com/keedio/CacheableInterceptor
-Vendor: The Redoop Team
+Vendor: Keedio
 Packager: Alessio Comisso <acomisso@keedio.org>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}

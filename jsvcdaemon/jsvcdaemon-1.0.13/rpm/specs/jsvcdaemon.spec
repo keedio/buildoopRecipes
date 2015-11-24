@@ -16,7 +16,7 @@
 
 %define jsvcdaemon_version 1.0.13
 %define jsvcdaemon_base_version 1.0.13
-%define jsvcdaemon_release openbus_1.3.0
+%define jsvcdaemon_release 1.3.0%{?dist}
 
 %if  %{?suse_version:1}0
 %define bin_jsvcdaemon /usr/lib/jsvcdaemon
@@ -31,8 +31,8 @@ Version: %{jsvcdaemon_version}
 Release: %{jsvcdaemon_release}
 Summary: Application to launch java daemon
 URL: http://commons.apache.org/daemon/
-Vendor: The Redoop Team
-Packager: Javi Roman <javiroman@redoop.org>
+Vendor: Keedio 
+Packager: Systems <systems@keedio.com>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}
 License: ASL 2.0

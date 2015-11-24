@@ -15,14 +15,14 @@
 %define lib_avro_schema_repo %{_usr}/lib/avro/%{name} 
 %define avro_schema_repo_version 1.7.4
 %define avro_schema_repo_base_version 1.7.4
-%define avro_schema_repo_release openbus_1.3.0
+%define avro_schema_repo_release 1.3.0%{?dist}
 
 Name: avro-schema-repo
 Version: %{avro_schema_repo_version}
 Release: %{avro_schema_repo_release}
-Summary: Apache Tomcat
+Summary: avro-schema-repo 
 URL: http://tomcat.apache.org/
-Vendor: The Redoop Team
+Vendor: Keedio 
 Group: Development/Libraries
 BuildArch: noarch
 Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)

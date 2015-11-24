@@ -25,7 +25,7 @@
 
 %define spark_version 1.5.1
 %define spark_base_version 1.5.1
-%define spark_release openbus_1.3.0
+%define spark_release 1.3.0%{?dist}
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
 %define __os_install_post \
@@ -56,9 +56,9 @@
 Name: spark
 Version: %{spark_version}
 Release: %{spark_release}
-Summary: A high-throughput distributed messaging system.
+Summary: Apache Spark is a fast and general engine for big data processing
 URL: http://spark.apache.org
-Vendor: The  Keedio Team
+Vendor: Keedio
 Packager: Alessio Comisso <acomisso@keedio.com>
 Group: Development/Libraries
 Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
@@ -106,7 +106,7 @@ sh $RPM_SOURCE_DIR/install_spark.sh \
 
 
 %post
-%{alternatives_cmd} --install /usr/lib/spark/default spark  /usr/lib/spark/%{name}-%{spark_base_version}-bin-2.4.0 30
+%{alternatives_cmd} --install /usr/lib/spark/default spark  /usr/lib/spark/%{name}-%{spark_base_version}-bin-2.4.0 32
 
 %preun
 if [ "$1" = 0 ]; then

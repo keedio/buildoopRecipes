@@ -14,7 +14,7 @@
 # limitations under the License.
 %define lib_flume /usr/lib/flume
 %define flume_taildir_base_version 1.1.0
-%define flume_taildir_release openbus_1.3.0
+%define flume_taildir_release 1.3.0%{?dist}
 %define etc_flume /etc/flume/conf
 
 %if  %{?suse_version:1}0
@@ -48,7 +48,7 @@ Version: %{flume_taildir_base_version}
 Release: %{flume_taildir_release}
 Summary: Flume tail directory
 URL: https://github.com/keedio/flume-taildirectory-source
-Vendor: The Redoop Team
+Vendor: Keedio
 Packager: Rodrigo Olmo <rolmo@keedio.org>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}

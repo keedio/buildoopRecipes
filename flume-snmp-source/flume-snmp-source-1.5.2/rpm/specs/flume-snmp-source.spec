@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 %define lib_flume /usr/lib/flume
-%define flume_snmp_source_base_version 1.5.2.0.0.1
-%define flume_snmp_source_release openbus_1.3.0
+%define flume_snmp_source_base_version 1.5.2
+%define flume_snmp_source_release 1.3.0%{?dist}
 %define etc_flume /etc/flume/conf
 
 %if  %{?suse_version:1}0
@@ -48,8 +48,8 @@ Version: %{flume_snmp_source_base_version}
 Release: %{flume_snmp_source_release}
 Summary: Apache Flume Source plugin for SNMP Query and Trap consumption
 URL: https://github.com/buildoop/flume-ng-kafka-sink
-Vendor: The Redoop Team
-Packager: Javi Roman <javiroman@redoop.org>
+Vendor: Keedio 
+Packager: Systems <systems@keedio.com>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}
 BuildArch: noarch

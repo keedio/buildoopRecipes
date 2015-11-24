@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+# chkconfig: 345 96 4
+# description: kata server
+
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+if [ -f "/etc/default/kata" ]; then
+	. /etc/default/kata
+fi
+
+export KATA_HOME=${KATA_HOME:-"/usr/lib/kata"}
+export KATA_LOG_DIR=${KATA_LOG_DIR:-"/var/log/kata"}
+export KATA_PID_DIR=${KATA_PID_DIR:-"/var/run/kata"}
+USER=${KATA_USER:-"kata"}
+KATA_PID="${KATA_PID_DIR}/kata-${USER}-${HOSTNAME}.pid"
+KATA_CMD=${KATA_CMD:-"${KATA_HOME}/bin/zeppelin-daemon.sh"}
+
+start(){
+	su -s /bin/bash ${USER} -c "${KATA_CMD} start" 
+	return $?
+}
+
+stop(){
+	su -s /bin/bash ${USER} -c "${KATA_CMD} stop"
+	rc=$?
+	if [ $rc -eq 0 ]; then
+		[ -f ${KATA_PID} ] && rm ${KATA_PID}
+		rc=$?
+	fi
+	return $rc
+}
+
+status(){
+	su -s /bin/bash ${USER} -c "${KATA_CMD} status"
+	if [ $? -ne 0 ]; then
+		if [ -f "${KATA_PID}"  ]; then
+			echo "Kata service stopped but PID File exists"
+			return 1
+		fi
+		return 3
+	fi
+        return 0
+}
+
+case "$1" in
+  start)
+	start
+        exit $?  
+        ;;
+  stop)
+	stop
+        exit $?  
+        ;;
+  status)
+	status
+        exit $?
+        ;;
+  restart)
+        stop
+        start
+	exit $?
+        ;;
+  *)
+        echo "Usage: $0 {start|stop|status|restart}"
+        exit 1
+esac
+
+exit 1

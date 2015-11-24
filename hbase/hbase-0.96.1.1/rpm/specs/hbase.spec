@@ -30,7 +30,7 @@
 
 %define hbase_version 0.96.1.1
 %define hbase_base_version 0.96.1.1
-%define hbase_release openbus_1.3.0
+%define hbase_release 1.3.0%{?dist}
 %define hbase_jar_version 0.96.1.1-hadoop2
 
 
@@ -87,8 +87,8 @@ Version: %{hbase_version}
 Release: %{hbase_release}
 Summary: HBase is the Hadoop database. Use it when you need random, realtime read/write access to your Big Data. This project's goal is the hosting of very large tables -- billions of rows X millions of columns -- atop clusters of commodity hardware. 
 URL: http://hbase.apache.org/
-Vendor: The Redoop Team
-Packager: Javi Roman <javiroman@redoop.org>
+Vendor: Keedio 
+Packager: Systems <systems@keedio.org>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}
 License: APL2

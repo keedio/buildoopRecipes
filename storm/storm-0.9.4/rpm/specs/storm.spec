@@ -27,7 +27,7 @@
 
 %define storm_version 0.9.4
 %define storm_base_version 0.9.4
-%define storm_release openbus_1.3.0
+%define storm_release 1.3.0%{?dist}
 
 %define kafka_version 0.8.2.1
 
@@ -36,9 +36,9 @@ Name: %{storm_name}
 Version: %{storm_version}
 Release: %{storm_release}
 Summary: Storm is a distributed realtime computation system.
-License: Apache License Version 2.0, January 2004
+License: APL2
 URL: https://github.com/apache/storm
-Vendor: The Keedio Team
+Vendor: Keedio
 Packager: Luca Rosellini <lrosellini@keedio.com>
 Group: Development/Libraries
 Source0: apache-%{storm_name}-%{storm_version}-src.tar.gz

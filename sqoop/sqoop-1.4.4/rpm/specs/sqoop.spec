@@ -18,7 +18,7 @@
 
 %define sqoop_version 1.4.4
 %define sqoop_base_version 1.4.4
-%define sqoop_release openbus_1.3.0
+%define sqoop_release 1.3.0%{?dist}
 %define sqoop_home /usr/lib/sqoop
 
 Name: sqoop
@@ -27,8 +27,8 @@ Release: %{sqoop_release}
 Summary:   Sqoop allows easy imports and exports of data sets between databases and the Hadoop Distributed File System (HDFS).
 License: APL2
 URL: http://incubator.apache.org/sqoop/
-Vendor: The Redoop Team
-Packager: Marcelo Valle <mvalle@redoop.org>
+Vendor: Keedio
+Packager: Marcelo Valle <mvalle@keedio.com>
 Group: Development/Libraries
 Source0: %{name}-%{sqoop_version}.tar.gz
 Source1: rpm-build-stage

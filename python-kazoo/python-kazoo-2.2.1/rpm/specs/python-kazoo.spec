@@ -13,7 +13,7 @@
 
 Name:           python-%{pypi_name}
 Version:        2.2.1
-Release:        2%{?dist}
+Release:        1.3.0%{?dist} 
 Summary:        Higher level Python Zookeeper client
 
 License:        ASL 2.0
@@ -25,7 +25,8 @@ BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
 # For building documentation
 BuildRequires:  python-sphinx
-
+Vendor: Keedio
+Packager: Juan Carlos Fernandez <jcfernandez@keedio.com>
 %description
 Kazoo is a Python library designed to make working with Zookeeper a more
 hassle-free experience that is less prone to errors.

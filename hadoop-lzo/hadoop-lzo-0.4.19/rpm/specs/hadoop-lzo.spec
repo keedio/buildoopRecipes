@@ -15,7 +15,7 @@
 %define lib_hadoop_lzo /usr/lib/hadoop/lib
 %define lib_hadoop_lzo_native  /usr/lib/hadoop/lib/native
 %define hadoop_lzo_base_version 0.4.19
-%define hadoop_lzo_release openbus_1.3.0
+%define hadoop_lzo_release 1.3.0%{?dist}
 
 
 # SLES is more strict and check all symlinks point to valid path
@@ -29,7 +29,7 @@ Version: %{hadoop_lzo_base_version}
 Release: %{hadoop_lzo_release}
 Summary: hadoop-lzo 
 URL: https://github.com/keedio/flume-ftp-source/
-Vendor: The Redoop Team
+Vendor: Keedio 
 Packager: Alessio Comisso <acomisso@keedio.org>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}

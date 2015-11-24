@@ -14,7 +14,7 @@
 # limitations under the License.
 %define lib_flume /usr/lib/flume
 %define cacheable_interceptor_base_version 0.0.6
-%define cacheable_interceptor_release openbus_1.3.0
+%define cacheable_interceptor_release 1.3.0%{?dist}
 %define etc_flume /etc/flume/conf
 
 %if  %{?suse_version:1}0
@@ -46,9 +46,9 @@
 Name: cacheable_interceptor
 Version: %{cacheable_interceptor_base_version}
 Release: %{cacheable_interceptor_release}
-Summary: Es un componente Interceptor de Apache Flume.  
+Summary: Apache Flume interceptor  
 URL: https://github.com/keedio/CacheableInterceptor
-Vendor: The Redoop Team
+Vendor: Keedio
 Packager: Alessio Comisso <acomisso@keedio.org>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}
@@ -67,8 +67,7 @@ Requires: sh-utils
 %endif
 
 %description 
-Es un componente Interceptor de Apache Flume que enriquece en base a un criterio de selección de campos alojados en un archivo externo en formato CSV. El dato insertado es cacheado y la cache puede ser desactivada bajo demanda, por ejemplo, cuando el contenido del archivo externo ha cambiado. 
-
+An Apache Flume interceptor that enriches data based on a selection criteria specified in an exetrnal CSV file. The inserted data is cached and the caching can be disabled.
 %prep
 %setup -n CacheableInterceptor.git 
 

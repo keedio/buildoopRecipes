@@ -14,11 +14,13 @@
 # limitations under the License.
 
 %define python_storm_version 0.9.2
-%define python_storm_release openbus_1.3.0
+%define python_storm_release 1.3.0%{?dist}
 
 Name:    python-storm
 Version: %{python_storm_version}
 Release: %{python_storm_release}
+Vendor: Keedio
+Packager: Systems <systems@keedio.com>
 Group: Applications/Engineering
 Summary: Python-storm.
 License: ASL 2.0

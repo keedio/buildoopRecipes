@@ -20,15 +20,15 @@
 
 %define avro_version 1.7.5
 %define avro_base_version 1.7.5
-%define avro_release openbus_1.3.0
+%define avro_release 1.3.0%{?dist}
 
 Name: avro
 Version: %{avro_version}
 Release: %{avro_release}
 Summary: A data serialization system
 URL: http://avro.apache.org
-Vendor: The Redoop Team
-Packager: Javi Roman <javiroman@redoop.org>
+Vendor: Keedio
+Packager: Systems team <systems@keedio.com> 
 Group: Development/Libraries
 BuildArch: noarch
 Buildroot: %(mktemp -ud %{_tmppath}/avro-%{version}-%{release}-XXXXXX)

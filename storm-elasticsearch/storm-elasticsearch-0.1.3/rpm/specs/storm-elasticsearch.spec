@@ -15,7 +15,7 @@
 
 %define storm_elasticsearch_version 0.1.3
 %define storm_elasticsearch_base_version 0.1.3
-%define storm_elasticsearch_release openbus_1.3.0
+%define storm_elasticsearch_release 1.3.0%{?dist}
 %define storm_user storm
 %define storm_group storm
 
@@ -26,8 +26,8 @@ Version: %{storm_elasticsearch_version}
 Release: %{storm_elasticsearch_release}
 Summary: Storm to ElasticSearch connector
 URL: https://github.com/mvalleavila/storm-elasticsearch
-Vendor: The Redoop Team
-Packager: Marcelo Valle <mvalle@redoop.org>
+Vendor: Keedio
+Packager: Marcelo Valle <mvalle@keedio.com>
 Group: Development/Libraries
 BuildArch: noarch
 Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{storm_elasticsearch_version}-%{storm_elasticsearch_release}-XXXXXX)

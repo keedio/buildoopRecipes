@@ -16,18 +16,19 @@
 %define lib_camus %{_usr}/lib/camus
 %define etc_camus /etc/camus/
 %define config_camus %{etc_camus}/conf.dist
+%define config_examples %{etc_camus}/conf.examples
 
 %define camus_version 2.0.0
 %define camus_base_version 2.0.0
-%define camus_release openbus_1.3.0
+%define camus_release 1.3.0%{?dist}
 
 Name: camus
 Version: %{camus_version}
 Release: %{camus_release}
 Summary: Linkedin Kafka Camus
 URL: https://github.com/linkedin/camus
-Vendor: The Redoop Team
-Packager: Javi Roman <javiroman@redoop.org>
+Vendor: Keedio 
+Packager: Systems team <systems@keedio.com>
 Group: Development/Libraries
 BuildArch: noarch
 Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
@@ -61,11 +62,12 @@ getent passwd camus > /dev/null || useradd -c "Camus" -s /sbin/nologin -g camus 
 %defattr(-,root,root,755)
 %attr(0755,root,root) %{lib_camus}
 %config(noreplace) %{config_camus}
-%{config_camus}
+/etc/camus/conf
+%{config_examples}/*
 %{lib_camus}/bin/*
 
 %changelog
-* Sun Mar 30 2014 Javi Roman <javiroman@redoop.org> 
+* Sun Mar 30 2014 Systems team <systems@keedio.com> 
 - First package version released.
 
 

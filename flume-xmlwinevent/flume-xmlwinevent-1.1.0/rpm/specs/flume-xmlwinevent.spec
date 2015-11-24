@@ -14,7 +14,7 @@
 # limitations under the License.
 %define lib_flume /usr/lib/flume
 %define flume_xmlwinevent_base_version 1.1.0
-%define flume_xmlwinevent_release openbus_1.3.0
+%define flume_xmlwinevent_release 1.3.0%{?dist}
 %define etc_flume /etc/flume/conf
 
 %if  %{?suse_version:1}0
@@ -48,7 +48,7 @@ Version: %{flume_xmlwinevent_base_version}
 Release: %{flume_xmlwinevent_release}
 Summary: Source of Flume NG for tailing xml files in a directory. 
 URL: https://github.com/keedio/XMLWinEvent 
-Vendor: The Redoop Team
+Vendor: Keedio 
 Packager: Alessio Comisso <acomisso@keedio.com>
 Group: Development/Libraries
 Buildroot: %{_topdir}/INSTALL/%{name}-%{version}

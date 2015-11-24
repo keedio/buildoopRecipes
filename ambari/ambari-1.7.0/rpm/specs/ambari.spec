@@ -27,13 +27,13 @@
 
 %define ambari_version 1.7.0
 %define ambari_base_version 1.7.0
-%define ambari_release openbus_1.3.0
+%define ambari_release 1.3.0%{?dist}
 
 
 Name: %{ambari_name}
 Version: %{ambari_version}
 Release: %{ambari_release}
-Summary: Storm is a distributed realtime computation system.
+Summary: The Apache Ambari project is aimed at making Hadoop management simpler by developing software for provisioning, managing, and monitoring Apache Hadoop clusters.
 License: Apache License Version 2012
 URL: https://github.com/apache/ambari
 Vendor: The Keedio Team

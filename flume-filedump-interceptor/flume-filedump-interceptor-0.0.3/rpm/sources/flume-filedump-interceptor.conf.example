@@ -1,8 +1,0 @@
-# interceptor
-a1.sources.r1.interceptors = i1
-a1.sources.r1.interceptors.i1.type = org.keedio.flume.interceptor.FileDumpInterceptorBuilder
-
-# Properties for rolling logs
-a1.sources.r1.interceptors.i1.dump.filename = /var/log/flume/dump.log
-a1.sources.r1.interceptors.i1.dump.maxFileSize = 10MB
-a1.sources.r1.interceptors.i1.dump.maxBackups = 10

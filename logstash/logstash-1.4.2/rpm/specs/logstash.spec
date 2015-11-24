@@ -30,7 +30,7 @@
 %global __os_install_post %{nil}
 
 %define logstash_version 1.4.2
-%define logstash_release openbus_1.3.0
+%define logstash_release 1.3.0%{?dist}
 
 Name:           %{logstash_name}
 Version:        %{logstash_version}
@@ -40,8 +40,8 @@ Summary:        Logstash is a tool for managing events and logs
 Group:          System Environment/Daemons
 License:        ASL 2.0
 URL:            http://logstash.net
-Vendor:		The Redoop Team
-Packager:	Marcelo Valle <mvalle@redoop.org>
+Vendor:	        Keedio	
+Packager:	Marcelo Valle <mvalle@keedio.com>
 Source0:        %{logstash_name}-%{logstash_version}.tar.gz
 
 Patch0: 	logstash-scripts-paths.patch
