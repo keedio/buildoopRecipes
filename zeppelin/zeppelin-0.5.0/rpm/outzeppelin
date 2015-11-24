@@ -1,5 +1,0 @@
-Caught: java.io.FileNotFoundException: /home/acomisso/buildoop/recipes/openbus-1.2-develop/zeppelin/zeppelin-0.5.0/rpm/buildoop/conf/buildoop.conf (No such file or directory)
-java.io.FileNotFoundException: /home/acomisso/buildoop/recipes/openbus-1.2-develop/zeppelin/zeppelin-0.5.0/rpm/buildoop/conf/buildoop.conf (No such file or directory)
-	at Buildoop.loadConfigurations(buildoop:64)
-	at Buildoop.<init>(buildoop:52)
-	at Buildoop.main(buildoop:110)
