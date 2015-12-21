@@ -29,7 +29,7 @@
 
 %define cassandra_version 2.1.0
 %define cassandra_base_version 2.1.0
-%define cassandra_release 1.3.0%{?dist}
+%define cassandra_release 1.3.1%{?dist}
 
 Name: %{cassandra_name}
 Version: %{cassandra_version}
@@ -91,7 +91,6 @@ getent passwd %{cassandra_user} >/dev/null || /usr/sbin/useradd --comment "Cassa
   if [ $? -eq 0 ]; then
     /sbin/service %{cassandra_name} stop > /dev/null 2>&1
   fi
-done
 
 %files
 %defattr(-,%{cassandra_user},%{cassandra_group})
