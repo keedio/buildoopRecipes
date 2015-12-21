@@ -92,8 +92,20 @@ install -d -m 0755 $PREFIX/$RC_DIR
 install -d -m 0755 $PREFIX/$LOG_DIR
 tar xvf ${BUILD_DIR}/spark*.tgz -C $PREFIX/$INSTALLATION_DIR
 version_name=`ls $PREFIX/$INSTALLATION_DIR`
+install -d -m 0755 $PREFIX/$INSTALLATION_DIR/$version_name/conf/lib
+echo  $version_name
 ln -s $INSTALLATION_DIR/default/conf $PREFIX/$CONFIGURATION_DIR/conf.d
 ln -s $LOG_DIR $PREFIX/$INSTALLATION_DIR/$version_name/logs 
 ln -s $CONFIGURATION_DIR/conf.d $PREFIX/$CONFIGURATION_DIR/conf
 cp $RPM_SOURCE_DIR/spark-history-server $PREFIX/$RC_DIR
+# gcc 4.9.3 gfortran and quadmath library required to use lapack in Spark
+cp $RPM_SOURCE_DIR/libgfortran.so.3.0.0 $PREFIX/$INSTALLATION_DIR/$version_name/lib
+cp $RPM_SOURCE_DIR/libquadmath.so.0.0.0 $PREFIX/$INSTALLATION_DIR/$version_name/lib
+ln -s $INSTALLATION_DIR/$version_name/lib/libgfortran.so.3.0.0  $PREFIX/$INSTALLATION_DIR/$version_name/lib/libgfortran.so.3
+ln -s $INSTALLATION_DIR/$version_name/lib/libquadmath.so.0.0.0  $PREFIX/$INSTALLATION_DIR/$version_name/lib/libquadmath.so.0
+
+# spark-env.sh to set LD_PRELOAD
+cp $RPM_SOURCE_DIR/spark-env.sh $PREFIX/$INSTALLATION_DIR/conf
+ln -s /usr/lib64/atlas/libatlas.so.3  $PREFIX/$INSTALLATION_DIR/$version_name/conf/lib/libblas.so.3
+ln -s /usr/lib64/atlas/liblapack.so.3  $PREFIX/$INSTALLATION_DIR/$version_name/conf/lib/liblapack.so.3
 

@@ -25,7 +25,7 @@
 
 %define spark_version 1.5.2
 %define spark_base_version 1.5.2
-%define spark_release 1.3.0%{?dist}
+%define spark_release 1.3.1%{?dist}
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
 %define __os_install_post \
@@ -66,10 +66,13 @@ License: APL2
 Source0: %{name}-%{version}.tgz
 Source1: rpm-build-stage
 Source2: install_%{name}.sh
-BuildArch: noarch
+Source3: libgfortran.so.3.0.0 
+Source4: libquadmath.so.0.0.0 
+Source5: spark-env.sh 
+BuildArch: x86_64
 BuildRequires: autoconf, automake
 Requires(pre): coreutils, /usr/sbin/groupadd, /usr/sbin/useradd
-Requires: jdk, redhat-lsb, hadoop-client, hadoop-yarn
+Requires: jdk, redhat-lsb, hadoop-client, hadoop-yarn, blas, lapack, atlas-devel
 %if  %{?suse_version:1}0
 # Required for init scripts
 Requires: insserv
