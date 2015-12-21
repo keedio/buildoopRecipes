@@ -24,7 +24,7 @@
 
 %define kafka_version 0.8.2.1
 %define kafka_base_version 0.8.2.1
-%define kafka_release 1.3.0%{?dist}
+%define kafka_release 1.3.1%{?dist}
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
 %define __os_install_post \
@@ -138,7 +138,10 @@ chkconfig --add %{name}
 %{alternatives_cmd} --install %{config_kafka} %{kafka_name}-conf %{config_kafka}.dist 30
 
 %preun
-/etc/init.d/kafka stop
+/sbin/service kafka status > /dev/null 2>&1
+  if [ $? -eq 0 ]; then
+    /sbin/service kafka stop > /dev/null 2>&1
+  fi
 
 %preun core
 if [ "$1" = 0 ]; then
