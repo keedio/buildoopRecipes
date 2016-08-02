@@ -1,0 +1,21 @@
+{
+	"do_info": {
+		"description": "Apache Hadoop software library", 
+		"homepage": "http://hadoop.apache.org/",
+		"license": "Apache-2.0",
+		"filename": "hadoop-2.7.2.bd"
+	},
+	
+	"do_download": {
+		"src_uri": "http://www-eu.apache.org/dist/hadoop/common/hadoop-2.7.2/hadoop-2.7.2-src.tar.gz",
+		"src_md5sum": "b79f81cccd3e2453056b9c8414c83ee5"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	},
+
+	"do_dependecies": {
+		"packages": ["protobuf"]
+	},
+}

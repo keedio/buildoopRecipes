@@ -1,0 +1,64 @@
+diff --git a/flume-ng-core/src/main/java/org/apache/flume/source/http/HTTPSource.java b/flume-ng-core/src/main/java/org/apache/flume/source/http/HTTPSource.java
+index b520b03..a9a2189 100644
+--- a/flume-ng-core/src/main/java/org/apache/flume/source/http/HTTPSource.java
++++ b/flume-ng-core/src/main/java/org/apache/flume/source/http/HTTPSource.java
+@@ -171,6 +171,10 @@ private void checkHostAndPort() {
+       + " specified");
+   }
+ 
++  protected void customizeServletContext(org.mortbay.jetty.servlet.Context context){
++
++  }
++
+   @Override
+   public void start() {
+     Preconditions.checkState(srv == null,
+@@ -202,7 +206,8 @@ public void start() {
+       org.mortbay.jetty.servlet.Context root =
+         new org.mortbay.jetty.servlet.Context(
+           srv, "/", org.mortbay.jetty.servlet.Context.SESSIONS);
+-      root.addServlet(new ServletHolder(new FlumeHTTPServlet()), "/");
++      root.addServlet(new ServletHolder(getServlet()), "/");
++      customizeServletContext(root);
+       HTTPServerConstraintUtil.enforceConstraints(root);
+       srv.start();
+       Preconditions.checkArgument(srv.getHandler().equals(root));
+@@ -215,6 +220,10 @@ public void start() {
+     super.start();
+   }
+ 
++  protected HttpServlet getServlet() {
++    return new FlumeHTTPServlet();
++  }
++
+   @Override
+   public void stop() {
+     try {
+@@ -228,7 +237,7 @@ public void stop() {
+     LOG.info("Http source {} stopped. Metrics: {}", getName(), sourceCounter);
+   }
+ 
+-  private class FlumeHTTPServlet extends HttpServlet {
++  protected class FlumeHTTPServlet extends HttpServlet {
+ 
+     private static final long serialVersionUID = 4891924863218790344L;
+ 
+@@ -270,13 +279,17 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)
+                 + ex.getMessage());
+         return;
+       }
+-      response.setCharacterEncoding(request.getCharacterEncoding());
++      customizeServletResponse(request, response);
+       response.setStatus(HttpServletResponse.SC_OK);
+       response.flushBuffer();
+       sourceCounter.incrementAppendBatchAcceptedCount();
+       sourceCounter.addToEventAcceptedCount(events.size());
+     }
+ 
++    protected void customizeServletResponse(HttpServletRequest request, HttpServletResponse response) {
++      response.setCharacterEncoding(request.getCharacterEncoding());
++    }
++
+     @Override
+     public void doGet(HttpServletRequest request, HttpServletResponse response)
+             throws IOException {

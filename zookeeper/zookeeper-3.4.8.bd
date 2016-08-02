@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Zookeeper", 
+		"homepage":    "http://zookeeper.apache.org/",
+		"license":     "Apache-2.0",
+		"filename":    "zookeeper-3.4.8.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "http://archive.apache.org/dist/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz",
+		"src_md5sum": "6bdddcd5179e9c259ef2bf4be2158d18"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Storm", 
+		"homepage":    "http://storm.apache.org",
+		"license":     "Apache-2.0",
+		"filename":    "storm-1.0.1.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "http://www.eu.apache.org/dist/storm/apache-storm-1.0.1/apache-storm-1.0.1-src.tar.gz",
+		"src_md5sum": "6dbcb898b154df0943e793776d5d129a"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	},
+}

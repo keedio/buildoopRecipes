@@ -1,0 +1,68 @@
+diff -uprN apache-storm-0.9.4_vanilla/external/storm-kafka/pom.xml apache-storm-0.9.4/external/storm-kafka/pom.xml
+--- apache-storm-0.9.4_vanilla/external/storm-kafka/pom.xml	2015-04-15 16:46:09.000000000 +0200
++++ apache-storm-0.9.4/external/storm-kafka/pom.xml	2015-04-15 17:01:37.000000000 +0200
+@@ -25,13 +25,39 @@
+         <relativePath>../../pom.xml</relativePath>
+     </parent>
+ 
++    <properties>
++        <scala.base.version>2.10</scala.base.version>
++        <scala.version>${scala.base.version}.4</scala.version>
++        <kafka.version>0.8.1.1</kafka.version>
++    </properties>
++
+     <packaging>jar</packaging>
+     <artifactId>storm-kafka</artifactId>
+     <name>storm-kafka</name>
+     <description>Storm Spouts for Apache Kafka</description>
+     <build>
+         <plugins>
+-
++            <plugin>
++                <groupId>org.apache.maven.plugins</groupId>
++                <artifactId>maven-shade-plugin</artifactId>
++                <version>2.3</version>
++                <executions>
++                    <execution>
++                        <phase>package</phase>
++                        <goals>
++                            <goal>shade</goal>
++                        </goals>
++                        <configuration>
++                            <artifactSet>
++                                <excludes>
++                                    <exclude>org.slf4j:slf4j-api</exclude>
++                                    <exclude>jline:jline</exclude>
++                                </excludes>
++                            </artifactSet>
++                        </configuration>
++                    </execution>
++                </executions>
++            </plugin>
+         </plugins>
+         <sourceDirectory>src/jvm</sourceDirectory>
+         <testSourceDirectory>src/test</testSourceDirectory>
+@@ -94,10 +120,8 @@
+         </dependency>
+         <dependency>
+             <groupId>org.apache.kafka</groupId>
+-            <artifactId>kafka_2.9.2</artifactId>
+-            <version>0.8.1.1</version>
+-            <!-- use provided scope, so users can pull in whichever scala version they choose -->
+-            <scope>provided</scope>
++            <artifactId>kafka_${scala.base.version}</artifactId>
++            <version>${kafka.version}</version>
+             <exclusions>
+                 <exclusion>
+                     <groupId>org.apache.zookeeper</groupId>
+@@ -107,6 +131,10 @@
+                     <groupId>log4j</groupId>
+                     <artifactId>log4j</artifactId>
+                 </exclusion>
++                <exclusion>
++                    <groupId>org.slf4j</groupId>
++                    <artifactId>slf4j-api</artifactId>
++                </exclusion>
+             </exclusions>
+         </dependency>
+         <dependency>

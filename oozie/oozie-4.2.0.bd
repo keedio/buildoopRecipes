@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Oozie", 
+		"homepage":    "https://oozie.apache.org/",
+		"license":     "Apache-2.0",
+		"filename":    "oozie-4.2.0.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "http://archive.apache.org/dist/oozie/4.2.0/oozie-4.2.0.tar.gz",
+		"src_md5sum": "70066a82b9e93ef28bfec8c6babf0aac"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	}
+}
