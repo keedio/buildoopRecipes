@@ -244,5 +244,6 @@ fi
 %dir %{lib_oozie}
 %{lib_oozie}/bin/oozie
 %{lib_oozie}/lib
+%{lib_oozie}/oozie-sharelib.tar.gz
 %doc %{doc_oozie}
 %{man_dir}/man1/oozie.1.*
