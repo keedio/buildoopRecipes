@@ -32,7 +32,7 @@
 
 %define hive_version 1.2.1
 %define hive_base_version 1.2.1
-%define hive_release 1.3.0%{?dist}
+%define hive_release 1.4.0%{?dist}
 
 %if  %{!?suse_version:1}0
 

@@ -29,7 +29,7 @@
 
 %define cassandra_version 2.1.0
 %define cassandra_base_version 2.1.0
-%define cassandra_release 1.3.0%{?dist}
+%define cassandra_release 1.4.0%{?dist}
 
 Name: %{cassandra_name}
 Version: %{cassandra_version}

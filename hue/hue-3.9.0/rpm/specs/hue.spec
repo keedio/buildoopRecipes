@@ -15,7 +15,7 @@
 
 %define hue_version 3.9.0
 %define hue_base_version 3.9.0
-%define hue_release 1.3.0%{?dist}
+%define hue_release 1.4.0%{?dist}
 
 Name:    hue
 Version: %{hue_version}
