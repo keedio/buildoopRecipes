@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Python bindings for the Apache Thrift RPC system", 
+		"homepage":    "https://pypi.python.org",
+		"license":     "Apache-2.0",
+		"filename":    "thrfit-0.9.3.bd"
+	},
+	
+	"do_download": {
+	 "src_uri":    "https://pypi.python.org/packages/source/t/thrift/thrift-0.9.3.tar.gz",
+	 "src_md5sum": "b519551d7a086bb0b4f222a8f566b7e8"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	},
+}
