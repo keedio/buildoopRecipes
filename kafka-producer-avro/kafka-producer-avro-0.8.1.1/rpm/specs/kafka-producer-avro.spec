@@ -15,7 +15,7 @@
 
 # Kafka Producer Avro tag -> 0.8.1.1
 %define kafka_producer_avro_base_version 0.8.1.1
-%define kafka_producer_avro_release 1.3.0%{?dist}
+%define kafka_producer_avro_release 1.4.0%{?dist}
 
 %define lib_kafka_producer_avro /usr/lib/kafka/lib/kafka-producer-avro
 %define etc_kafka /etc/kafka/conf

@@ -17,7 +17,7 @@
 
 %define pig_version 0.14.0
 %define pig_base_version 0.14.0
-%define pig_release 1.3.0%{?dist} 
+%define pig_release 1.4.0%{?dist} 
 %define pig_home /usr/lib/pig
 
 Name: pig

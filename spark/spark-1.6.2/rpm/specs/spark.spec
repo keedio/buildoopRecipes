@@ -24,6 +24,7 @@
 %define rc_dir /etc/init.d
 
 %define spark_version 1.6.2
+%define hadoop_version 2.7.2
 %define spark_base_version 1.6.2
 %define spark_release 1.4.0%{?dist}
 
@@ -71,6 +72,7 @@ BuildRequires: autoconf, automake
 Requires(pre): coreutils, /usr/sbin/groupadd, /usr/sbin/useradd
 Requires: jdk, redhat-lsb, hadoop-client, hadoop-yarn
 Patch0: spark-pom-wasb-eventhubs-v3.patch
+Patch1: paho-dependency.patch
 %if  %{?suse_version:1}0
 # Required for init scripts
 Requires: insserv
@@ -93,6 +95,7 @@ Apache Spark™ is a fast and general engine for large-scale data processing.
 %setup  %{name}-%{spark_base_version}.tgz 
 #cd $RPM_SOURCE_DIR
 %patch0 -p1
+%patch1 -p0
 
 %build
 bash $RPM_SOURCE_DIR/rpm-build-stage
@@ -107,7 +110,7 @@ sh $RPM_SOURCE_DIR/install_spark.sh \
 
 
 %post
-%{alternatives_cmd} --install /usr/lib/spark/default spark  /usr/lib/spark/%{name}-%{spark_base_version}-bin-2.6.0 32
+%{alternatives_cmd} --install /usr/lib/spark/default spark  /usr/lib/spark/%{name}-%{spark_base_version}-bin-%{hadoop_version} 32
 
 %preun
 if [ "$1" = 0 ]; then
