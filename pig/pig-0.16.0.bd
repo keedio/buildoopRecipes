@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Pig", 
+		"homepage":    "http://http://pig.apache.org/",
+		"license":     "Apache-2.0",
+		"filename":    "pig.0.16.0.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "http://apache.lauf-forum.at/pig/pig-0.16.0/pig-0.16.0-src.tar.gz",
+		"src_md5sum": "1862591daff4ceeec3a9e931935402bc"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	},
+}
