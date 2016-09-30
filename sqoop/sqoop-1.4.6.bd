@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Sqoop", 
+		"homepage":    "http://sqoop.apache.org/",
+		"license":     "Apache-2.0",
+		"filename":    "sqoop-1.4.6.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "http://archive.apache.org/dist/sqoop/1.4.6/sqoop-1.4.6.tar.gz",
+		"src_md5sum": "c663457249046c655c84d59f67d228e1"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	},
+}
