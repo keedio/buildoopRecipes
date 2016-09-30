@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Flume Sink for Kafka", 
+		"homepage":    "https://github.com/keedio/flume-ng-kafka-sink",
+		"license":     "Apache-2.0",
+		"filename":    "flume-kafka-sink-0.0.7.bd"
+	},
+	
+	"do_download": {
+		"src_uri":  "https://github.com/keedio/flume-ng-kafka-sink.git",
+	 	"src_hash": "v0.0.7"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}
