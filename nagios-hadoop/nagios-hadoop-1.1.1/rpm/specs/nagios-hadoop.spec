@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-%define nagios_hadoop_version 1.0.0
+%define nagios_hadoop_version 1.1.1
 %define nagios_hadoop_release 1.4.0%{?dist}
 
 Name:    nagios-hadoop
