@@ -22,8 +22,8 @@
 %define man_dir /usr/share/man
 %define zeppelin_user_home /var/lib/zeppelin
 
-%define zeppelin_version 0.6.1 
-%define zeppelin_base_version 0.6.1
+%define zeppelin_version 0.6.2 
+%define zeppelin_base_version 0.6.2
 %define zeppelin_release 1.4.0%{?dist}
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
