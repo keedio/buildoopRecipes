@@ -1,3 +1,6 @@
+export GOROOT=/usr/lib/go-1.7
+export GOPATH=$GOROOT/bin
+export PATH=$GOROOT/bin:$PATH
 rm -rf grafana
 mkdir grafana
 cd grafana

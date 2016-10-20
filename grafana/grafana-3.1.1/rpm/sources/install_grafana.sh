@@ -79,7 +79,6 @@ cp -Rpd ${BUILD_DIR}/grafana/src/github.com/grafana/grafana/conf ${GRAFANA_HOME}
 cp -Rpd ${BUILD_DIR}/grafana/src/github.com/grafana/grafana/vendor ${GRAFANA_HOME}
 cp -Rpd ${BUILD_DIR}/grafana/src/github.com/grafana/grafana/public ${GRAFANA_HOME}
 cp -Rpd ${BUILD_DIR}/grafana/src/github.com/grafana/grafana/public_gen ${GRAFANA_HOME}
-f2qfg3	gtf
-ln -s /etc/grfana/conf.dist ${PREFIX}/etc/grafana/conf
+ln -s /etc/grafana/conf.dist ${PREFIX}/etc/grafana/conf
 ln -s /usr/lib/grafana/conf  ${PREFIX}/etc/grafana/conf.dist
 
