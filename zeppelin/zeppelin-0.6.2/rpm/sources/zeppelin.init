@@ -30,12 +30,12 @@ ZEPPELIN_PID="${ZEPPELIN_PID_DIR}/zeppelin-${USER}-${HOSTNAME}.pid"
 ZEPPELIN_CMD=${ZEPPELIN_CMD:-"${ZEPPELIN_HOME}/bin/zeppelin-daemon.sh"}
 
 start(){
-	su -s /bin/bash ${USER} -c "${ZEPPELIN_CMD} start" 
+	/sbin/runuser -s /bin/bash  ${USER} -c "${ZEPPELIN_CMD} start" 
 	return $?
 }
 
 stop(){
-	su -s /bin/bash ${USER} -c "${ZEPPELIN_CMD} stop"
+	/sbin/runuser -s /bin/bash ${USER} -c "${ZEPPELIN_CMD} stop"
 	rc=$?
 	if [ $rc -eq 0 ]; then
 		[ -f ${ZEPPELIN_PID} ] && rm ${ZEPPELIN_PID}
@@ -45,7 +45,7 @@ stop(){
 }
 
 status(){
-	su -s /bin/bash ${USER} -c "${ZEPPELIN_CMD} status"
+	/sbin/runuser -s /bin/bash ${USER}  -c "${ZEPPELIN_CMD} status"
 	if [ $? -ne 0 ]; then
 		if [ -f "${ZEPPELIN_PID}"  ]; then
 			echo "Zeppelin service stopped but PID File exists"
