@@ -95,8 +95,8 @@ install    -m 644 ${BUILD_DIR}/README.markdown ${STORM_HOME}/
 install -d -m 755 ${BIN_DIR}/
 cp       -r       ${BUILD_DIR}/bin/* ${BIN_DIR}
 
-install -d -m 755 ${STORM_HOME}/conf/
-cp        -r      ${BUILD_DIR}/conf/* ${STORM_HOME}/conf
+#install -d -m 755 ${STORM_HOME}/conf/
+#cp        -r      ${BUILD_DIR}/conf/* ${STORM_HOME}/conf
 
 install -d -m 755 ${STORM_HOME}/lib/
 install    -m 644 ${BUILD_DIR}/lib/* ${STORM_HOME}/lib/
@@ -114,8 +114,8 @@ cp      -r        ${BUILD_DIR}/public/* ${STORM_HOME}/public/
 install -d -m 755 ${STORM_HOME}/examples/
 cp      -r        ${BUILD_DIR}/examples/* ${STORM_HOME}/examples/
 
-install -d -m 755 ${STORM_ETC_DIR}/conf
-install    -m 644 ${BUILD_DIR}/conf/* ${STORM_ETC_DIR}/conf/
+install -d -m 755 ${STORM_ETC_DIR}/conf.dist
+install    -m 644 ${BUILD_DIR}/conf/* ${STORM_ETC_DIR}/conf.dist/
 
 echo ${INITD_DIR}
 install -d -m 755 ${INITD_DIR}
@@ -144,4 +144,5 @@ install -d -m 755 ${PREFIX}/var/run/storm
 install -d -m 755 ${PREFIX}/
 
 cd ${PREFIX}/etc/storm
-ln -s conf.dist conf
+ln -s /etc/storm/conf.dist conf
+ln -s /etc/storm/conf  ${STORM_HOME}/conf

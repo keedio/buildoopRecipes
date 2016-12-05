@@ -280,7 +280,7 @@ getent passwd %{storm_user} >/dev/null || /usr/sbin/useradd --comment "Storm Dae
 %{storm_home}/NOTICE
 %{storm_home}/README.markdown
 %{storm_home}/RELEASE
-%{storm_home}/conf/*
+%{storm_home}/conf
 %{storm_home}/examples/*
 %{storm_home}/lib/*
 %{storm_home}/logback/*
