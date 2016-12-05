@@ -1,133 +1,152 @@
-#!/bin/bash 
+#! /usr/bin/env bash
 
-
-# chkconfig: - 95 5
-# description: The Apache HTTP Server is an efficient and extensible  \
-#	       server implementing the current HTTP standards.
-# processname: httpd
-# config: /etc/grafana/conf/grafana.yml
+# chkconfig: 2345 80 05
+# description: Grafana web server & backend
+# processname: grafana
+# config: /etc/grafana/grafana.ini
 # pidfile: /var/run/grafana.pid
-#
+
 ### BEGIN INIT INFO
-# Provides: grafana
-# Required-Start: $local_fs $remote_fs $network $named
-# Required-Stop: $local_fs $remote_fs $network
-# Short-Description: start and stop Grafana4
-# Description: The grafana is a dashboard for ElasticSearch 
+# Provides:          grafana
+# Required-Start:    $all
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start grafana at boot time
 ### END INIT INFO
 
+#  tested on
+#  1. New lsb that define start-stop-daemon
+#  3. Centos with initscripts package installed
 
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+NAME=grafana-server
+DESC="Grafana Server"
 
-PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/lib/grafana/bin
-DESC="Grafana"
-NAME=grafana
-DAEMON=bin/grafana-server
-DAEMON_ARGS=""
-PIDFILE=/var/run/$NAME.pid
-SCRIPTNAME=/etc/init.d/$NAME
-LOG=/var/log/grafana/grafana.log
-RETVAL=0
- 
-pid_file_exists() {
-    [ -f "$PIDFILE" ]
+GRAFANA_USER=grafana
+GRAFANA_GROUP=grafana
+GRAFANA_HOME=/usr/lib/grafana
+CONF_DIR=/etc/grafana/conf
+WORK_DIR=$GRAFANA_HOME
+DATA_DIR=/var/lib/grafana
+PLUGINS_DIR=/var/lib/grafana/plugins
+LOG_DIR=/var/log/grafana
+CONF_FILE=$CONF_DIR/custom.ini
+MAX_OPEN_FILES=10000
+PID_FILE=/var/run/$NAME.pid
+DAEMON=/usr/lib/grafana/bin/$NAME
+
+if [ `id -u` -ne 0 ]; then
+  echo "You need root privileges to run this script"
+  exit 4
+fi
+
+if [ ! -x $DAEMON ]; then
+  echo "Program not installed or not executable"
+  exit 5
+fi
+
+#
+# init.d / servicectl compatibility (openSUSE)
+#
+if [ -f /etc/rc.status ]; then
+    . /etc/rc.status
+    rc_reset
+fi
+
+#
+# Source function library.
+#
+if [ -f /etc/rc.d/init.d/functions ]; then
+    . /etc/rc.d/init.d/functions
+fi
+
+# overwrite settings from default file
+[ -e /etc/sysconfig/$NAME ] && . /etc/sysconfig/$NAME
+
+DAEMON_OPTS="--pidfile=${PID_FILE} --config=${CONF_FILE} cfg:default.paths.data=${DATA_DIR} cfg:default.paths.logs=${LOG_DIR} cfg:default.paths.plugins=${PLUGINS_DIR}"
+
+function isRunning() {
+  status -p $PID_FILE $NAME > /dev/null 2>&1
 }
- 
-do_start()      {
-        
-        if pid_file_exists
-        then
-                        echo "Grafana is already running"
-                        return 1
-        else
-                        cd /usr/lib/grafana
-                        sudo -u grafana $DAEMON $DAEMON_ARGS 1>"$LOG" 2>&1 &
-                        PID=$!
-                        echo $PID > "$PIDFILE"
-           
-                        if [ "$PID" > 0 ]
-                        then
-                                echo "Grafana started with pid $!"
-                                return 0
-                        else
-                                echo "Grafana could not be started"
-                                return 1
-                        fi    
-        fi
-                
-        
-}
- 
- 
-do_status() {
-        if pid_file_exists
-        then    
-                PID=$(cat $PIDFILE)
-                STATUS=$(ps ax | grep $PID | grep -v grep | awk '{print $1}')
-                
-                if [ "$STATUS" == "$PID" ]
-                then
-                                echo "Grafana is running on proccess $PID"
-                                return 0
-                else
-                                echo "Grafana is NOT running"
-                                #rm $PIDFILE
-                                return 1
-                fi
-        else
-                echo "Grafana is NOT running"
-                return 3
-        fi
-}
- 
-do_stop() {
-        if pid_file_exists
-        then    
-                PID=$(cat $PIDFILE)
-                STATUS=$(ps ax | grep $PID | grep -v grep | awk '{print $1}')
-                
-                if [ "$STATUS" == "$PID" ]
-                then
-                                echo "Killing Grafana...."
-                                KILL=$(kill -15 $PID)
-                                rm $PIDFILE
-                                sleep 1
-                                echo -e "\tGrafana (PID:$PID) killed"
-                                return 0
-                                
-                else
-                                echo "Grafana is NOT running"
-                                rm $PIDFILE
-                                return 1
-                fi
-        else
-                echo "Grafana is NOT running"
-                 return 0
-        fi
-}
- 
- 
+
 case "$1" in
   start)
-        do_start
-        RETVAL=$?
-        ;;
+    isRunning
+    if [ $? -eq 0 ]; then
+      echo "Already running."
+      exit 0
+    fi
+
+    # Prepare environment
+    mkdir -p "$LOG_DIR" "$DATA_DIR" && chown "$GRAFANA_USER":"$GRAFANA_GROUP" "$LOG_DIR" "$DATA_DIR"
+    touch "$PID_FILE" && chown "$GRAFANA_USER":"$GRAFANA_GROUP" "$PID_FILE"
+
+    if [ -n "$MAX_OPEN_FILES" ]; then
+      ulimit -n $MAX_OPEN_FILES
+    fi
+
+    # Start Daemon
+    cd $GRAFANA_HOME
+    action $"Starting $DESC: ..." su -s /bin/sh -c "nohup ${DAEMON} ${DAEMON_OPTS} >> /dev/null 3>&1 &" $GRAFANA_USER 2> /dev/null
+    return=$?
+    if [ $return -eq 0 ]
+    then
+      sleep 1
+      # check if pid file has been written two
+      if ! [[ -s $PID_FILE ]]; then
+        echo "FAILED"
+        exit 1
+      fi
+      i=0
+      timeout=10
+      # Wait for the process to be properly started before exiting
+      until { cat "$PID_FILE" | xargs kill -0; } >/dev/null 2>&1
+      do
+        sleep 1
+        i=$(($i + 1))
+        if [ $i -gt $timeout ]; then
+          echo "FAILED"
+          exit 1
+        fi
+      done
+    fi
+
+    exit $return
+    ;;
   stop)
-        do_stop
-        RETVAL=$?
-        ;;
+    echo -n "Stopping $DESC: ..."
+
+    if [ -f "$PID_FILE" ]; then
+      killproc -p $PID_FILE -d 20 $NAME
+      if [ $? -eq 1 ]; then
+        echo  "$DESC is not running but pid file exists, cleaning up"
+      elif [ $? -eq 3 ]; then
+        PID="`cat $PID_FILE`"
+        echo  "Failed to stop $DESC (pid $PID)"
+        exit 1
+      fi
+      rm -f "$PID_FILE"
+      echo  ""
+      exit 0
+    else
+      echo  "(not running)"
+    fi
+    exit 0
+    ;;
   status)
-        do_status
-        RETVAL=$?
-        ;;
-  restart)
-        do_stop
-        do_start
-        RETVAL=$?
-        ;;
+    status -p $PID_FILE $NAME
+    exit $?
+    ;;
+  restart|force-reload)
+    if [ -f "$PID_FILE" ]; then
+      $0 stop
+      sleep 1
+    fi
+    $0 start
+    ;;
   *)
-        echo "Usage: $SCRIPTNAME {start|stop|status|restart}" >&2
-        exit 2
-        ;;
+    echo "Usage: $0 {start|stop|restart|force-reload|status}"
+    exit 3
+    ;;
 esac
- 
-exit $RETVAL
