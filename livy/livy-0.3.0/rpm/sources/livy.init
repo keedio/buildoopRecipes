@@ -1,0 +1,133 @@
+#!/bin/bash
+
+
+# chkconfig: - 95 5
+# description: The Apache HTTP Server is an efficient and extensible  \
+#      	       server implementing the current HTTP standards.
+# processname: httpd
+# config: /etc/livy/conf/livy.yml
+# pidfile: /var/run/livy.pid
+#
+### BEGIN INIT INFO
+# Provides: livy
+# Required-Start: $local_fs $remote_fs $network $named
+# Required-Stop: $local_fs $remote_fs $network
+# Short-Description: start and stop Livy4
+# Description: The livy is a dashboard for ElasticSearch
+### END INIT INFO
+
+
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/lib/livy/bin
+DESC="Livy"
+NAME=livy
+DAEMON=bin/livy-server
+DAEMON_ARGS=""
+PIDFILE=/var/run/$NAME.pid
+SCRIPTNAME=/etc/init.d/$NAME
+LOG=/var/log/livy/livy.log
+RETVAL=0
+
+pid_file_exists() {
+    [ -f "$PIDFILE" ]
+}
+
+do_start()      {
+
+        if pid_file_exists
+        then
+                        echo "Livy is already running"
+                        return 1
+        else
+                        cd /usr/lib/livy
+                        /sbin/runuser -s /bin/bash livy  $DAEMON $DAEMON_ARGS 1>"$LOG" 2>&1 &
+                        PID=$!
+                        echo $PID > "$PIDFILE"
+
+                        if [ "$PID" > 0 ]
+                        then
+                                echo "Livy started with pid $!"
+                                return 0
+                        else
+                                echo "Livy could not be started"
+                                return 1
+                        fi
+        fi
+
+
+}
+
+
+do_status() {
+        if pid_file_exists
+        then
+                PID=$(cat $PIDFILE)
+                STATUS=$(ps ax | grep $PID | grep -v grep | awk '{print $1}')
+
+                if [ "$STATUS" == "$PID" ]
+                then
+                                echo "Livy is running on proccess $PID"
+                                return 0
+                else
+                                echo "Livy is NOT running"
+                                #rm $PIDFILE
+                                return 1
+                fi
+        else
+                echo "Livy is NOT running"
+                return 3
+        fi
+}
+
+do_stop() {
+        if pid_file_exists
+        then
+                PID=$(cat $PIDFILE)
+                STATUS=$(ps ax | grep $PID | grep -v grep | awk '{print $1}')
+
+                if [ "$STATUS" == "$PID" ]
+                then
+                                echo "Killing Livy...."
+                                KILL=$(kill -15 $PID)
+                                rm $PIDFILE
+                                sleep 1
+                                echo -e "\tLivy (PID:$PID) killed"
+                                return 0
+
+                else
+                                echo "Livy is NOT running"
+                                rm $PIDFILE
+                                return 1
+                fi
+        else
+                echo "Livy is NOT running"
+                 return 0
+        fi
+}
+
+
+case "$1" in
+  start)
+        do_start
+        RETVAL=$?
+        ;;
+  stop)
+        do_stop
+        RETVAL=$?
+        ;;
+  status)
+        do_status
+        RETVAL=$?
+        ;;
+  restart)
+        do_stop
+        do_start
+        RETVAL=$?
+        ;;
+  *)
+        echo "Usage: $SCRIPTNAME {start|stop|status|restart}" >&2
+        exit 2
+        ;;
+esac
+
+exit $RETVAL
