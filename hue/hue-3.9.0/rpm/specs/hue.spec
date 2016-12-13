@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+%global __os_install_post %{nil}
 %define hue_version 3.9.0
 %define hue_base_version 3.9.0
 %define hue_release 1.4.0%{?dist}
@@ -156,7 +156,7 @@ It supports a file browser, job tracker interface, cluster health monitor, and m
 
 %if 0%{?rhel:%{rhel}} < 6
 # Python 2.5+ is required, but RHEL 5's `python` is 2.4
-export SYS_PYTHON=`which python2.6`
+export SYS_PYTHON=`which python2.7`
 export SKIP_PYTHONDEV_CHECK=true
 %endif
 
@@ -267,7 +267,7 @@ fi
 %files -n %{name}-common
 %defattr(-,%{username},%{username})
 %attr(0755,root,root) %config(noreplace) %{etc_hue}.empty 
-%dir %{hue_dir}
+%{hue_dir}
 %{hue_dir}/desktop
 %{hue_dir}/ext
 %{hue_dir}/LICENSE.txt
@@ -282,11 +282,12 @@ fi
 %{hue_dir}/VERSION
 %{hue_dir}/build/env/bin/*
 %{hue_dir}/build/env/include/
-%{hue_dir}/build/env/lib*/
+%{hue_dir}/build/env/lib/
+%{hue_dir}/build/env/lib64
 %{hue_dir}/build/env/stamp
 %{hue_dir}/app.reg
 %{hue_dir}/apps/Makefile
-%dir %{hue_dir}/apps
+%{hue_dir}/apps
 # Hue core apps
 %{about_app_dir}
 %{filebrowser_app_dir}

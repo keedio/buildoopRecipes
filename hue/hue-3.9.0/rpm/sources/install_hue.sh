@@ -185,5 +185,6 @@ rm -fv `find $PREFIX -iname "build_log.txt"`
 install -d ${PREFIX}/${DOC_DIR}
 cp -r ${BUILD_DIR}/docs/* ${PREFIX}/${DOC_DIR}/
 
+$PREFIX/usr/lib/hue/build/env/bin/pip install --upgrade pip
 $PREFIX/usr/lib/hue/build/env/bin/python $PREFIX/usr/lib/hue/build/env/bin/pip install kazoo
 $PREFIX/usr/lib/hue/build/env/bin/python $PREFIX/usr/lib/hue/build/env/bin/pip install "reportlab<3.0" 
