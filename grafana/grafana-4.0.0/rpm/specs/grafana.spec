@@ -42,6 +42,7 @@ Source1:	install_grafana.sh
 Source2:        grafana.init	
 Source3:        rpm_build_stage	
 Source4:        grafana-env	
+Source5:        grafana.service	
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 BuildArch:      x86_64 
 
@@ -66,9 +67,9 @@ bash %{SOURCE1} \
 	   --build-dir=$PWD
 
 # Install init script
-init_file=${RPM_BUILD_ROOT}/etc/init.d/grafana
+init_file=${RPM_BUILD_ROOT}/etc/systemd/system/grafana.service
 env_file=${RPM_BUILD_ROOT}/etc/sysconfig/grafana
-%__cp %{SOURCE2} $init_file
+%__cp %{SOURCE5} $init_file
 %__cp %{SOURCE4} $env_file
 #chmod 755 $init_file
 
@@ -84,11 +85,11 @@ if ! getent passwd grafana >/dev/null; then
 fi
 
 %post
-/sbin/chkconfig --add grafana 
+/usr/bin/systemctl enable grafana 
 
 %preun
 /sbin/service grafana stop > /dev/null
-/sbin/chkconfig --del grafana
+/usr/bin/systemctl disable grafana
 
 %postun 
 if [ $1 -ge 1 ]; then
@@ -98,7 +99,7 @@ fi
 %defattr(-,%{grafana_user},%{grafana_group})
 %dir %attr(755, %{grafana_user},%{grafana_group}) %{grafana_home}
 %{grafana_home}/*
-%attr(0755,root,root) /etc/init.d/grafana 
+%attr(0755,root,root) /etc/systemd/system/grafana.service 
 %config(noreplace) /etc/grafana/*
 %config(noreplace) /etc/sysconfig/*
 %{grafana_user_home}

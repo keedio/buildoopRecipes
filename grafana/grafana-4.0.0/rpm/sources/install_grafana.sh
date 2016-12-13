@@ -71,6 +71,7 @@ install -d -m 755 ${GRAFANA_HOME}
 install -d -m 755 ${PREFIX}/etc/init.d
 install -d -m 755 ${PREFIX}/etc/sysconfig
 install -d -m 755 ${PREFIX}/etc/grafana
+install -d -m 755 ${PREFIX}/etc/systemd/system
 install -d -m 755 ${PREFIX}/var/lib/grafana
 install -d -m 755 ${PREFIX}/var/log/grafana
 
