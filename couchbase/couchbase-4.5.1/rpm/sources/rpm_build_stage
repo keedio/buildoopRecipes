@@ -1,7 +1,7 @@
 CB_VERSION=$1
 BUILD=$2
 #Loading the right environment from SCL
-source scl_source enable git19 devtoolset-2 
+#source scl_source enable git19 devtoolset-3 
 rm -rf couchbase
 mkdir couchbase
 cd couchbase
