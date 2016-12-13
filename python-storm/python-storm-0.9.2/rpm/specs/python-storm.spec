@@ -28,7 +28,7 @@ Source0: storm.git.tar.gz
 Source1: install_python-storm.sh
 URL: http://github.com/apache/storm
 
-%define python_storm_dir /usr/lib64/python2.6/site-packages/
+%define python_storm_dir /usr/lib64/python2.7/site-packages/
 
 %description
 Python-storm. 

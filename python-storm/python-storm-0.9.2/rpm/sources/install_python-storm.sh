@@ -79,7 +79,7 @@ for var in PREFIX BUILD_DIR ; do
   fi
 done
 
-LIB_DIR=${LIB_DIR:-/usr/lib64/python2.6/site-packages}
+LIB_DIR=${LIB_DIR:-/usr/lib64/python2.7/site-packages}
 
 mkdir -p $PREFIX/$LIB_DIR
 cp -Rf $BUILD_DIR/storm-core/src/py/storm $PREFIX/$LIB_DIR/
