@@ -96,7 +96,7 @@ install -d -m 0755 ${PREFIX}/${PLUGIN_DIR}
 install -d -m 0755 ${PREFIX}/${PLUGIN_LIB_DIR}
 install -d -m 0755 ${PREFIX}/${PLUGIN_LIBEXT_DIR}
 cp ${BUILD_DIR}/target/*.jar ${PREFIX}/${PLUGIN_LIB_DIR}
-cp ${BUILD_DIR}/target/libs/*.jar ${PREFIX}/${PLUGIN_LIBEXT_DIR}
+#cp ${BUILD_DIR}/target/libs/*.jar ${PREFIX}/${PLUGIN_LIBEXT_DIR}
 
 install -d -m 0755 ${PREFIX}/${FLUME_CONF}
 cp ${RPM_SOURCE_DIR}/flume-enrichment-interceptor.conf.example ${PREFIX}/${FLUME_CONF}
