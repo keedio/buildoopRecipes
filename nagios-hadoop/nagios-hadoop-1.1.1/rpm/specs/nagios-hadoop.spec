@@ -51,7 +51,7 @@ sh %{SOURCE1} \
 
 %files
 %defattr(755,'nrpe','nrpe')
-%{nagios_plugins_dir}
+%{nagios_plugins_dir}/*
 
 %clean
 %__rm -rf $RPM_BUILD_ROOT
