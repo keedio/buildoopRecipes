@@ -111,9 +111,9 @@ mkdir -p ${PREFIX}/etc/logrotate.d/
 install -m 644 ${RPM_SOURCE_DIR}/elasticsearch.logrotate ${PREFIX}/etc/logrotate.d/elasticsearch
 
 # sysconfig and init
-mkdir -p ${PREFIX}/etc/rc.d/init.d
+mkdir -p ${PREFIX}/etc/systemd/system
 mkdir -p ${PREFIX}/etc/sysconfig
-install -m 755 ${RPM_SOURCE_DIR}/elasticsearch.init ${PREFIX}/etc/rc.d/init.d/elasticsearch
+install -m 755 ${RPM_SOURCE_DIR}/elasticsearch.service ${PREFIX}/etc/systemd/system/elasticsearch.service
 install -m 755 ${RPM_SOURCE_DIR}/elasticsearch.sysconfig ${PREFIX}/etc/sysconfig/elasticsearch
 
 mkdir -p ${PREFIX}/var/run/elasticsearch

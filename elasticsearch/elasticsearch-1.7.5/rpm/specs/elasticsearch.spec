@@ -63,7 +63,7 @@ if ! getent passwd elasticsearch >/dev/null; then
 fi
 
 %post
-/sbin/chkconfig --add elasticsearch
+/usr/bin/systemctl enable elasticsearch
 
 %preun
 if [ $1 -eq 0 ]; then
@@ -76,7 +76,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{_initddir}/elasticsearch
+/etc/systemd/system/elasticsearch.service
 %config(noreplace) %{_sysconfdir}/sysconfig/elasticsearch
 %{_sysconfdir}/logrotate.d/elasticsearch
 %dir /usr/share/elasticsearch
