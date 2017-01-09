@@ -183,6 +183,7 @@ cp build/contrib/rest/*.jar $PREFIX/usr/lib/zookeeper-rest/lib
 #cp -a ${RPM_SOURCE_DIR}/zookeeper-rest-server.sh $PREFIX/etc/rc.d/init.d/zookeeper-rest
 install -d -m 755 $PREFIX/etc/zookeeper/conf.dist
 cp -r ${RPM_SOURCE_DIR}/rest $PREFIX/etc/zookeeper/conf.dist
+cp -r ${RPM_SOURCE_DIR}/zookeeper-env.sh $PREFIX/etc/zookeeper/conf.dist
 
 
 

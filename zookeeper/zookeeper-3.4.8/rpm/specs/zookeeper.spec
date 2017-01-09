@@ -50,7 +50,7 @@
 %define alternatives_dep update-alternatives
 %define chkconfig_dep    aaa_base
 %define service_dep      aaa_base
-%global initd_dir %{_sysconfdir}/rc.d
+%global initd_dir /etc/systemd/system
 
 %else
 
@@ -59,7 +59,7 @@
 %define alternatives_dep chkconfig 
 %define chkconfig_dep    chkconfig
 %define service_dep      initscripts
-%global initd_dir %{_sysconfdir}/rc.d/init.d
+%global initd_dir  /etc/systemd/system
 
 %endif
 
@@ -82,7 +82,8 @@ Source3: zookeeper-server.sh
 Source4: zookeeper-server.sh.suse
 Source5: zookeeper.1
 Source6: zoo.cfg
-Source7: zookeeper-rest-server.sh
+Source8: zookeeper-rest-server.service
+Source7: zookeeper-server.service
 BuildArch: noarch
 BuildRequires: autoconf, automake, ant
 Requires: lsof
@@ -164,14 +165,14 @@ orig_init_file=%{SOURCE3}
 %endif
 
 %__install -d -m 0755 $RPM_BUILD_ROOT/%{initd_dir}/
-init_file=$RPM_BUILD_ROOT/%{initd_dir}/%{svc_zookeeper}
-%__cp $orig_init_file $init_file
+init_file=$RPM_BUILD_ROOT/%{initd_dir}/zookeeper-server.service
+%__cp %{SOURCE7} $init_file
 chmod 755 $init_file
 
 # REST service
-orig_init_file=%{SOURCE7}
+orig_init_file=%{SOURCE8}
 %__install -d -m 0755 $RPM_BUILD_ROOT/%{initd_dir}/
-init_file=$RPM_BUILD_ROOT/%{initd_dir}/%{svc_zookeeper_rest}
+init_file=$RPM_BUILD_ROOT/%{initd_dir}/%{svc_zookeeper_rest}.service
 %__cp $orig_init_file $init_file
 chmod 755 $init_file
 
@@ -193,12 +194,14 @@ if [ "$1" = 0 ]; then
 fi
 
 %post server
-	chkconfig --add %{svc_zookeeper}
+	systemctl enable %{svc_zookeeper}
 
+%post rest
+	systemctl enable zookeeper-rest-server
 %preun server
 if [ $1 = 0 ] ; then
 	service %{svc_zookeeper} stop > /dev/null 2>&1
-	chkconfig --del %{svc_zookeeper}
+	systemctl disable  %{svc_zookeeper}
 fi
 
 %postun server
@@ -207,7 +210,7 @@ if [ $1 -ge 1 ]; then
 fi
 
 %files server
-%attr(0755,root,root) %{initd_dir}/%{svc_zookeeper}
+%attr(0755,root,root) %{initd_dir}/%{svc_zookeeper}.service
 
 %files rest
 %attr(0755,root,root) %{initd_dir}/%{svc_zookeeper_rest}
