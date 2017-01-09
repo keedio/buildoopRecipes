@@ -30,6 +30,7 @@ Source0: hue.git.tar.gz
 Source1: %{name}.init
 Source2: rpm-build-stage
 Source3: install_hue.sh
+Source4: %{name}.service
 URL: http://github.com/cloudera/hue
 Requires: %{name}-plugins = %{version}-%{release}
 Requires: %{name}-common = %{version}-%{release}
@@ -69,10 +70,10 @@ AutoReqProv: no
 # Init.d directory has different locations dependeing on the OS
 %if  %{!?suse_version:1}0
 %define alternatives_cmd alternatives
-%global initd_dir %{_sysconfdir}/rc.d/init.d
+%global initd_dir /etc/systemd/system
 %else
 %define alternatives_cmd update-alternatives
-%global initd_dir %{_sysconfdir}/rc.d
+%global initd_dir /etc/systemd/system
 %endif
 
 ############### DESKTOP SPECIFIC CONFIGURATION ##################
@@ -173,12 +174,12 @@ bash -x %{SOURCE3} \
 %if  %{?suse_version:1}0
 orig_init_file=$RPM_SOURCE_DIR/%{name}.init.suse
 %else
-orig_init_file=$RPM_SOURCE_DIR/%{name}.init
+orig_init_file=$RPM_SOURCE_DIR/%{name}.service
 %endif
 
 # TODO maybe dont need this line anymore:
 %__install -d -m 0755 $RPM_BUILD_ROOT/%{initd_dir}
-cp $orig_init_file $RPM_BUILD_ROOT/%{initd_dir}/hue
+cp $orig_init_file $RPM_BUILD_ROOT/%{initd_dir}/hue.service
 
 #### PLUGINS ######
 
@@ -240,6 +241,7 @@ if [ -e %{hue_dir}/desktop/desktop.db ]; then
   cp -a %{hue_dir}/desktop/desktop.db %{hue_dir}/desktop/desktop.db.rpmsave.$(date +'%Y%m%d.%H%M%S')
 fi
 
+systemctl enable hue
 %preun -n %{name}-common -p /bin/bash
 if [ "$1" = 0 ]; then
         %{alternatives_cmd} --remove hue-conf %{etc_hue}.empty || :
@@ -328,7 +330,7 @@ Group: Applications/Engineering
 This package provides the service scripts for Hue server.
 
 %files -n %{name}-server
-%attr(0755,root,root) %{initd_dir}/hue
+%attr(0755,root,root) %{initd_dir}/hue.service
 
 # Install and start init scripts
 
