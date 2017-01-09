@@ -206,8 +206,8 @@ install -d -m 0755 ${CONF_DIR}/action-conf
 cp ${EXTRA_DIR}/hive.xml ${CONF_DIR}/action-conf
 if [ "${INITD_DIR}" != "" ]; then
   install -d -m 0755 ${INITD_DIR}
-  cp -R ${EXTRA_DIR}/oozie.init ${INITD_DIR}/oozie
-  chmod 755 ${INITD_DIR}/oozie
+  cp -R ${EXTRA_DIR}/oozie.service ${INITD_DIR}/oozie.service
+  chmod 755 ${INITD_DIR}/oozie.service
 fi
 cp -R ${BUILD_DIR}/oozie-sharelib*.tar.gz ${SERVER_LIB_DIR}/oozie-sharelib.tar.gz
 ln -s -f /etc/oozie/conf/oozie-env.sh ${SERVER_LIB_DIR}/bin

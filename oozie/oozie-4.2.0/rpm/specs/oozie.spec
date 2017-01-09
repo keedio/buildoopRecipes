@@ -26,7 +26,7 @@
 
 %if  %{!?suse_version:1}0
   %define doc_oozie %{_docdir}/oozie-%{oozie_version}
-  %define initd_dir %{_sysconfdir}/rc.d/init.d
+  %define initd_dir %{_sysconfdir}/systemd/system 
   %define alternatives_cmd alternatives
 %else
 
@@ -229,13 +229,12 @@ fi
 #%{lib_oozie}/oozie-sharelib-yarn.tar.gz
 %{lib_oozie}/libext
 %{lib_oozie}/tomcat-deployment.sh
-%{initd_dir}/oozie
+%{initd_dir}/oozie.service
 %defattr(-, oozie, oozie)
 %dir %{_sysconfdir}/%{name}
 %dir %{_localstatedir}/log/oozie
 %dir %{_localstatedir}/run/oozie
 %attr(0755,oozie,oozie) %{data_oozie}
-
 %files client
 %defattr(-,root,root)
 %config(noreplace) %{conf_oozie_dist}
