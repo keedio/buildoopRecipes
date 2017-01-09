@@ -22,7 +22,7 @@
 %define cassandra_daemon_run /var/run/%{cassandra_name}
 %define cassandra_service cassandra
 
-%global initd_dir %{_sysconfdir}/rc.d/init.d
+%global initd_dir %{_sysconfdir}/systemd/system
 # prevent binary stripping - not necessary at all.
 # Only for prevention.
 %global __os_install_post %{nil}
@@ -78,9 +78,9 @@ bash %{SOURCE2}\
 	--source-dir=$RPM_SOURCE_DIR
 
 # Install init script
-  echo "Installing service: %{cassandra_service}"
-  init_file=$RPM_BUILD_ROOT/%{initd_dir}/%{cassandra_service}
-  bash $RPM_SOURCE_DIR/init.d.tmpl $RPM_SOURCE_DIR/%{cassandra_service}.svc rpm > $init_file
+#  echo "Installing service: %{cassandra_service}"
+#  init_file=$RPM_BUILD_ROOT/%{initd_dir}/%{cassandra_service}
+#  bash $RPM_SOURCE_DIR/init.d.tmpl $RPM_SOURCE_DIR/%{cassandra_service}  $init_file
 
 %pre
 getent group %{cassandra_group} >/dev/null || groupadd -r %{cassandra_group}
@@ -101,12 +101,12 @@ done
 %dir %attr(755, %{cassandra_user},%{cassandra_group}) /var/lib/cassandra
 %dir %attr(755, root,root) /%{initd_dir}
 %dir %attr(755, root,root) /etc/default
-%attr(0755,root,root)/%{initd_dir}/%{cassandra_service}
+%attr(0755,root,root)/%{initd_dir}/cassandra.service
 %attr(0644,root,root)/etc/default/%{cassandra_service}
 %{cassandra_home}/*
 /etc/cassandra/*
 /var/log/cassandra
 /var/lib/cassandra/*
 /var/run/cassandra
-/etc/rc.d/init.d/*
+/etc/systemd/system/*
 

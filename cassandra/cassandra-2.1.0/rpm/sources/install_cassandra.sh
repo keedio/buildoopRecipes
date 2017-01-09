@@ -151,7 +151,10 @@ install    -m 644 ${BUILD_DIR}/conf/*.sh ${PREFIX}/etc/cassandra/conf
 install -d -m 755 ${PREFIX}/etc/cassandra/conf/triggers
 install    -m 644 ${BUILD_DIR}/conf/triggers/README.txt ${PREFIX}/etc/cassandra/conf
 
-install -d -m 755 ${PREFIX}/etc/rc.d/init.d
+install -d -m 755 ${PREFIX}/etc/systemd/system
 
 install -d -m 755 ${PREFIX}/etc/default
 install    -m 644 ${SOURCE_DIR}/cassandra-default ${PREFIX}/etc/default/cassandra
+install    -m 755 ${SOURCE_DIR}/cassandra.service ${PREFIX}/etc/systemd/system/cassandra.service
+rm -rf ${CASSANDRA_HOME}/logs
+ln -s  /var/log/cassandra ${CASSANDRA_HOME}/logs 
