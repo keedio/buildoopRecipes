@@ -39,7 +39,7 @@
 %define doc_hive %{_docdir}/%{name}-%{hive_version}
 %define alternatives_cmd alternatives
 
-%global initd_dir %{_sysconfdir}/rc.d/init.d
+%global initd_dir %{_sysconfdir}/systemd/system
 
 %else
 
@@ -51,7 +51,7 @@
 %define doc_hive %{_docdir}/%{name}
 %define alternatives_cmd update-alternatives
 
-%global initd_dir %{_sysconfdir}/rc.d
+%global initd_dir %{_sysconfdir}/systemd/system
 
 %define __os_install_post \
     %{suse_check} ; \
@@ -278,8 +278,8 @@ cp $RPM_SOURCE_DIR/hive-site.xml .
 for service in %{hive_services}
 do
     # Install init script
-    init_file=$RPM_BUILD_ROOT/%{initd_dir}/${service}
-    bash $RPM_SOURCE_DIR/init.d.tmpl $RPM_SOURCE_DIR/${service}.svc rpm $init_file
+    init_file=$RPM_BUILD_ROOT/%{initd_dir}/${service}.service
+    %__cp  $RPM_SOURCE_DIR/${service}.service  $init_file
 done
 
 %pre
@@ -390,15 +390,15 @@ fi
 
 %define service_macro() \
 %files %1 \
-%attr(0755,root,root)/%{initd_dir}/%{name}-%1 \
+%attr(0755,root,root)/%{initd_dir}/%{name}-%1.service \
 %config(noreplace) /etc/default/%{name}-%1 \
 %post %1 \
-chkconfig --add %{name}-%1 \
+systemctl enable  %{name}-%1 \
 \
 %preun %1 \
 if [ "$1" = 0 ] ; then \
         service %{name}-%1 stop > /dev/null \
-        chkconfig --del %{name}-%1 \
+        systemctl disable  %{name}-%1 \
 fi \
 %postun %1 \
 if [ $1 -ge 1 ]; then \

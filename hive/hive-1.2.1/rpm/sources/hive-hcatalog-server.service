@@ -1,0 +1,20 @@
+[Unit]
+Description=hive-hcatalog-server
+Documentation=https://cwiki.apache.org/confluence/display/Hive/LanguageManual
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+
+[Service]
+Type=simple
+User=hive
+Group=hive
+EnvironmentFile=/etc/default/hadoop-systemd
+EnvironmentFile=/etc/default/hive-hcatalog-server
+EnvironmentFile=/etc/profile.d/java-systemd.sh
+Environment='HADOOP_OPTS=-Dhive.log.dir=/var/log/hive -Dhive.log.file=hive-hcatalog-server.log -Dhive.log.threshold=INFO'
+ExecStart=/usr/lib/hive/bin/hive --service hive-hcatalog-server $PORT
+Restart=always
+SyslogIdentifier=hive-hcatalog-server
+
+[Install]
+WantedBy=multi-user.target

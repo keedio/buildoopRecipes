@@ -1,0 +1,20 @@
+[Unit]
+Description=Hive Server 2
+Documentation=https://cwiki.apache.org/confluence/display/Hive/LanguageManual
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+
+[Service]
+Type=simple
+User=hive
+Group=hive
+EnvironmentFile=/etc/default/hadoop-systemd
+EnvironmentFile=/etc/default/hive-server2
+EnvironmentFile=/etc/profile.d/java-systemd.sh
+Environment='HADOOP_OPTS=-Dhive.log.dir=/var/log/hive -Dhive.log.file=hive-server2.log -Dhive.log.threshold=INFO'
+ExecStart=/usr/lib/hive/bin/hive --service hiveserver2 $PORT
+Restart=always
+SyslogIdentifier=hive-server2
+
+[Install]
+WantedBy=multi-user.target

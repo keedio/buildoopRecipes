@@ -1,0 +1,20 @@
+[Unit]
+Description=hive-webhcat-server
+Documentation=https://cwiki.apache.org/confluence/display/Hive/LanguageManual
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+
+[Service]
+Type=simple
+User=hive
+Group=hive
+EnvironmentFile=/etc/default/hadoop-systemd
+EnvironmentFile=/etc/default/hive-webhcat-server
+EnvironmentFile=/etc/profile.d/java-systemd.sh
+Environment='HADOOP_OPTS=-Dhive.log.dir=/var/log/hive -Dhive.log.file=hive-webhcat-server.log -Dhive.log.threshold=INFO'
+ExecStart=/usr/lib/hive/bin/hive --service hive-webhcat-server $PORT
+Restart=always
+SyslogIdentifier=hive-webhcat-server
+
+[Install]
+WantedBy=multi-user.target
