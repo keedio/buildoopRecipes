@@ -1,0 +1,27 @@
+[Unit]
+Description=Httpfs  server
+After=network.target
+After=systemd-user-sessions.service
+
+[Service]
+User=httpfs
+Group=hadoop
+Type=forking
+Restart=always
+EnvironmentFile=/etc/default/hadoop-systemd
+EnvironmentFile=/etc/default/hadoop-httpfs-systemd
+EnvironmentFile=/etc/profile.d/java-systemd.sh
+Environment='HTTPFS_USER=httpfs'
+Environment='HTTPFS_CONFIG=/etc/hadoop-httpfs/conf'
+Environment='HTTPFS_LOG=/var/log/hadoop-httpfs/'
+Environment='HTTPFS_TEMP=/var/run/hadoop-httpfs'
+Environment='HTTPFS_SLEEP_TIME=5'
+Environment='CATALINA_BASE=/usr/lib/hadoop-httpfs'
+Environment='CATALINA_TMPDIR=/var/run/hadoop-httpfs'
+ExecStartPre=/bin/install -d -m 0755 -o httpfs -g httpfs /var/run/hadoop-httpfs
+ExecStart=/usr/lib/hadoop-httpfs/sbin/httpfs.sh start httpfs httpfs
+ExecStop=/usr/lib/hadoop-httpfs/sbin/httpfs stop $HTTPFS_SLEEP_TIME -force
+SyslogIdentifier=httpfs
+[Install]
+WantedBy=multi-user.target
+

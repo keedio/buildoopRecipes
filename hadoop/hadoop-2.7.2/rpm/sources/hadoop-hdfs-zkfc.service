@@ -1,0 +1,20 @@
+[Unit]
+Description=HDFS Zookeeper Failover service
+After=network.target
+After=systemd-user-sessions.service
+
+[Service]
+User=hdfs
+Group=hadoop
+Type=forking
+Restart=no
+PermissionsStartOnly=tru
+EnvironmentFile=/etc/default/hadoop-systemd
+EnvironmentFile=/etc/default/hadoop-hdfs-zkfc-systemd
+EnvironmentFile=/etc/profile.d/java-systemd.sh
+ExecStartPre=/bin/install -d -m 0755 -o hdfs -g hdfs /var/run/hadoop-hdfs
+ExecStart=/usr/lib/hadoop/sbin/hadoop-daemon.sh --config /etc/hadoop/conf start zkfc
+ExecStop=/usr/lib/hadoop/sbin/hadoop-daemon.sh --config /etc/hadoop/conf stop zkfc
+SyslogIdentifier=hdfs-zkfc
+[Install]
+WantedBy=multi-user.target

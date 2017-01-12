@@ -69,7 +69,7 @@
 %define static_images_dir src/webapps/static/images
 
 %define hadoop_base_version 2.7.2
-%define hadoop_release 1.4.0%{?dist}
+%define hadoop_release 1.4.1%{?dist}
 
 %ifarch i386
 %global hadoop_arch Linux-i386-32
@@ -98,7 +98,7 @@
 %define libexecdir %{_libexecdir}
 %define doc_hadoop %{_docdir}/%{name}-%{hadoop_jar_version}
 %define alternatives_cmd alternatives
-%global initd_dir %{_sysconfdir}/rc.d/init.d
+%global initd_dir %{_sysconfdir}/systemd/system
 %endif
 
 
@@ -127,7 +127,7 @@
 %define libexecdir /usr/libexec/
 %define doc_hadoop %{_docdir}/%{name}-%{hadoop_jar_version}
 %define alternatives_cmd update-alternatives
-%global initd_dir %{_sysconfdir}/rc.d/init.d
+%global initd_dir %{_sysconfdir}/systemd/system
 %endif
 
 
@@ -153,8 +153,11 @@ Source0: %{name}-%{hadoop_base_version}-src.tar.gz
 Source1: rpm-build-stage
 Source2: install_%{name}.sh
 Source3: hadoop.default
+Source30: hadoop-systemd.default
 Source4: hadoop-fuse.default
+Source40: hadoop-fuse-systemd.default
 Source5: httpfs.default
+Source50: httpfs-systemd.default
 Source6: hadoop.1
 Source7: hadoop-fuse-dfs.1
 Source8: hdfs.conf
@@ -169,12 +172,16 @@ Source16: hadoop-yarn-resourcemanager.svc
 Source17: hadoop-yarn-nodemanager.svc
 Source18: hadoop-httpfs.svc
 Source19: mapreduce.default
+Source190: mapreduce-systemd.default
 Source20: hdfs.default
+Source200: hdfs-systemd.default
 Source21: yarn.default
+Source210: yarn-systemd.default
 Source22: hadoop-layout.sh
 Source23: hadoop-hdfs-zkfc.svc
 Source24: hadoop-hdfs-journalnode.svc
 Source25: hadoop-hdfs-nfs3.default 
+Source250: hadoop-hdfs-nfs3-systemd.default 
 Source26: hadoop-hdfs-nfs3
 Source27: hadoop-yarn-timelineserver.svc
 
@@ -561,21 +568,30 @@ bash %{SOURCE2} \
 #echo 'export JSVC_HOME=%{libexecdir}/bigtop-utils' >> $RPM_BUILD_ROOT/etc/default/hadoop
 %__cp $RPM_SOURCE_DIR/%{name}-fuse.default $RPM_BUILD_ROOT/etc/default/%{name}-fuse
 %__cp $RPM_SOURCE_DIR/%{name}-hdfs-nfs3.default $RPM_BUILD_ROOT/etc/default/%{name}-hdfs-nfs3
-%__cp $RPM_SOURCE_DIR/%{name}-hdfs-nfs3 $RPM_BUILD_ROOT/%{initd_dir}/%{name}-hdfs-nfs3
+%__cp $RPM_SOURCE_DIR/%{name}-hdfs-nfs3.service $RPM_BUILD_ROOT/%{initd_dir}/%{name}-hdfs-nfs3.service
 %__cp $RPM_SOURCE_DIR/%{name}-kms.default   $RPM_BUILD_ROOT/etc/default/%{name}-kms
-%__cp $RPM_SOURCE_DIR/%{name}-kms-server $RPM_BUILD_ROOT/%{initd_dir}/%{name}-kms-server
+%__cp $RPM_SOURCE_DIR/%{name}-kms-server.service $RPM_BUILD_ROOT/%{initd_dir}/%{name}-kms-server.service
+# Copy default files for systemd compatibility
+%__cp $RPM_SOURCE_DIR/hadoop-systemd.default $RPM_BUILD_ROOT/etc/default/hadoop-systemd
+%__cp $RPM_SOURCE_DIR/%{name}-fuse-systemd.default $RPM_BUILD_ROOT/etc/default/%{name}-fuse-systemd
+%__cp $RPM_SOURCE_DIR/%{name}-hdfs-nfs3-systemd.default $RPM_BUILD_ROOT/etc/default/%{name}-hdfs-nfs3-systemd
+%__cp $RPM_SOURCE_DIR/%{name}-kms-systemd.default   $RPM_BUILD_ROOT/etc/default/%{name}-kms-systemd
 # Generate the init.d scripts
 for service in %{hadoop_services}
 do
-       init_file=$RPM_BUILD_ROOT/%{initd_dir}/%{name}-${service}
+       init_file=$RPM_BUILD_ROOT/%{initd_dir}/%{name}-${service}.service
        # On RedHat, SuSE and Mageia run-level 2 is networkless, hence excluding it
        env CHKCONFIG="345 85 15"       \
            INIT_DEFAULT_START="3 4 5"  \
            INIT_DEFAULT_STOP="0 1 2 6" \
-         bash $RPM_SOURCE_DIR/init.d.tmpl $RPM_SOURCE_DIR/%{name}-${service}.svc > $init_file
-       chmod 755 $init_file
+         #bash $RPM_SOURCE_DIR/init.d.tmpl $RPM_SOURCE_DIR/%{name}-${service}.svc > $init_file
+         # Modification for systemd services
+         %__cp $RPM_SOURCE_DIR/%{name}-${service}.service $init_file
+         chmod 644 $init_file
        cp $RPM_SOURCE_DIR/${service/-*/}.default $RPM_BUILD_ROOT/etc/default/%{name}-${service}
        chmod 644 $RPM_BUILD_ROOT/etc/default/%{name}-${service}
+       cp $RPM_SOURCE_DIR/${service/-*/}-systemd.default $RPM_BUILD_ROOT/etc/default/%{name}-${service}-systemd
+       chmod 644 $RPM_BUILD_ROOT/etc/default/%{name}-${service}-systemd
 done
 
 # Install security limits
@@ -587,6 +603,7 @@ done
 # Install fuse default file
 %__install -d -m 0755 $RPM_BUILD_ROOT/etc/default
 %__cp %{SOURCE4} $RPM_BUILD_ROOT/etc/default/hadoop-fuse
+%__cp %{SOURCE40} $RPM_BUILD_ROOT/etc/default/hadoop-fuse-systemd
 
 # /var/lib/*/cache
 %__install -d -m 1777 $RPM_BUILD_ROOT/%{state_yarn}/cache
@@ -635,13 +652,13 @@ getent passwd mapred >/dev/null || /usr/sbin/useradd --comment "Hadoop MapReduce
 
 %post httpfs
 %{alternatives_cmd} --install %{config_httpfs} %{name}-httpfs-conf %{etc_httpfs}/conf.empty 10
-chkconfig --add %{name}-httpfs
+systemctl enable  %{name}-httpfs
 
 %post kms 
 alternatives --install /etc/hadoop-kms/conf hadoop-kms-conf /etc/hadoop-kms/conf.dist 10
 
 %post kms-server
-chkconfig --add %{name}-kms-server
+systemctl enable %{name}-kms-server
 
 %preun
 if [ "$1" = 0 ]; then
@@ -656,7 +673,7 @@ fi
 %preun httpfs
 if [ $1 = 0 ]; then
   service %{name}-httpfs stop > /dev/null 2>&1
-  chkconfig --del %{name}-httpfs
+  systemctl disable %{name}-httpfs
   %{alternatives_cmd} --remove %{name}-httpfs-conf %{etc_httpfs}/conf.empty || :
 fi
 
@@ -668,7 +685,7 @@ fi
 %preun kms-server
 if [ $1 = 0 ]; then
   service %{name}-kms-server stop > /dev/null 2>&1
-  chkconfig --del {name}-kms-server
+  systemctl disable {name}-kms-server
 fi
 
 %postun httpfs
@@ -700,6 +717,7 @@ fi
 %defattr(-,root,root)
 %config(noreplace) %{etc_hadoop}/conf.empty/hdfs-site.xml
 %config(noreplace) /etc/default/hadoop-fuse
+%config(noreplace) /etc/default/hadoop-fuse-systemd
 %config(noreplace) /etc/security/limits.d/hdfs.conf
 %{lib_hdfs}
 %{lib_hadoop}/libexec/hdfs-config.sh
@@ -745,6 +763,7 @@ fi
 %config(noreplace) %{etc_hadoop}/conf.empty/mapred-site.xml.template
 %config(noreplace) %{etc_hadoop}/conf.empty/yarn-env.cmd
 %config(noreplace) /etc/default/hadoop
+%config(noreplace) /etc/default/hadoop-systemd
 /etc/bash_completion.d/hadoop
 %{lib_hadoop}/*.jar
 %{lib_hadoop}/lib
@@ -773,8 +792,9 @@ fi
 %defattr(-,root,root)
 %config(noreplace) %{etc_httpfs}/conf.empty
 %config(noreplace) /etc/default/%{name}-httpfs
+%config(noreplace) /etc/default/%{name}-httpfs-systemd
 %{lib_hadoop}/libexec/httpfs-config.sh
-%{initd_dir}/%{name}-httpfs
+%{initd_dir}/%{name}-httpfs.service
 %{lib_httpfs}
 %attr(0775,httpfs,httpfs) %{run_httpfs}
 %attr(0775,httpfs,httpfs) %{log_httpfs}
@@ -783,6 +803,7 @@ fi
 %defattr(-,root,root)
 %config(noreplace) %{config_dist_kms}
 %config(noreplace) /etc/default/%{name}-kms 
+%config(noreplace) /etc/default/%{name}-kms-systemd 
 %{lib_hadoop}/libexec/kms-config.sh
 %{lib_kms}
 %{lib_kms}/sbin
@@ -793,14 +814,15 @@ fi
 
 %files kms-server
 %defattr(-,root,root)
-%{initd_dir}/%{name}-kms-server
+%{initd_dir}/%{name}-kms-server.service
 
 # Service file management RPMs
 %define service_macro() \
 %files %1 \
 %defattr(-,root,root) \
-%{initd_dir}/%{name}-%1 \
+%{initd_dir}/%{name}-%1.service \
 %config(noreplace) /etc/default/%{name}-%1 \
+%config(noreplace) /etc/default/%{name}-%1-systemd \
 %post %1 \
 chkconfig --add %{name}-%1 \
 \
@@ -857,5 +879,6 @@ fi
 %files hdfs-fuse
 %defattr(-,root,root)
 %attr(0644,root,root) %config(noreplace) /etc/default/hadoop-fuse
+%attr(0644,root,root) %config(noreplace) /etc/default/hadoop-fuse-systemd
 %attr(0755,root,root) %{lib_hadoop}/bin/fuse_dfs
 %attr(0755,root,root) %{bin_hadoop}/hadoop-fuse-dfs
