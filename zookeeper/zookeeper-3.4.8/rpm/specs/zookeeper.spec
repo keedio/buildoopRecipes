@@ -213,7 +213,7 @@ fi
 %attr(0755,root,root) %{initd_dir}/%{svc_zookeeper}.service
 
 %files rest
-%attr(0755,root,root) %{initd_dir}/%{svc_zookeeper_rest}
+%attr(0755,root,root) %{initd_dir}/%{svc_zookeeper_rest}.service
 %defattr(-,root,root)
 %{lib_zookeeper_rest}
 %defattr(-,root,root)
