@@ -1,0 +1,16 @@
+[Unit]
+Description=Apache Spark History Server
+After=network.target
+After=systemd-user-sessions.service
+
+[Service]
+User=spark
+Type=forking
+Restart=always
+EnvironmentFile=/etc/profile.d/hadoop-env-systemd.sh
+EnvironmentFile=/etc/spark/conf/spark-env.sh
+ExecStart=/usr/lib/spark/default/sbin/start-history-server.sh
+ExecStop=/usr/lib/spark/default/sbin/stop-history-server.sh
+
+[Install]
+WantedBy=multi-user.target

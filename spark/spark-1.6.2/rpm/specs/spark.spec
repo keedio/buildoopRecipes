@@ -21,7 +21,7 @@
 %define run_spark /var/run/%{spark_name}
 %define man_dir /usr/share/man
 %define spark_user_home /var/lib/spark
-%define rc_dir /etc/init.d
+%define rc_dir /etc/systemd/system
 
 %define spark_version 1.6.2
 %define hadoop_version 2.7.2
@@ -111,6 +111,7 @@ sh $RPM_SOURCE_DIR/install_spark.sh \
 
 %post
 %{alternatives_cmd} --install /usr/lib/spark/default spark  /usr/lib/spark/%{name}-%{spark_base_version}-bin-%{hadoop_version} 32
+systemctl enable spark-history-server
 
 %preun
 if [ "$1" = 0 ]; then
@@ -124,5 +125,5 @@ fi
 %defattr(-,spark,hadoop,755)
 /usr/lib/%{name}/*
 %config(noreplace) /etc/%{name}/*
-%attr(0755,root,root) %{rc_dir}/spark-history-server
+%attr(0755,root,root) %{rc_dir}/spark-history-server.service
 /var/log/spark-history-server
