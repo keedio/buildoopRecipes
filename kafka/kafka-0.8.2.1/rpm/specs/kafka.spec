@@ -15,7 +15,7 @@
 %define kafka_name kafka
 %define lib_kafka /usr/lib/%{kafka_name}
 %define etc_kafka /etc/%{kafka_name}
-%define etc_rcd /etc/rc.d
+%define etc_rcd /etc
 %define config_kafka %{etc_kafka}/conf
 %define log_kafka /var/log/%{kafka_name}
 %define run_kafka /var/run/%{kafka_name}
@@ -41,12 +41,12 @@
 %define doc_kafka %{_docdir}/kafka
 %define alternatives_cmd update-alternatives
 %define alternatives_dep update-alternatives
-%global initd_dir %{_sysconfdir}/rc.d
+%global initd_dir %{_sysconfdir}/systemd/system
 %else
 %define doc_kafka %{_docdir}/kafka-%{kafka_version}
 %define alternatives_cmd alternatives
 %define alternatives_dep chkconfig
-%global initd_dir %{_sysconfdir}/rc.d/init.d
+%global initd_dir %{_sysconfdir}/systemd/system
 %endif
 
 # disable repacking jars
@@ -65,7 +65,7 @@ License: APL2
 Source0: %{name}-%{kafka_base_version}-src.tgz
 Source1: rpm-build-stage
 Source2: install_%{name}.sh
-Source3: kafka-server.sh
+Source3: kafka.service
 Patch0: log_path.patch
 BuildArch: noarch
 BuildRequires: autoconf, automake
@@ -118,7 +118,7 @@ sh $RPM_SOURCE_DIR/install_kafka.sh \
           --build-dir=`pwd`         \
           --prefix=$RPM_BUILD_ROOT
 %__install -d -m 0755 $RPM_BUILD_ROOT/%{initd_dir}/
-init_file=$RPM_BUILD_ROOT/%{initd_dir}/%{name}
+init_file=$RPM_BUILD_ROOT/%{initd_dir}/%{name}.service
 orig_init_file=%{SOURCE3}
 %__cp $orig_init_file $init_file
 chmod 755 $init_file
@@ -132,7 +132,7 @@ getent passwd kafka > /dev/null || useradd -c "Kafka" -s /sbin/nologin -g kafka 
 %__install -d -o kafka -g kafka -m 0755 %{lib_kafka}
 
 %post
-chkconfig --add %{name}
+systemctl enable %{name}
 
 %post core
 %{alternatives_cmd} --install %{config_kafka} %{kafka_name}-conf %{config_kafka}.dist 30
@@ -149,7 +149,7 @@ fi
 #### FILES SECTION ####
 #######################
 %files
-%{etc_rcd}/init.d/kafka
+%{etc_rcd}/systemd/system/kafka.service
 %files core 
 %defattr(-,root,root,755)
 %config(noreplace) %{config_kafka}.dist
