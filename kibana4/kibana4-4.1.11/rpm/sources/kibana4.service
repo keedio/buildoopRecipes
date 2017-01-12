@@ -1,0 +1,21 @@
+[Unit]
+Description=Starts and stops a Kibana 4 instance
+Documentation=https://www.elastic.co/products/kibana
+
+[Service]
+Type=simple
+User=kibana
+Group=kibana
+ExecStart=/usr/lib/kibana4/bin/kibana -c /etc/kibana4/conf/kibana.yml  -l /var/log/kibana/kibana4.log
+# See MAX_OPEN_FILES in sysconfig
+LimitNOFILE=65536
+# See MAX_LOCKED_MEMORY in sysconfig, use "infinity" when MAX_LOCKED_MEMORY=unlimited and using bootstrap.mlockall: true
+LimitMEMLOCK=infinity
+
+#MAX_LOCKED_MEMORY=unlimited
+
+# Shutdown delay in seconds, before process is tried to be killed with KILL (if configured)
+TimeoutStopSec=20
+
+[Install]
+WantedBy=multi-user.target

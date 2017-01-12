@@ -39,7 +39,7 @@ Source0:        %{kibana_name}-%{kibana_version}-linux-x64.tar.gz
 
 #Patch0: 	kibana-scripts-paths.patch
 Source1:	install_kibana.sh
-Source2:        kibana4.init	
+Source2:        kibana4.service	
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
 BuildArch:      x86_64 
 
@@ -63,9 +63,9 @@ bash %{SOURCE1} \
 	   --build-dir=$PWD
 
 # Install init script
-init_file=${RPM_BUILD_ROOT}/etc/init.d/kibana4
+init_file=${RPM_BUILD_ROOT}/etc/systemd/system/kibana4.service
 %__cp %{SOURCE2} $init_file
-chmod 755 $init_file
+chmod 644 $init_file
 
 %pre
 # create kibana group
@@ -79,11 +79,11 @@ if ! getent passwd kibana >/dev/null; then
 fi
 
 %post
-/sbin/chkconfig --add kibana4 
+systemctl enable kibana4 
 
 %preun
 /sbin/service kibana4 stop > /dev/null
-/sbin/chkconfig --del kibana4
+systemctl disable kibana4
 
 %postun 
 if [ $1 -ge 1 ]; then
@@ -93,8 +93,8 @@ fi
 %defattr(-,%{kibana_user},%{kibana_group})
 %dir %attr(755, %{kibana_user},%{kibana_group}) %{kibana_home}
 %{kibana_home}/*
-%attr(0755,root,root) /etc/init.d/kibana4 
+%attr(0644,root,root) /etc/systemd/system/kibana4.service 
 %config(noreplace) /etc/kibana4/*
 %{kibana_user_home}
-/var/log/kibana
+%attr(0755,kibana,kibana)/var/log/kibana
 %changelog

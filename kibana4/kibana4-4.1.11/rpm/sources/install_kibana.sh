@@ -68,7 +68,7 @@ done
 KIBANA_HOME=${PREFIX}/usr/lib/kibana4
 
 install -d -m 755 ${KIBANA_HOME}
-install -d -m 755 ${PREFIX}/etc/init.d
+install -d -m 755 ${PREFIX}/etc/systemd/system
 install -d -m 755 ${PREFIX}/etc/kibana4
 install -d -m 755 ${PREFIX}/var/lib/kibana4
 install -d -m 755 ${PREFIX}/var/log/kibana
