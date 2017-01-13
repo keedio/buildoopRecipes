@@ -84,7 +84,7 @@ LOGSTASH_WEB_ETC_DIR=${LOGSTASH_WEB_ETC_DIR:-$PREFIX/etc/logstash-web}
 
 install -d -m 755 ${LOGSTASH_HOME}
 install    -m 644 ${BUILD_DIR}/LICENSE ${LOGSTASH_HOME}
-install    -m 644 ${BUILD_DIR}/README.md ${LOGSTASH_HOME}
+#install    -m 644 ${BUILD_DIR}/README.md ${LOGSTASH_HOME}
 install    -m 755 $RPM_SOURCE_DIR/readmeExampleConf.txt ${LOGSTASH_HOME}
 
 install -d -m 755 ${LOGSTASH_HOME}/bin
