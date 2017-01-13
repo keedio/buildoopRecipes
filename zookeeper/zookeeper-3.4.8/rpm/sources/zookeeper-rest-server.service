@@ -4,6 +4,8 @@ Want=network-online.target
 After=network-online.target
 
 [Service]
+RuntimeDirectory=zookeeper-rest
+PIDFile=/var/run/zookeeper-rest/zookeeper-rest.pid
 ExecStart=/bin/sh -c 'set -x; . /etc/zookeeper/conf/zookeeper-env.sh;/usr/java/default/bin/java -Dzookeeper.log.dir="/var/log/zookeeper" -Dzookeeper.root.logger="$ZOO_LOG4J_PROP" -cp "$CLASSPATH" $JAVA_OPTS -Dzookeeper.log.threshold=INFO  -cp "/etc/zookeeper/conf.dist/rest/:/usr/lib/zookeeper-rest/lib/zookeeper-3.4.8-rest.jar:/usr/lib/zookeeper-rest/lib/*:/usr/lib/zookeeper-rest/*:/usr/lib/zookeeper/zookeeper.jar:/usr/lib/zookeeper/lib/*"  org.apache.zookeeper.server.jersey.RestMain 2>&1 >> /var/log/zookeeper/zookeeper-rest.log'
 Restart=always
 RemainAfterExit=no

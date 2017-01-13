@@ -102,11 +102,11 @@ install -d -m 0755 ${PREFIX}/${LIVY_HOME}
 install -d -m 0755 ${PREFIX}/var/log/livy
 install -d -m 0755 ${PREFIX}/var/run/livy
 install -d -m 0755 ${PREFIX}/etc/livy
-install -d -m 0755 ${PREFIX}/etc/init.d
+install -d -m 0755 ${PREFIX}/etc/systemd/system
 cp -Rpd ${BUILD_DIR}/* ${PREFIX}/${LIVY_HOME}/
 mv  ${PREFIX}/${LIVY_HOME}/conf   ${PREFIX}/etc/livy/conf.dist
 ln -s /etc/livy/conf.dist ${PREFIX}/etc/livy/conf
 ln -s /etc/livy/conf  ${PREFIX}/${LIVY_HOME}/conf
-cp ${RPM_SOURCE_DIR}/livy.init ${PREFIX}/etc/init.d/livy
+cp ${RPM_SOURCE_DIR}/livy.service ${PREFIX}/etc/systemd/system/livy.service
 cp ${RPM_SOURCE_DIR}/livy-env.sh ${PREFIX}/etc/livy/conf.dist/livy-env.sh
 

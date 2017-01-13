@@ -87,14 +87,14 @@ getent passwd livy >/dev/null || /usr/sbin/useradd --comment "Livy User" --shell
 
 
 %post
-/sbin/chkconfig --add livy 
+systemctl enable livy 
 
 
 
 %preun
 if [ "$1" = 0 ]; then
   /sbin/service livy stop > /dev/null
-  /sbin/chkconfig --del livy
+  systemctl disable livy
 fi
 
 %postun
@@ -109,5 +109,5 @@ fi
 /var/log/livy
 /var/run/livy
 %config(noreplace) /etc/livy/
-%attr(0755,root,root) /etc/init.d/livy
+%attr(0755,root,root) /etc/systemd/system/livy.service
 

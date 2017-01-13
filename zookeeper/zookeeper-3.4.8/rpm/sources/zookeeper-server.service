@@ -4,6 +4,8 @@ Want=network-online.target
 After=network-online.target
 
 [Service]
+RuntimeDirectory=zookeeper
+PIDFile=/var/run/zookeeper/zookeeper.pid
 ExecStart=/bin/sh -c 'set -x; . /etc/zookeeper/conf/zookeeper-env.sh; CLASSPATH="/usr/lib/zookeeper/zookeeper.jar:/usr/lib/zookeeper/lib/*:$CLASSPATH"; CLASSPATH="$(. /usr/lib/zookeeper/bin/zkEnv.sh ; echo $CLASSPATH)"; mkdir -p /var/log/zookeeper; $JAVA "-Dzookeeper.log.dir=/var/log/zookeeper" "-Dzookeeper.root.logger=$ZOO_LOG4J_PROP" -cp "$CLASSPATH" $JAVA_OPTS -Dzookeeper.log.threshold=INFO "$ZOOMAIN" "$ZOOCFG"'
 Restart=always
 RemainAfterExit=no

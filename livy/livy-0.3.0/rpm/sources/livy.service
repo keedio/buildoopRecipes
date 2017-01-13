@@ -1,0 +1,15 @@
+[Unit]
+Description=LIVY
+Documentation=https://github.com/cloudera/livy
+
+[Service]
+Type=simple
+User=livy
+Group=hadoop
+RuntimeDirectory=livy
+PIDFile=/var/run/livy/livy.pid
+ExecStart=/usr/lib/livy/bin/livy-server
+
+
+[Install]
+WantedBy=multi-user.target
