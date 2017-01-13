@@ -6,7 +6,10 @@ After=network-online.target
 
 [Service]
 User=hue
+Group=hadoop
 WorkingDirectory=/usr/lib/hue/
+PIDFile = /var/run/hue/hue.pid
+RuntimeDirectory=hue
 Environment=PYTHON_EGG_CACHE=/tmp/.hue-python-eggs
 ExecStart=/usr/bin/env build/env/bin/hue runcherrypyserver
 SyslogIdentifier=hue

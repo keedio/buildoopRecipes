@@ -8,6 +8,7 @@ User=kms
 Group=hadoop
 Type=forking
 Restart=always
+PermissionsStartOnly=true
 EnvironmentFile=/etc/default/hadoop-systemd
 EnvironmentFile=/etc/default/hadoop-kms-systemd
 EnvironmentFile=/etc/profile.d/java-systemd.sh

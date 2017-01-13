@@ -4,8 +4,10 @@ After = syslog.target network.target remote-fs.target
 
 [Service]
 User = oozie
+Group = hadoop
 EnvironmentFile=/usr/lib/oozie/bin/oozie-env.sh
 PIDFile = /var/run/oozie/oozie.pid
+RuntimeDirectory=oozie
 ExecStartPre = /usr/lib/oozie/tomcat-deployment.sh
 ExecStart = /usr/lib/oozie/bin/oozied.sh start
 ExecStop = /usr/lib/oozie/bin/oozied.sh stop

@@ -8,6 +8,8 @@ After=network.target remote-fs.target
 Type=simple
 User=kafka
 Group=kafka
+PIDFile = /var/run/kafka/kafka.pid
+RuntimeDirectory=kafka
 EnvironmentFile=/etc/default/kafka-systemd.sh
 EnvironmentFile=/etc/profile.d/java-systemd.sh
 Environment='LOG_DIR=/var/log/kafka'

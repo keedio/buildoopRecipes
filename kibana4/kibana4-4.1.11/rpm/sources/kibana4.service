@@ -7,6 +7,8 @@ Type=simple
 User=kibana
 Group=kibana
 ExecStart=/usr/lib/kibana4/bin/kibana -c /etc/kibana4/conf/kibana.yml  -l /var/log/kibana/kibana4.log
+PIDFile=/var/run/kibana/kibana4.pid
+RuntimeDirectory=kibana
 # See MAX_OPEN_FILES in sysconfig
 LimitNOFILE=65536
 # See MAX_LOCKED_MEMORY in sysconfig, use "infinity" when MAX_LOCKED_MEMORY=unlimited and using bootstrap.mlockall: true
