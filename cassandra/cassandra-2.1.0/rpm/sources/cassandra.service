@@ -7,6 +7,7 @@ After=network.target
 [Service]
 EnvironmentFile=/etc/default/cassandra
 PIDFile=/var/run/cassandra/cassandra.pid
+RuntimeDirectory=cassandra
 User=cassandra
 Group=cassandra
 ExecStart= /usr/lib/cassandra/bin/cassandra -f -p /var/run/cassandra/cassandra.pid
