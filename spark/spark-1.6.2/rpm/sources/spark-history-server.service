@@ -5,11 +5,12 @@ After=systemd-user-sessions.service
 
 [Service]
 User=spark
-Type=forking
+Type=simple
 Restart=always
 PIDFile = /var/run/spark/spark-hs.pid
 RuntimeDirectory=spark
-EnvironmentFile=/etc/profile.d/hadoop-env-systemd.sh
+Environment='HADOOP_CONF_DIR=/etc/hadoop/conf'
+Environment='YARN_CONF_DIR=/etc/hadoop/conf'
 EnvironmentFile=/etc/spark/conf/spark-env.sh
 ExecStart=/usr/lib/spark/default/sbin/start-history-server.sh
 ExecStop=/usr/lib/spark/default/sbin/stop-history-server.sh

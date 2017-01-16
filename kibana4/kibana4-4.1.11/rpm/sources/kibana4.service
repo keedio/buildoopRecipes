@@ -6,18 +6,12 @@ Documentation=https://www.elastic.co/products/kibana
 Type=simple
 User=kibana
 Group=kibana
+PermissionsStartOnly=true
+ExecStartPre=/bin/install -d -m 0755 -o kibana -g kibana /var/log/kibana
 ExecStart=/usr/lib/kibana4/bin/kibana -c /etc/kibana4/conf/kibana.yml  -l /var/log/kibana/kibana4.log
 PIDFile=/var/run/kibana/kibana4.pid
 RuntimeDirectory=kibana
-# See MAX_OPEN_FILES in sysconfig
-LimitNOFILE=65536
-# See MAX_LOCKED_MEMORY in sysconfig, use "infinity" when MAX_LOCKED_MEMORY=unlimited and using bootstrap.mlockall: true
-LimitMEMLOCK=infinity
 
-#MAX_LOCKED_MEMORY=unlimited
-
-# Shutdown delay in seconds, before process is tried to be killed with KILL (if configured)
-TimeoutStopSec=20
 
 [Install]
 WantedBy=multi-user.target
