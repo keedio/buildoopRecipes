@@ -30,7 +30,7 @@
 %define __os_install_post \
     %{!?__debug_package:/usr/lib/rpm/brp-strip %{__strip}} \
 %{nil}
-%define __jar_repack %{nil}
+#%define __jar_repack %{nil}
 %define __prelink_undo_cmd %{nil}
 
 # Disable debuginfo package, since we never need to gdb
@@ -49,9 +49,9 @@
 %global initd_dir %{_sysconfdir}/init.d
 %endif
 
-# disable repacking jars
-%define __os_install_post %{nil}
-
+# disable automatic dependency finding
+# related to problem with osgi dependecy
+AutoReqProv: no
 Name: zeppelin
 Version: %{zeppelin_version}
 Release: %{zeppelin_release}
