@@ -30,7 +30,7 @@
 
 %define hbase_version 0.96.1.1
 %define hbase_base_version 0.96.1.1
-%define hbase_release 1.4.0%{?dist}
+%define hbase_release 2.0.0%{?dist}
 %define hbase_jar_version 0.96.1.1-hadoop2
 
 

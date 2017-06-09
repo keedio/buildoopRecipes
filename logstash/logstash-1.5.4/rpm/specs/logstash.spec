@@ -30,7 +30,7 @@
 %global __os_install_post %{nil}
 
 %define logstash_version 1.5.4
-%define logstash_release 1.4.0%{?dist}
+%define logstash_release 2.0.0%{?dist}
 
 Name:           %{logstash_name}
 Version:        %{logstash_version}

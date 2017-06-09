@@ -1,0 +1,26 @@
+diff -ur couchbase1/goproj/src/github.com/couchbase/query/datastore/couchbase/get_inferencer_ce.go couchbase2/goproj/src/github.com/couchbase/query/datastore/couchbase/get_inferencer_ce.go
+--- couchbase1/goproj/src/github.com/couchbase/query/datastore/couchbase/get_inferencer_ce.go	2016-10-04 12:41:02.113294105 +0200
++++ couchbase2/goproj/src/github.com/couchbase/query/datastore/couchbase/get_inferencer_ce.go	2016-10-04 12:44:56.403819766 +0200
+@@ -13,7 +13,7 @@
+ // Currently, the community edition does not have access to schema
+ // inferencing, so this stub returns an error.
+ 
+-// +build !enterprise
++// build !enterprise
+ 
+ package couchbase
+ 
+Only in couchbase1/goproj/src/github.com/couchbase/query/datastore/couchbase: get_inferencer_ee.go
+diff -ur couchbase1/Makefile couchbase2/Makefile
+--- couchbase1/Makefile	2016-10-04 12:41:03.521279235 +0200
++++ couchbase2/Makefile	2016-10-04 12:44:34.829047611 +0200
+@@ -18,7 +18,7 @@
+ # Options passed to the command to nuke directories
+ RMOPTS=/Q /S
+ # Other options you would like to pass to cmake
+-EXTRA_CMAKE_OPTIONS=
++EXTRA_CMAKE_OPTIONS=-D CMAKE_PREFIX_PATH="/opt/r14b04;/usr/lib/couchbase" -D CMAKE_INSTALL_PREFIX=/usr/lib/couchbase 
+ # Command used to remove read only flag for files
+ CHMODCMD=attrib -r
+ # Command used for copying files
+Only in couchbase1: .repo

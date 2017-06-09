@@ -1,0 +1,18 @@
+CB_VERSION=$1
+BUILD=$2
+#Loading the right environment from SCL
+#source scl_source enable git19 devtoolset-3 
+rm -rf couchbase
+mkdir couchbase
+cd couchbase
+git config --global user.email systems@keedio.com
+git config --global user.name  "Keedio Systems Team"
+#Using Google's repo program to get couchbase repo
+repo init -u git://github.com/couchbase/manifest.git -m released/$CB_VERSION.xml
+repo sync -j8
+#Activating enterprise features
+rm ./goproj/src/github.com/couchbase/query/datastore/couchbase/get_inferencer_ee.go
+patch -p1 < ${RPM_SOURCE_DIR}/ee.patch
+cmake -G "Unix Makefiles"  -D CMAKE_INSTALL_PREFIX="/usr/lib/couchbase" -D CMAKE_PREFIX_PATH=";/usr/lib/couchbase" -D PRODUCT_VERSION=4.6.2 -D BUILD_ENTERPRISE=keedio  -D CMAKE_BUILD_TYPE=RelWithDebInfo .
+make  -j 8
+cmake -P cmake_install.cmake 

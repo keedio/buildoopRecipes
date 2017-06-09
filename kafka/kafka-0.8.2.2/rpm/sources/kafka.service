@@ -1,0 +1,22 @@
+[Unit]
+Description=Apache Kafka server (broker)
+Documentation=http://kafka.apache.org/documentation.html
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+
+[Service]
+Type=simple
+User=kafka
+Group=kafka
+PIDFile = /var/run/kafka/kafka.pid
+RuntimeDirectory=kafka
+EnvironmentFile=/etc/default/kafka-systemd.sh
+EnvironmentFile=/etc/profile.d/java-systemd.sh
+Environment='LOG_DIR=/var/log/kafka'
+Environment='KAFKA_LOG4J_OPTS=-Dlog4j.configuration=file:/etc/kafka/conf/log4j.properties'
+ExecStart=/usr/lib/kafka/bin/kafka-server-start.sh  /etc/kafka/conf/server.properties
+Restart=always
+SyslogIdentifier=kafka
+
+[Install]
+WantedBy=multi-user.target

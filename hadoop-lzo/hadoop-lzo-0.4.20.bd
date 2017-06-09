@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Splittable lzo compression for hdfs", 
+		"homepage":    "https://github.com/twitter/hadoop-lzo.git",
+		"license":     "Apache-2.0",
+		"filename":    "hadoop-lzo-0.4.20.bd"
+	},
+	
+	"do_download": {
+		"src_uri":  "https://github.com/twitter/hadoop-lzo.git",
+	 	"src_hash": "release-0.4.20"
+	},
+
+	"do_fetch": {
+		"download_cmd": "git"
+	},
+}

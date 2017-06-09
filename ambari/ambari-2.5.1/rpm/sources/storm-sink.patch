@@ -1,0 +1,12 @@
+diff -ur apache-ambari-2.5.1-src/ambari-metrics/ambari-metrics-storm-sink/pom.xml apache-ambari-2.5.1-src-fixed/ambari-metrics/ambari-metrics-storm-sink/pom.xml
+--- apache-ambari-2.5.1-src/ambari-metrics/ambari-metrics-storm-sink/pom.xml	2017-05-22 18:18:55.000000000 +0000
++++ apache-ambari-2.5.1-src-fixed/ambari-metrics/ambari-metrics-storm-sink/pom.xml	2017-06-05 15:02:27.859489005 +0000
+@@ -31,7 +31,7 @@
+   <packaging>jar</packaging>
+ 
+   <properties>
+-    <storm.version>1.1.0-SNAPSHOT</storm.version>
++    <storm.version>1.1.0</storm.version>
+   </properties>
+ 
+   <build>

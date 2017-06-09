@@ -22,7 +22,7 @@
 %define lib_hadoop /usr/lib/hadoop
 %define oozie_version 4.2.0
 %define oozie_base_version 4.2.0 
-%define oozie_release 1.4.0%{?dist}
+%define oozie_release 2.0.0%{?dist}
 
 %if  %{!?suse_version:1}0
   %define doc_oozie %{_docdir}/oozie-%{oozie_version}

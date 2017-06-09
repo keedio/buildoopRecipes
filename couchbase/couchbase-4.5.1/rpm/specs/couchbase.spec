@@ -21,13 +21,13 @@
 %define couchbase_group couchbase
 
 %define couchbase_version 4.5.1
-%define couchbase_release 1.4.0%{?dist}
+%define couchbase_release 2.0.0%{?dist}
 %define debug_package %{nil}
 
 Name:           %{couchbase_name}
 Version:        %{couchbase_version}
 Release:        %{couchbase_release}
-Summary:        Couchbase is a web tool to visualize and represent data
+Summary:        Couchbase Server, originally known as Membase, is an open-source, distributed multi-model NoSQL document-oriented database software package that is optimized for interactive applications.
 
 Group:          Applications/web
 License:        ASL 2.0
@@ -47,7 +47,7 @@ BuildArch:      x86_64
 AutoReqProv: 	no
 
 %description
-Couchbase is a web tool to visualize and represent elasticsearch data
+Couchbase Server, originally known as Membase, is an open-source, distributed multi-model NoSQL document-oriented database software package that is optimized for interactive applications.
 
 %prep
 #%setup -n %{couchbase_name}-%{couchbase_version}-linux-x64

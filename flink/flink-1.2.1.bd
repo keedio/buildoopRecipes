@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Flink", 
+		"homepage":    "https://flink.apache.org/",
+		"license":     "Apache-2.0",
+		"filename":    "flink-1.2.1.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "http://www-eu.apache.org/dist/flink/flink-1.2.1/flink-1.2.1-src.tgz",
+		"src_md5sum": "3bb78928f684dc6b53c74e34a60e99e8"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	},
+}

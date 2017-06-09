@@ -14,7 +14,7 @@
 # limitations under the License.
 
 %define nagios_hadoop_version 1.1.1
-%define nagios_hadoop_release 1.4.0%{?dist}
+%define nagios_hadoop_release 2.0.0%{?dist}
 
 Name:    nagios-hadoop
 Version: %{nagios_hadoop_version}

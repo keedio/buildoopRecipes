@@ -1,0 +1,19 @@
+[Unit]
+Description=YARN Proxyserver
+After=network.target
+After=systemd-user-sessions.service
+
+[Service]
+User=yarn
+Type=forking
+Restart=always
+PermissionsStartOnly=true
+EnvironmentFile=/etc/default/hadoop-systemd
+EnvironmentFile=/etc/default/hadoop-yarn-proxyserver-systemd
+EnvironmentFile=/etc/profile.d/java-systemd.sh
+ExecStartPre=/bin/install -d -m 0755 -o yarn -g hadoop /var/run/hadoop-yarn
+ExecStart=/usr/lib/hadoop-yarn/sbin/yarn-daemon.sh --config /etc/hadoop/conf start proxyserver
+ExecStop=/usr/lib/hadoop-yarn/sbin/yarn-daemon.sh --config /etc/hadoop/conf stop proxyserver
+SyslogIdentifier=yarn-proxyserver
+[Install]
+WantedBy=multi-user.target

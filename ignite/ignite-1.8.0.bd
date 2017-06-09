@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Ignite", 
+		"homepage":    "https://ignite.apache.org/",
+		"license":     "Apache-2.0",
+		"filename":    "ignite-1.8.0.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "https://github.com/apache/ignite/archive/1.8.0.tar.gz",
+		"src_md5sum": "667918cef169e70d3c7f1a116bdb509a"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	},
+}

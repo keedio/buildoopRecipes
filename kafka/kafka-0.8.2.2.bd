@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Kafka", 
+		"homepage":    "http://kafka.apache.org/",
+		"license":     "Apache-2.0",
+		"filename":    "kafka-0.8.2.2.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "http://www-eu.apache.org/dist/kafka/0.8.2.2/kafka-0.8.2.2-src.tgz",
+		"src_md5sum": "570332f7db323476f4f74efcff271982"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	},
+}

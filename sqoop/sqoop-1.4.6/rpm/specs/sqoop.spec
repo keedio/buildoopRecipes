@@ -18,7 +18,7 @@
 
 %define sqoop_version 1.4.6
 %define sqoop_base_version 1.4.6
-%define sqoop_release 1.4.0%{?dist}
+%define sqoop_release 2.0.0%{?dist}
 %define sqoop_home /usr/lib/sqoop
 
 Name: sqoop

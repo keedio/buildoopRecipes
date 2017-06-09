@@ -1,0 +1,12 @@
+diff -uprN kafka-0.8.2.2-src_vanilla/bin/kafka-run-class.sh kafka-0.8.2.2-src/bin/kafka-run-class.sh
+--- kafka-0.8.2.2-src_vanilla/bin/kafka-run-class.sh	2015-02-26 23:12:05.000000000 +0100
++++ kafka-0.8.2.2-src/bin/kafka-run-class.sh	2015-08-18 11:32:03.943950232 +0200
+@@ -22,6 +22,8 @@ fi
+ 
+ base_dir=$(dirname $0)/..
+ 
++LOG_DIR=/var/log/kafka
++
+ # create logs directory
+ if [ "x$LOG_DIR" = "x" ]; then
+     LOG_DIR="$base_dir/logs"

@@ -14,7 +14,7 @@
 # limitations under the License.
 %define lib_flume /usr/lib/flume
 %define livy_base_version 0.3.0
-%define livy_release 1.4.0%{?dist}
+%define livy_release 2.0.0%{?dist}
 %define etc_flume /etc/flume/conf
 
 %if  %{?suse_version:1}0

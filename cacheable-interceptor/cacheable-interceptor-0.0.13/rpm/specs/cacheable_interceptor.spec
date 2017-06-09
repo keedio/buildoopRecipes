@@ -14,7 +14,7 @@
 # limitations under the License.
 %define lib_flume /usr/lib/flume
 %define cacheable_interceptor_base_version 0.0.13
-%define cacheable_interceptor_release 1.4.0%{?dist}
+%define cacheable_interceptor_release 2.0.0%{?dist}
 %define etc_flume /etc/flume/conf
 
 %if  %{?suse_version:1}0

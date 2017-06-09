@@ -7,7 +7,7 @@
 	},
 	
 	"do_download": {
-		"src_uri":    "http://www-eu.apache.org/dist/hive/hive-1.2.1/apache-hive-1.2.1-src.tar.gz",
+		"src_uri":    "https://archive.apache.org/dist/hive/hive-1.2.1/apache-hive-1.2.1-src.tar.gz",
 		"src_md5sum": "fdb5177ba931cf65149d395faebf9dda"
 	},
 

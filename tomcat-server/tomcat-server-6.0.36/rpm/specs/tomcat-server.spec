@@ -21,7 +21,7 @@
 %endif
 %define tomcat_server_version 6.0.36
 %define tomcat_server_base_version 6.0.36
-%define tomcat_server_release 1.3.0%{?dist}
+%define tomcat_server_release 2.0.0%{?dist}
 
 Name: tomcat-server
 Version: %{tomcat_server_version}

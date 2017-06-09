@@ -1,0 +1,5 @@
+#!/bin/bash
+
+CASSANDRA_HOME=/usr/lib/cassandra
+CASSANDRA_CONF=/etc/cassandra/conf
+CASSANDRA_INCLUDE=/usr/lib/cassandra/tools/bin/cassandra.in.sh

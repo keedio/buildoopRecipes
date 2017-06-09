@@ -20,7 +20,7 @@
 
 %define avro_version 1.7.5
 %define avro_base_version 1.7.5
-%define avro_release 1.4.0%{?dist}
+%define avro_release 2.0.0%{?dist}
 
 Name: avro
 Version: %{avro_version}

@@ -14,7 +14,7 @@
 # limitations under the License.
 %define nagiosplugin_version 1.2.2
 %define nagiosplugin_base_version 1.2.2
-%define nagiosplugin_release 1.4.0%{?dist}
+%define nagiosplugin_release 2.0.0%{?dist}
 
 Name: nagiosplugin
 Version: %{nagiosplugin_version}

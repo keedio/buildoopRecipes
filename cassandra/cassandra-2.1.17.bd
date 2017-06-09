@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Cassandra database", 
+		"homepage":    "http://cassandra.apache.org/",
+		"license":     "Apache-2.0",
+		"filename":    "cassandra-2.1.17.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "http://archive.apache.org/dist/cassandra/2.1.17/apache-cassandra-2.1.17-src.tar.gz",
+		"src_md5sum": "27f85922f3c98d08eb977e1a177bce75"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	},
+}

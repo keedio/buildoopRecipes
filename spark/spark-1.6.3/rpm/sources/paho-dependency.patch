@@ -1,0 +1,11 @@
+--- external/mqtt/pom-orig.xml	2016-08-11 11:26:25.704909833 +0200
++++ external/mqtt/pom.xml	2016-08-11 11:25:28.618517795 +0200
+@@ -51,7 +51,7 @@
+     <dependency>
+       <groupId>org.eclipse.paho</groupId>
+       <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+-      <version>1.0.1</version>
++      <version>1.0.2</version>
+     </dependency>
+     <dependency>
+       <groupId>org.scalacheck</groupId>

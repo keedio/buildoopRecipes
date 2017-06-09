@@ -1,0 +1,20 @@
+[Unit]
+Description = Couchbase Server
+Documentation = http://docs.couchbase.com
+After = network.target remote-fs.target nss-lookup.target
+
+[Service]
+SyslogIdentifier = couchbase
+User = couchbase
+Type = forking
+PIDFile=/var/run/couchbase/couchbase-server.pid
+RuntimeDirectory=elasticsearch
+WorkingDirectory = /var/lib/couchbase
+LimitNOFILE = 40960
+LimitCORE = unlimited
+LimitMEMLOCK = unlimited
+ExecStart = /usr/lib/couchbase/bin/couchbase-server -noinput -detached > /usr/lib/couchbase/var/lib/couchbase/logs/start.log 2>&1
+ExecStop = /usr/lib/couchbase/bin/couchbase-server -k
+
+[Install]
+WantedBy = multi-user.target

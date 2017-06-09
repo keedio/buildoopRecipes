@@ -14,7 +14,7 @@
 # limitations under the License.
 %define thrift_version 0.9.3
 %define thrift_base_version 0.9.3
-%define thrift_release 1.4.0%{?dist}
+%define thrift_release 2.0.0%{?dist}
 
 Name: thrift
 Version: %{thrift_version}

@@ -21,7 +21,7 @@
 %define kibana_group kibana
 
 %define kibana_version 4.1.11
-%define kibana_release 1.4.0%{?dist}
+%define kibana_release 2.0.0%{?dist}
 %define debug_package %{nil}
 
 # Added a 4 for compatibility issues with kibana 3

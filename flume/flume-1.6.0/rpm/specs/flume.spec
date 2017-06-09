@@ -37,7 +37,7 @@
 # apache-flume-1.6.0-src.tar.gz
 #
 %define flume_base_version 1.6.0
-%define flume_release 1.4.0%{?dist}
+%define flume_release 2.0.0%{?dist}
 
 %define flume_folder apache-%{name}-%{flume_base_version}-src
 

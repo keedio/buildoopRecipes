@@ -24,7 +24,7 @@
 
 %define zeppelin_version 0.6.2 
 %define zeppelin_base_version 0.6.2
-%define zeppelin_release 1.4.0%{?dist}
+%define zeppelin_release 2.0.0%{?dist}
 
 # Disable post hooks (brp-repack-jars, etc) that just take forever and sometimes cause issues
 %define __os_install_post \
