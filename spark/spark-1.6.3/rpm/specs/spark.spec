@@ -70,7 +70,7 @@ Source2: install_%{name}.sh
 BuildArch: noarch
 BuildRequires: autoconf, automake
 Requires(pre): coreutils, /usr/sbin/groupadd, /usr/sbin/useradd
-Requires: jdk, redhat-lsb, hadoop-client, hadoop-yarn
+Requires: redhat-lsb, hadoop-client, hadoop-yarn
 Patch0: spark-pom-wasb-eventhubs-v3.patch
 Patch1: paho-dependency.patch
 %if  %{?suse_version:1}0

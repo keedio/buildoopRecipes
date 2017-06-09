@@ -60,7 +60,7 @@ Logstash is a tool for managing events and logs.
 %package web
 Summary: Logstash web is a Kibana web interface to see logstash activity
 Group: System Environment/Daemons
-Requires: %{name} = %{version}-%{release}, jdk, kibana
+Requires: %{name} = %{version}-%{release}, kibana
 BuildArch: noarch
 %description web
 Logstash web is a Kibana web interface to see logstash activity
