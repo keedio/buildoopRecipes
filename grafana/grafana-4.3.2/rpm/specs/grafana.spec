@@ -20,7 +20,7 @@
 %define grafana_user_home /var/lib/grafana
 %define grafana_group grafana
 
-%define grafana_version 4.0.2
+%define grafana_version 4.3.2
 %define grafana_release 2.0.0%{?dist}
 %define debug_package %{nil}
 
@@ -34,7 +34,7 @@ Group:          Applications/web
 License:        ASL 2.0
 URL:            http://www.grafana.org
 Vendor:	        Keedio	
-Packager:	Alessio Comisso <acomisso@keedio.org>
+Packager:	Carlos Alvarez <calvarez@keedio.org>
 Source0:        %{grafana_name}.git.tar.gz
 
 #Patch0: 	grafana-scripts-paths.patch

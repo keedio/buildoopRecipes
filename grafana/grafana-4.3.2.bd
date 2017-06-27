@@ -1,14 +1,14 @@
 {
 	"do_info": {
-		"description": "Kibana is a web tool to visualize and represent elasticsearch data", 
-		"homepage":    "http://www.elasticsearch.org/overview/kibana/",
+		"description": "Grafana is a web tool to visualize and represent elasticsearch data", 
+		"homepage":    "https://grafana.com/grafana",
 		"license":     "Apache-2.0",
-		"filename":    "grafana-4.0.2.bd"
+		"filename":    "grafana-4.3.2.bd"
 	},
 	
         "do_download": {
                 "src_uri":  "https://github.com/grafana/grafana.git",
-                "src_hash": "v4.0.2"
+                "src_hash": "v4.3.2"
         },
 
         "do_fetch": {
