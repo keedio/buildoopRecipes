@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Kibana is a web tool to visualize and represent elasticsearch data", 
+		"homepage":    "http://www.elasticsearch.org/overview/kibana/",
+		"license":     "Apache-2.0",
+		"filename":    "kibana-5.4.1.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "https://artifacts.elastic.co/downloads/kibana/kibana-5.4.1-linux-x86_64.tar.gz",
+		"src_md5sum": "cae2ecc1263608a5927763f72474ed0b"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	},
+}

@@ -1,0 +1,17 @@
+[Unit]
+Description=Starts and stops a Kibana instance
+Documentation=https://www.elastic.co/products/kibana
+
+[Service]
+Type=simple
+User=kibana
+Group=kibana
+PermissionsStartOnly=true
+ExecStartPre=/bin/install -d -m 0755 -o kibana -g kibana /var/log/kibana
+ExecStart=/usr/lib/kibana/bin/kibana -c /etc/kibana/conf/kibana.yml  -l /var/log/kibana/kibana.log
+PIDFile=/var/run/kibana/kibana.pid
+RuntimeDirectory=kibana
+
+
+[Install]
+WantedBy=multi-user.target

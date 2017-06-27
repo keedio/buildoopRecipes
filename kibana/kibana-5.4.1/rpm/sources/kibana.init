@@ -1,0 +1,132 @@
+#!/bin/bash
+
+
+# chkconfig: - 95 5
+# description: The Apache HTTP Server is an efficient and extensible  \
+#	       server implementing the current HTTP standards.
+# processname: httpd
+# config: /etc/kibana/conf/kibana.yml
+# pidfile: /var/run/kibana.pid
+#
+### BEGIN INIT INFO
+# Provides: kibana
+# Required-Start: $local_fs $remote_fs $network $named
+# Required-Stop: $local_fs $remote_fs $network
+# Short-Description: start and stop kibana
+# Description: The kibana is a dashboard for ElasticSearch 
+### END INIT INFO
+
+
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+DESC="Kibana 4"
+NAME=kibana
+DAEMON=/usr/lib/kibana/bin/$NAME
+DAEMON_ARGS=""
+PIDFILE=/var/run/$NAME.pid
+SCRIPTNAME=/etc/init.d/$NAME
+LOG=/var/log/kibana/kibana.log
+RETVAL=0
+ 
+pid_file_exists() {
+    [ -f "$PIDFILE" ]
+}
+ 
+do_start()      {
+        
+        if pid_file_exists
+        then
+                        echo "Kibana is already running"
+                        return 1
+        else
+                        $DAEMON $DAEMON_ARGS 1>"$LOG" 2>&1 &
+                        PID=$!
+                        echo $PID > "$PIDFILE"
+           
+                        if [ "$PID" > 0 ]
+                        then
+                                echo "Kibana started with pid $!"
+                                return 0
+                        else
+                                echo "Kibana could not be started"
+                                return 1
+                        fi    
+        fi
+                
+        
+}
+ 
+ 
+do_status() {
+        if pid_file_exists
+        then    
+                PID=$(cat $PIDFILE)
+                STATUS=$(ps ax | grep $PID | grep -v grep | awk '{print $1}')
+                
+                if [ "$STATUS" == "$PID" ]
+                then
+                                echo "Kibana is running on proccess $PID"
+                                return 0
+                else
+                                echo "Kibana is NOT running"
+                                #rm $PIDFILE
+                                return 1
+                fi
+        else
+                echo "Kibana is NOT running"
+                return 3
+        fi
+}
+ 
+do_stop() {
+        if pid_file_exists
+        then    
+                PID=$(cat $PIDFILE)
+                STATUS=$(ps ax | grep $PID | grep -v grep | awk '{print $1}')
+                
+                if [ "$STATUS" == "$PID" ]
+                then
+                                echo "Killing Kibana...."
+                                KILL=$(kill -15 $PID)
+                                rm $PIDFILE
+                                sleep 1
+                                echo -e "\tKibana (PID:$PID) killed"
+                                return 0
+                                
+                else
+                                echo "Kibana is NOT running"
+                                rm $PIDFILE
+                                return 1
+                fi
+        else
+                echo "Kibana is NOT running"
+                 return 0
+        fi
+}
+ 
+ 
+case "$1" in
+  start)
+        do_start
+        RETVAL=$?
+        ;;
+  stop)
+        do_stop
+        RETVAL=$?
+        ;;
+  status)
+        do_status
+        RETVAL=$?
+        ;;
+  restart)
+        do_stop
+        do_start
+        RETVAL=$?
+        ;;
+  *)
+        echo "Usage: $SCRIPTNAME {start|stop|status|restart}" >&2
+        exit 2
+        ;;
+esac
+ 
+exit $RETVAL
