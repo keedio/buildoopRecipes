@@ -22,6 +22,8 @@
 %define man_dir /usr/share/man
 %define spark_user_home /var/lib/spark
 %define rc_dir /etc/init.d
+%define spark1_directory spark
+%define pkgname spark1-%{spark_version}-%{spark_release}
 
 %define spark_version 1.6.3
 %define hadoop_version 2.7.3
@@ -54,23 +56,23 @@
 # disable repacking jars
 %define __os_install_post %{nil}
 
-Name: spark
+Name: spark1
 Version: %{spark_version}
 Release: %{spark_release}
 Summary: Apache Spark is a fast and general engine for big data processing
 URL: http://spark.apache.org
 Vendor: Keedio
-Packager: Alessio Comisso <acomisso@keedio.com>
+Packager: Carlos Alvarez <calvarez@keedio.com>
 Group: Development/Libraries
-Buildroot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
+Buildroot: %(mktemp -ud %{_tmppath}/%{spark1_directory}-%{version}-%{release}-XXXXXX)
 License: APL2
-Source0: %{name}-%{version}.tgz
+Source0: spark-%{version}.tgz
 Source1: rpm-build-stage
-Source2: install_%{name}.sh
+Source2: install_spark.sh
 BuildArch: noarch
 BuildRequires: autoconf, automake
 Requires(pre): coreutils, /usr/sbin/groupadd, /usr/sbin/useradd
-Requires: jdk, redhat-lsb, hadoop-client, hadoop-yarn
+Requires: redhat-lsb, hadoop-client, hadoop-yarn
 Patch0: spark-pom-wasb-eventhubs-v3.patch
 Patch1: paho-dependency.patch
 %if  %{?suse_version:1}0
@@ -92,7 +94,7 @@ Requires: redhat-lsb
 Apache Spark™ is a fast and general engine for large-scale data processing. 
     
 %prep
-%setup  %{name}-%{spark_base_version}.tgz 
+%setup -n %{spark1_directory}-%{spark_base_version}
 #cd $RPM_SOURCE_DIR
 #%patch0 -p1
 #%patch1 -p0
@@ -110,12 +112,12 @@ sh $RPM_SOURCE_DIR/install_spark.sh \
 
 
 %post
-%{alternatives_cmd} --install /usr/lib/spark/default spark  /usr/lib/spark/%{name}-%{spark_base_version}-bin-%{hadoop_version} 32
+%{alternatives_cmd} --install /usr/lib/spark/default spark  /usr/lib/spark/%{spark1_directory}-%{spark_base_version}-bin-%{hadoop_version} 32
 chkconfig spark-history-server on
 
 %preun
 if [ "$1" = 0 ]; then
-        %{alternatives_cmd} --remove spark  /usr/lib/spark/%{name}-%{spark_base_version}-bin-2..0  || :
+        %{alternatives_cmd} --remove spark  /usr/lib/spark/%{spark1_directory}-%{spark_base_version}-bin-2..0  || :
 fi
 
 #######################
@@ -123,7 +125,7 @@ fi
 #######################
 %files 
 %defattr(-,spark,hadoop,755)
-/usr/lib/%{name}/*
-%config(noreplace) /etc/%{name}/*
+/usr/lib/%{spark1_directory}/*
+%config(noreplace) /etc/%{spark1_directory}/*
 %attr(0755,root,root) %{rc_dir}/spark-history-server
 /var/log/spark-history-server
