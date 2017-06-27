@@ -1,0 +1,17 @@
+{
+	"do_info": {
+		"description": "Apache Kafka", 
+		"homepage":    "https://spark.apache.org/",
+		"license":     "Apache-2.0",
+		"filename":    "spark-2.1.1.bd"
+	},
+	
+	"do_download": {
+		"src_uri":    "http://apache.rediris.es/spark/spark-2.1.1/spark-2.1.1.tgz",
+		"src_md5sum": "f536956f1e10ea04b606fd642a3079dd"
+	},
+
+	"do_fetch": {
+		"download_cmd": "wget"
+	},
+}

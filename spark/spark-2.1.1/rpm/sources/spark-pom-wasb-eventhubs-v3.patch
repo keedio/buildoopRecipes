@@ -1,0 +1,62 @@
+diff -X - -ru spark-1.6.4/assembly/pom.xml spark-1.6.4-evobanco-azure/assembly/pom.xml
+--- spark-1.6.4/assembly/pom.xml	2016-02-27 05:40:50.000000000 +0100
++++ spark-1.6.4/assembly/pom.xml	2016-04-13 17:41:02.000000000 +0200
+@@ -207,6 +207,39 @@
+       </dependencies>
+     </profile>
+     <profile>
++      <id>azure</id>
++      <dependencies>
++        <dependency>
++            <groupId>org.apache.hadoop</groupId>
++            <artifactId>hadoop-azure</artifactId>
++            <version>${hadoop.version}</version>
++            <exclusions>
++                <exclusion>
++                    <groupId>org.apache.hadoop</groupId>
++                    <artifactId>hadoop-common</artifactId>
++                </exclusion>
++                <exclusion>
++                    <groupId>com.fasterxml.jackson.core</groupId>
++                    <artifactId>jackson-core</artifactId>
++                </exclusion>
++                <exclusion>
++                    <groupId>org.apache.httpcomponents</groupId>
++                    <artifactId>httpclient</artifactId>
++                </exclusion>
++                <exclusion>
++                    <groupId>com.google.guava</groupId>
++                    <artifactId>guava</artifactId>
++                </exclusion>
++            </exclusions>
++        </dependency>
++	<dependency>
++  	    <groupId>org.keedio.spark</groupId>
++  	    <artifactId>spark-streaming-eventhubs_2.10</artifactId>
++  	    <version>0.1.1</version>
++	</dependency>
++      </dependencies>
++    </profile>
++    <profile>
+       <id>bigtop-dist</id>
+       <!-- This profile uses the assembly plugin to create a special "dist" package for BigTop
+            that contains Spark but not the Hadoop JARs it depends on. -->
+diff -X - -ru spark-1.6.4/pom.xml spark-1.6.4-evobanco-azure/pom.xml
+--- spark-1.6.4/pom.xml	2016-02-27 05:40:50.000000000 +0100
++++ spark-1.6.4-evobanco-azure/pom.xml	2016-04-13 17:38:53.000000000 +0200
+@@ -2497,6 +2497,15 @@
+         <curator.version>2.6.0</curator.version>
+       </properties>
+     </profile>
++    <profile>
++      <id>hadoop-2.7</id>
++      <properties>
++	<hadoop.version>2.7.3</hadoop.version>
++        <jets3t.version>0.9.4</jets3t.version>
++        <zookeeper.version>3.4.7</zookeeper.version>
++        <curator.version>2.7.1</curator.version>      
++      </properties>
++    </profile>
+ 
+     <profile>
+       <id>yarn</id>
