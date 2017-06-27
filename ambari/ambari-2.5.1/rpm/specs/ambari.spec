@@ -65,7 +65,6 @@ Ambari enables System Administrators to:
 %package server
 Summary: The Ambari server
 Group: System/Daemons
-Requires: jdk
 Requires: openssl 
 Requires: postgresql-server >= 8.1
 Requires: python >= 2.6

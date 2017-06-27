@@ -70,7 +70,7 @@ Source2: install_%{name}.sh
 BuildArch: noarch
 BuildRequires: autoconf, automake
 Requires(pre): coreutils, /usr/sbin/groupadd, /usr/sbin/useradd
-Requires: jdk, redhat-lsb, hadoop-client, hadoop-yarn
+Requires: redhat-lsb, hadoop-client, hadoop-yarn
 %if  %{?suse_version:1}0
 # Required for init scripts
 Requires: insserv

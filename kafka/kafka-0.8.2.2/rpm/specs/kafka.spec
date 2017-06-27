@@ -72,7 +72,7 @@ BuildRequires: autoconf, automake
 Requires(pre): coreutils, /usr/sbin/groupadd, /usr/sbin/useradd
 Requires(post): %{alternatives_dep}
 Requires(preun): %{alternatives_dep}
-Requires: jdk, redhat-lsb
+Requires: redhat-lsb
 Requires: kafka-core
 %if  %{?suse_version:1}0
 # Required for init scripts

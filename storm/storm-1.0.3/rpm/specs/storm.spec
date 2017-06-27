@@ -76,7 +76,7 @@ running in their Hadoop cluster.
 %package nimbus
 Summary: The Storm Nimbus node manages the Storm cluster.
 Group: System/Daemons
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description nimbus
 Nimbus role is the Master Node of Storm, is responsible for distributing code 
@@ -85,7 +85,7 @@ around the Storm cluster, assigning tasks to machines, and monitoring for failur
 %package ui
 Summary: The Storm UI exposes metrics for the Storm cluster.
 Group: System/Daemons
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description ui
 The Storm UI exposes metrics on a web interface on port 8080 to give you
@@ -94,7 +94,7 @@ a high level view of the cluster.
 %package supervisor
 Summary: The Storm Supervisor is a worker process of the Storm cluster.
 Group: System/Daemons
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description supervisor
 The Supervisor role is the Worker Node, listens for work assigned to its 
@@ -105,7 +105,7 @@ A topology in Storm runs across many worker nodes on different machines.
 %package drpc
 Summary: Storm Distributed RPC daemon.
 Group: System/Daemons
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description drpc
 The DRPC server coordinates receiving an RPC request, sending the request to
@@ -115,7 +115,7 @@ the results back to the waiting client.
 %package jms
 Summary: JMS connector for Storm.
 Group: System/Daemons
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description jms
 Storm JMS is a generic framework for integrating JMS messaging within the Storm framework.
@@ -123,7 +123,7 @@ Storm JMS is a generic framework for integrating JMS messaging within the Storm 
 %package flux
 Summary: Flux connector for Storm.
 Group: System/Daemons
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description flux 
 Apache Storm 0.10.0 now includes Flux, which is a framework and set of utilities that make defining and deploying Storm topologies less painful and developer-intensive. A common pain point mentioned by Storm users is the fact that the wiring for a Topology graph is often tied up in Java code, and that any changes require recompilation and repackaging of the topology jar file. Flux aims to alleviate that pain by allowing you to package all your Storm components in a single jar, and use an external text file to define the layout and configuration of your topologies.
@@ -131,7 +131,7 @@ Apache Storm 0.10.0 now includes Flux, which is a framework and set of utilities
 %package sql
 Summary: SQL connector for Storm.
 Group: System/Daemons
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description sql 
 The Storm SQL integration allows users to run SQL queries over streaming data in Storm. Not only the SQL interface allows faster development cycles on streaming analytics, but also opens up the opportunities to unify batch data processing like Apache Hive and real-time streaming data analytics. At a very high level StormSQL compiles the SQL queries to Trident topologies and executes them in Storm clusters. This document provides information of how to use StormSQL as end users. For people that are interested in more details in the design and the implementation of StormSQL please refer to the this page.
@@ -139,7 +139,7 @@ The Storm SQL integration allows users to run SQL queries over streaming data in
 %package cassandra
 Summary: Cassandra Bolt for Storm.
 Group: System/Daemons
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description cassandra
 This library provides core storm bolt on top of Apache Cassandra. Provides simple DSL to map storm Tuple to Cassandra Query Language Statement.
@@ -147,7 +147,7 @@ This library provides core storm bolt on top of Apache Cassandra. Provides simpl
 %package elasticsearch
 Summary: Elasticsearch connector  for Storm.
 Group: System/Daemons
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description elasticsearch
 EsIndexBolt, EsPercolateBolt and EsState allows users to stream data from storm into Elasticsearch directly. For detailed description, please refer to the following.
@@ -155,7 +155,7 @@ EsIndexBolt, EsPercolateBolt and EsState allows users to stream data from storm 
 %package eventhubs
 Summary: Eventhubs connector  for Storm.
 Group: System/Daemons
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description eventhubs
 EsIndexBolt, EsPercolateBolt and EsState allows users to stream data from storm into Elasticsearch directly. For detailed description, please refer to the following.
@@ -165,7 +165,7 @@ EsIndexBolt, EsPercolateBolt and EsState allows users to stream data from storm 
 %package hbase
 Summary: Storm HBase Connector.
 Group: Libraries
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description hbase
 Storm-HBase provides Storm/Trident integration for Apache HBase.
@@ -173,7 +173,7 @@ Storm-HBase provides Storm/Trident integration for Apache HBase.
 %package kafka
 Summary: Storm Kafka Connector.
 Group: Libraries
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description kafka
 Provides core storm and Trident spout implementations for consuming data from Apache Kafka 0.8.x.
@@ -181,7 +181,7 @@ Provides core storm and Trident spout implementations for consuming data from Ap
 %package kafka-client
 Summary: Storm Kafka Client.
 Group: Libraries
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description kafka-client
 Provides core storm and Trident spout implementations for consuming data from Apache Kafka 0.8.x.
@@ -189,7 +189,7 @@ Provides core storm and Trident spout implementations for consuming data from Ap
 %package hdfs
 Summary: Storm HDFS Connector.
 Group: Libraries
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description hdfs
 Storm-HDFS provides Storm components for interacting with HDFS file systems.
@@ -197,7 +197,7 @@ Storm-HDFS provides Storm components for interacting with HDFS file systems.
 %package hive
 Summary: Storm HIVE Connector.
 Group: Libraries
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description hive
 Hive offers streaming API that allows data to be written continuously into Hive. With the help of Hive Streaming API, HiveBolt and HiveState allows users to stream data from Storm into Hive directly. 
@@ -205,7 +205,7 @@ Hive offers streaming API that allows data to be written continuously into Hive.
 %package jdbc
 Summary: Storm jdbc Connector.
 Group: Libraries
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description jdbc
 Storm/Trident integration for JDBC. This package includes the core bolts and trident states that allows a storm topology to either insert storm tuples in a database table or to execute select queries against a database and enrich tuples in a storm topology.
@@ -213,7 +213,7 @@ Storm/Trident integration for JDBC. This package includes the core bolts and tri
 %package logviewer
 Summary: The Storm LogViewer daemon
 Group: System/Daemons
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description logviewer
 New feature for debugging and monitoring topologies: The logviewer daemon.
@@ -222,7 +222,7 @@ New feature for debugging and monitoring topologies: The logviewer daemon.
 %package mongodb
 Summary: The Storm mongodb connector
 Group: Libraries
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description mongodb
 Storm/Trident integration for MongoDB. This package includes the core bolts and trident states that allows a storm topology to either insert storm tuples in a database collection or to execute update queries against a database collection in a storm topology.
@@ -230,7 +230,7 @@ Storm/Trident integration for MongoDB. This package includes the core bolts and 
 %package mqtt
 Summary: The Storm MQTT connector 
 Group: Libraries
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description mqtt
 MQTT is a lightweight publish/subscribe protocol frequently used in IoT applications.
@@ -240,7 +240,7 @@ Storm/Trident integration for MongoDB. This package includes the core bolts and 
 %package redis
 Summary: The Storm Redis connector 
 Group: Libraries
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description redis
 Storm/Trident integration for Redis
@@ -248,7 +248,7 @@ Storm/Trident integration for Redis
 %package solr
 Summary: The Storm SolR connector 
 Group: Libraries
-Requires: %{name} = %{version}-%{release}, jdk
+Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 %description solr
 Storm/Trident integration for SolR

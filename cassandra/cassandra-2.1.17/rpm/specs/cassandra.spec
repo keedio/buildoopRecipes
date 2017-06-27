@@ -45,7 +45,6 @@ Source1: rpm-build-stage
 Source2: install_cassandra.sh
 #Patch0: dataDirectoriesConfig.patch
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)
-Requires: jdk
 Provides: cassandra
 BuildArch: noarch
 
